@@ -21,6 +21,7 @@ from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QTabWidget, QTableWidget, QTableWidgetItem, QTextEdit,
     QVBoxLayout, QWidget)
 import resources_rc
+import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -455,8 +456,7 @@ class Ui_MainWindow(object):
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Place for logo or for </p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">something else</p></body></html>", None))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">@Szabi, @Deniz, @Doni, @Ayse</p></body></html>", None))
         self.ButtonCopyPageSelect.setText(QCoreApplication.translate("MainWindow", u"Time tracker", None))
         self.ButtonExit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
         self.label.setText("")
