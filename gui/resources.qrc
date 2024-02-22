@@ -1,8 +1,5 @@
 <RCC>
-  <qresource prefix="images">
-    <file>resources/images/cu.jpg</file>
-    <file>resources/images/black.png</file>
-  </qresource>
+  <qresource prefix="images"/>
   <qresource prefix="icons">
     <file>resources/icons/cil-3d.png</file>
     <file>resources/icons/cil-4k.png</file>
