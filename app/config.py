@@ -1,7 +1,9 @@
 from configparser import ConfigParser
 import os
 
-def load_config(filename='path', section='postgresql'):
+def load_config(filename='file', section='postgresql'):
+    if filename == 'file':
+        raise Exception('No database init file was added')
     parser = ConfigParser()
     parser.read(filename)
     config = {}
