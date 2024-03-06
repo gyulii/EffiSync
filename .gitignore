@@ -16,3 +16,4 @@ thumbs.db
 extensions/
 /venv
 /app/database.ini
+/app/DB_handling
