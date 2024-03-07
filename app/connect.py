@@ -21,8 +21,8 @@ def connect(config):
     except (psycopg2.DatabaseError, Exception) as error:
         print(error)
 
-def load_config(filename='file', section='postgresql'):
-    if filename == 'file':
+def load_config(filename, section='postgresql'):
+    if not filename:
         raise Exception('No database init file was added')
     parser = ConfigParser()
     parser.read(filename)
@@ -41,9 +41,9 @@ def list_all_items(conn, table_name):
             cursor = conn.cursor()
             sql_select = f'SELECT * FROM {table_name}'
             cursor.execute(sql_select)
-            rows = cursor.fetchall()
+            records = cursor.fetchall()
             cursor.close()
-            return rows
+            return records
         except psycopg2.errors.InFailedSqlTransaction as failed_transaction:
             return (f'Error: Last transacation was invalid', f'Details: {failed_transaction}')
     else:
@@ -92,9 +92,9 @@ def remove_project(conn, project_name):
         cursor = conn.cursor()
         sql_find_item = 'SELECT id FROM project WHERE id = (%s)'
         cursor.execute(sql_find_item, (project_name,))
-        row = cursor.fetchall()
+        record = cursor.fetchall()
 
-        if len(row) > 0:
+        if len(record) > 0:
             sql_delete = 'DELETE FROM project WHERE id = (%s)'
             cursor.execute(sql_delete, (project_name,))
             conn.commit()
@@ -150,9 +150,9 @@ def remove_booking_text(conn, booking_text):
         cursor = conn.cursor()
         sql_find_item = 'SELECT id FROM booking_text WHERE id = (%s)'
         cursor.execute(sql_find_item, (booking_text,))
-        row = cursor.fetchall()
+        record = cursor.fetchall()
 
-        if len(row) > 0:
+        if len(record) > 0:
             sql_delete = 'DELETE FROM booking_text WHERE id = (%s)'
             cursor.execute(sql_delete, (booking_text,))
             conn.commit()
@@ -208,9 +208,9 @@ def remove_employee(conn, employee):
         cursor = conn.cursor()
         sql_find_item = 'SELECT id FROM employee WHERE id = (%s)'
         cursor.execute(sql_find_item, (employee,))
-        row = cursor.fetchall()
+        record = cursor.fetchall()
         
-        if len(row) > 0:
+        if len(record) > 0:
             sql_delete = 'DELETE FROM employee WHERE id = (%s)'
             cursor.execute(sql_delete, (employee,))
             conn.commit()
@@ -225,18 +225,18 @@ def remove_employee(conn, employee):
     
 ## topic table base function
 
-def find_topic_id(conn, project_id: str, booking_text_id: str): 
+def get_topic_id(conn, project_id: str, booking_text_id: str): 
     cursor = conn.cursor()
     sql_find_item = 'SELECT id FROM topic WHERE project_id = (%s) AND booking_text_id = (%s)'
     cursor.execute(sql_find_item, (project_id, booking_text_id))
-    row = cursor.fetchall()
+    record = cursor.fetchall()
     cursor.close()
-    return row
+    return record
 
 def add_new_topic(conn, project_id: str, booking_text_id: str, necessary_hours = 0):
     try:
-        row = find_topic_id(conn, project_id, booking_text_id)
-        if len(row) == 0:
+        record = get_topic_id(conn, project_id, booking_text_id)
+        if len(record) == 0:
             cursor = conn.cursor()
             sql_insert = 'INSERT INTO topic (project_id, booking_text_id, necessary_hours) VALUES (%s, %s, %s)'
             cursor.execute(sql_insert, (project_id, booking_text_id, necessary_hours))
@@ -244,7 +244,7 @@ def add_new_topic(conn, project_id: str, booking_text_id: str, necessary_hours =
             cursor.close()
             state_msg = f'New topic is added with {booking_text_id} booking text for {project_id} project'
         else:
-            state_msg = f'There is already a topic (id={row[0][0]}) with {booking_text_id} booking text for {project_id} project'
+            state_msg = f'There is already a topic (id={record[0][0]}) with {booking_text_id} booking text for {project_id} project'
         return (state_msg,)
     except psycopg2.errors.UniqueViolation as unique_error:
         conn.rollback()
@@ -255,10 +255,10 @@ def add_new_topic(conn, project_id: str, booking_text_id: str, necessary_hours =
 
 def update_topic_worked_hours(conn, project_id: str, booking_text_id: str, new_worked_hours):
     try:
-        row = find_topic_id(conn, project_id, booking_text_id)
-        if len(row) > 0:
+        record = get_topic_id(conn, project_id, booking_text_id)
+        if len(record) > 0:
             cursor = conn.cursor()
-            id_to_update = row[0][0]
+            id_to_update = record[0][0]
             print(type(id_to_update))
             sql_update = 'UPDATE topic SET worked_hours = %s WHERE  id = %s'
             cursor.execute(sql_update, (new_worked_hours, id_to_update))
@@ -274,10 +274,10 @@ def update_topic_worked_hours(conn, project_id: str, booking_text_id: str, new_w
 
 def update_topic_necessary_hours(conn, project_id: str, booking_text_id: str, new_necessary_hours):
     try:
-        row = find_topic_id(conn, project_id, booking_text_id)
-        if len(row) > 0:
+        record = get_topic_id(conn, project_id, booking_text_id)
+        if len(record) > 0:
             cursor = conn.cursor()
-            id_to_update = row[0][0]
+            id_to_update = record[0][0]
             print(type(id_to_update))
             sql_update = 'UPDATE topic SET necessary_hours = %s WHERE  id = %s'
             cursor.execute(sql_update, (new_necessary_hours, id_to_update))
@@ -294,10 +294,10 @@ def update_topic_necessary_hours(conn, project_id: str, booking_text_id: str, ne
 
 def update_topic_project_id(conn, old_project_id: str, booking_text_id: str, new_project_id: str):
     try:
-        row = find_topic_id(conn, old_project_id, booking_text_id)
-        if len(row) > 0:
+        record = get_topic_id(conn, old_project_id, booking_text_id)
+        if len(record) > 0:
             cursor = conn.cursor()
-            id_to_update = row[0][0]
+            id_to_update = record[0][0]
             print(type(id_to_update))
             sql_update = 'UPDATE topic SET project_id = %s WHERE  id = %s'
             cursor.execute(sql_update, (new_project_id, id_to_update))
@@ -313,10 +313,10 @@ def update_topic_project_id(conn, old_project_id: str, booking_text_id: str, new
     
 def update_topic_booking_text_id(conn, project_id: str, old_booking_text_id: str, new_booking_text_id: str):
     try:
-        row = find_topic_id(conn, project_id, old_booking_text_id)
-        if len(row) > 0:
+        record = get_topic_id(conn, project_id, old_booking_text_id)
+        if len(record) > 0:
             cursor = conn.cursor()
-            id_to_update = row[0][0]
+            id_to_update = record[0][0]
             print(type(id_to_update))
             sql_update = 'UPDATE topic SET project_id = %s WHERE  id = %s'
             cursor.execute(sql_update, (new_booking_text_id, id_to_update))
@@ -332,10 +332,10 @@ def update_topic_booking_text_id(conn, project_id: str, old_booking_text_id: str
 
 def remove_topic(conn, project_id: str, booking_text_id: str):
     try: 
-        row = find_topic_id(conn, project_id, booking_text_id)
-        if len(row) > 0:
+        record = get_topic_id(conn, project_id, booking_text_id)
+        if len(record) > 0:
             cursor = conn.cursor()
-            id_to_remove = row[0][0]
+            id_to_remove = record[0][0]
             sql_delete = 'DELETE FROM employee WHERE id = (%s)'
             cursor.execute(sql_delete, (id_to_remove,))
             conn.commit()
@@ -347,19 +347,82 @@ def remove_topic(conn, project_id: str, booking_text_id: str):
     except psycopg2.errors.UndefinedFunction as undefined_error:
         conn.rollback()
         return (f'Error: project_id or booking_text_id is not a string', f'Details: {undefined_error}')
+    
+## topic_employee table base functions
+
+def get_topic_employee_relation(conn, topic_id, employee_id: str): 
+    cursor = conn.cursor()
+    sql_get_topic_employee_relation = 'SELECT topic_id, employee_id FROM topic_employee WHERE topic_id = (%s) AND employee_id = (%s)'
+    cursor.execute(sql_get_topic_employee_relation, (topic_id, employee_id))
+    record = cursor.fetchall()
+    cursor.close()
+    return record
+
+def get_topic_info(conn, topic_id):
+    cursor = conn.cursor()
+    sql_get_topic_info = 'SELECT project_id, booking_text_id FROM topic WHERE id = (%s)'
+    cursor.execute(sql_get_topic_info, (topic_id,))
+    record = cursor.fetchall()
+    cursor.close()
+    return record
+
+def add_new_topic_employee_relation(conn, topic_id, employee_id: str):
+    try:
+        record = get_topic_employee_relation(conn, topic_id, employee_id)
+        if len(record) == 0:
+            cursor = conn.cursor()
+            sql_insert = 'INSERT INTO topic_employee (topic_id, employee_id) VALUES (%s, %s)'
+            cursor.execute(sql_insert, (topic_id, employee_id))
+            conn.commit()
+            cursor.close()
+            state_msg = 'New topic_employee relation is added'
+        else:
+            topic_record = get_topic_info(conn, topic_id)
+            project = topic_record[0][0]
+            booking_text = topic_record[0][1]
+            state_msg = f'The relation between the {booking_text} booking text for {project} project and {employee_id} employee is already in the database'
+        return (state_msg,)        
+    except psycopg2.errors.ForeignKeyViolation as foreign_key_error:
+        conn.rollback()
+        return (f"Error: The topic_id or the employee_id is wrong", f"Details: {foreign_key_error}")
+    except psycopg2.errors.StringDataRightTruncation as truncation_error:
+        conn.rollback()
+        return (f"Error: ID {employee_id} is too long", f"Details: {truncation_error}")
+    except psycopg2.errors.CheckViolation as short_name_error:
+        conn.rollback()
+        return (f"Error: ID {employee_id} is shorter than 3 characters", f"Details: {short_name_error}") 
+    
+def remove_topic_employee_relation(conn, topic_id, employee_id: str):
+    try:
+        record = get_topic_employee_relation(conn, topic_id, employee_id)
+        topic_record = get_topic_info(conn, topic_id)
+        project = topic_record[0][0]
+        booking_text = topic_record[0][1]
+        if len(record) > 0:
+            topic_record = get_topic_info(conn, topic_id)
+            project = topic_record[0][0]
+            booking_text = topic_record[0][1]
+            cursor = conn.cursor()
+            sql_delete = 'DELETE FROM topic_employee WHERE topic_id = (%s) AND employee_id = (%s)'
+            cursor.execute(sql_delete, (topic_id, employee_id))
+            conn.commit()
+            cursor.close()
+            state_msg = f'The relation between the {booking_text} booking text for {project} project and {employee_id} employee is removed'
+        else:
+            state_msg = f'The relation between {topic_id} topic and {employee_id} employee is not in the topic_employee table'
+        return (state_msg,)
+    except psycopg2.errors.UndefinedFunction as undefined_error:
+        conn.rollback()
+        return (f'Error: employee_id is not a string', f'Details: {undefined_error}')
 
 ## test functions
 
 if __name__ == '__main__':
     config = load_config(filename=path+r'\app\database.ini')
     conn = connect(config)
-    project = 'BBB1111'
-    booking_text = 'new'
-    hrs = 1.5
-    state = update_topic_worked_hours(conn, project, booking_text, hrs)
-    state = update_employee(conn, 'Example_1', 'another')
+    state = remove_topic_employee_relation(conn, 11, 'Example')
     print_state(state)
-    table_name = 'topic'
+    table_name = 'topic_employee'
     projects = list_all_items(conn, table_name)
     for project in projects:
         print(project)
