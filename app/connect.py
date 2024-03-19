@@ -51,6 +51,14 @@ def list_all_items(conn, table_name):
 
 ## project table base functions
 
+def get_project_id(conn, project_id: str):
+    cursor = conn.cursor()
+    sql_find_item = 'SELECT id FROM project WHERE id = (%s)'
+    cursor.execute(sql_find_item, (project_id,))
+    record = cursor.fetchall()
+    cursor.close()
+    return record
+
 def add_new_project(conn, project_name: str):
     try:
         cursor = conn.cursor()
@@ -89,12 +97,9 @@ def update_project(conn, old_project_name: str, new_project_name: str):
 
 def remove_project(conn, project_name):
     try: 
-        cursor = conn.cursor()
-        sql_find_item = 'SELECT id FROM project WHERE id = (%s)'
-        cursor.execute(sql_find_item, (project_name,))
-        record = cursor.fetchall()
-
+        record = get_project_id(conn, project_name)
         if len(record) > 0:
+            cursor = conn.cursor()
             sql_delete = 'DELETE FROM project WHERE id = (%s)'
             cursor.execute(sql_delete, (project_name,))
             conn.commit()
@@ -167,6 +172,14 @@ def remove_booking_text(conn, booking_text):
     
 ## employee table base functions
 
+def get_employee_id(conn, employee_id: str): 
+    cursor = conn.cursor()
+    sql_find_item = 'SELECT id FROM employee WHERE id = (%s)'
+    cursor.execute(sql_find_item, (employee_id,))
+    record = cursor.fetchall()
+    cursor.close()
+    return record
+
 def add_new_employee(conn, employee: str):
     try:
         cursor = conn.cursor()
@@ -205,18 +218,15 @@ def update_employee(conn, old_employee: str, new_employee: str):
 
 def remove_employee(conn, employee):
     try: 
-        cursor = conn.cursor()
-        sql_find_item = 'SELECT id FROM employee WHERE id = (%s)'
-        cursor.execute(sql_find_item, (employee,))
-        record = cursor.fetchall()
-        
+        record = get_employee_id(conn, employee)
         if len(record) > 0:
+            cursor = conn.cursor()
             sql_delete = 'DELETE FROM employee WHERE id = (%s)'
             cursor.execute(sql_delete, (employee,))
             conn.commit()
             state_msg = f'{employee} employee is removed'
         else:
-            state_msg = f'{employee} employee is not in the project table'
+            state_msg = f'{employee} employee is not in the employee table'
         cursor.close()
         return (state_msg,)
     except psycopg2.errors.UndefinedFunction as undefined_error:
@@ -298,7 +308,6 @@ def update_topic_project_id(conn, old_project_id: str, booking_text_id: str, new
         if len(record) > 0:
             cursor = conn.cursor()
             id_to_update = record[0][0]
-            print(type(id_to_update))
             sql_update = 'UPDATE topic SET project_id = %s WHERE  id = %s'
             cursor.execute(sql_update, (new_project_id, id_to_update))
             conn.commit()
@@ -414,15 +423,91 @@ def remove_topic_employee_relation(conn, topic_id, employee_id: str):
     except psycopg2.errors.UndefinedFunction as undefined_error:
         conn.rollback()
         return (f'Error: employee_id is not a string', f'Details: {undefined_error}')
+    
+## data retrieval
+
+def get_all_topic_of_employee(conn, employee_id: str):
+    try:
+        record = get_employee_id(conn, employee_id)
+        if len(record) > 0:
+            cursor = conn.cursor()
+            sql_find_topic = 'SELECT project_id, booking_text_id, necessary_hours, worked_hours FROM employee JOIN topic_employee ON employee.id = topic_employee.employee_id JOIN topic ON topic.id = topic_employee.topic_id WHERE employee.id = (%s)'
+            cursor.execute(sql_find_topic, (employee_id,))
+            topics = cursor.fetchall()
+            cursor.close()
+            if len(topics) == 0:
+                topics = (f'The {employee_id} employee id does not have any topics',)
+            return topics
+        else:
+            return (f'The {employee_id} employee id cannot be found in the employee table',)
+    except psycopg2.errors.UndefinedFunction as undefined_error:
+        conn.rollback()
+        return (f'Error: employee id is not a string', f'Details: {undefined_error}')
+    
+def get_all_employee_of_topic(conn, project_id: str, booking_text_id: str):
+    try:
+        record = get_topic_id(conn, project_id, booking_text_id)
+        if len(record) > 0:
+            topic_id = record[0][0]
+            cursor = conn.cursor()
+            sql_find_employee = 'SELECT employee.id FROM topic JOIN topic_employee ON topic.id = topic_employee.topic_id JOIN employee ON employee.id = topic_employee.employee_id WHERE topic.id = (%s)'
+            cursor.execute(sql_find_employee, (topic_id,))
+            employees = cursor.fetchall()
+            cursor.close()
+            if len(employees) == 0:
+                employees = (f'The topic with {booking_text_id} booking text for {project_id} project id does not have any employees',)
+            return employees
+        else:
+            return (f'The topic with {booking_text_id} booking text for {project_id} project id cannot be found in the topic table',)
+    except psycopg2.errors.UndefinedFunction as undefined_error:
+        conn.rollback()
+        return (f'Error: topic id is not a string', f'Details: {undefined_error}')
+
+def get_all_booking_text_of_project(conn, project_id: str):
+    try:
+        record = get_project_id(conn, project_id)
+        if len(record) > 0:
+            cursor = conn.cursor()
+            sql_find_booking_text = 'SELECT booking_text_id FROM project JOIN topic ON project.id = topic.project_id WHERE project.id = (%s)'
+            cursor.execute(sql_find_booking_text, (project_id,))
+            topics = cursor.fetchall()
+            cursor.close()
+            if len(topics) == 0:
+                topics = (f'The {project_id} project id does not have any booking texts',)
+            return topics
+        else:
+            return (f'The {project_id} project id cannot be found in the project table',)
+    except psycopg2.errors.UndefinedFunction as undefined_error:
+        conn.rollback()
+        return (f'Error: project id is not a string', f'Details: {undefined_error}')
+
+def get_all_employee_of_project(conn, project_id: str):
+    try:
+        record = get_project_id(conn, project_id)
+        if len(record) > 0:
+            cursor = conn.cursor()
+            sql_find_employee = 'SELECT topic_employee.employee_id FROM project JOIN topic ON project.id = topic.project_id JOIN topic_employee ON topic.id = topic_employee.topic_id WHERE project.id = (%s)'
+            cursor.execute(sql_find_employee, (project_id,))
+            topics = cursor.fetchall()
+            cursor.close()
+            if len(topics) == 0:
+                topics = (f'The {project_id} project id does not have any employees',)
+            return topics
+        else:
+            return (f'The {project_id} project id cannot be found in the project table',)
+    except psycopg2.errors.UndefinedFunction as undefined_error:
+        conn.rollback()
+        return (f'Error: project id is not a string', f'Details: {undefined_error}')
 
 ## test functions
 
 if __name__ == '__main__':
     config = load_config(filename=path+r'\app\database.ini')
     conn = connect(config)
-    state = remove_topic_employee_relation(conn, 11, 'Example')
+    state = get_all_employee_of_topic(conn, 'BBB1111', 'new')
+
     print_state(state)
-    table_name = 'topic_employee'
-    projects = list_all_items(conn, table_name)
-    for project in projects:
-        print(project)
+    #table_name = 'topic'
+    #projects = list_all_items(conn, table_name)
+    #for project in projects:
+    #    print(project)
