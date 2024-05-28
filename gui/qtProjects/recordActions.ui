@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>recordActionButtons</class>
+ <widget class="QWidget" name="recordActionButtons">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>128</width>
+    <height>33</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">QFrame{
+	background-color: transparent;
+	margin: 1px;
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>1</number>
+      </property>
+      <property name="leftMargin">
+       <number>1</number>
+      </property>
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="editBtn">
+        <property name="minimumSize">
+         <size>
+          <width>23</width>
+          <height>23</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	background-color: rgb(44, 44, 44);
+	border: 2px solid  rgb(2, 20, 72);
+	border-radius:10px;
+	color: rgb(177, 177, 177);
+}
+QPushButton::hover{
+	background-color: rgb(23, 32, 42);
+}
+QPushButton::pressed{
+	background-color: rgb(3, 1, 59)
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources/icons/dark/iconsDark.qrc">
+          <normaloff>:/iconsDark/icons/edit.svg</normaloff>:/iconsDark/icons/edit.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="deleteBtn">
+        <property name="minimumSize">
+         <size>
+          <width>23</width>
+          <height>23</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	background-color: rgb(44, 44, 44);
+	border: 2px solid  rgb(2, 20, 72);
+	border-radius:10px;
+	color: rgb(177, 177, 177);
+}
+QPushButton::hover{
+	background-color: rgb(23, 32, 42);
+}
+QPushButton::pressed{
+	background-color: rgb(3, 1, 59)
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources/icons/dark/iconsDark.qrc">
+          <normaloff>:/iconsDark/icons/trash-2.svg</normaloff>:/iconsDark/icons/trash-2.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="freezeBtn">
+        <property name="minimumSize">
+         <size>
+          <width>23</width>
+          <height>23</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	background-color: rgb(44, 44, 44);
+	border: 2px solid  rgb(2, 20, 72);
+	border-radius:10px;
+	color: rgb(177, 177, 177);
+}
+QPushButton::hover{
+	background-color: rgb(23, 32, 42);
+}
+QPushButton::pressed{
+	background-color: rgb(3, 1, 59)
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources/icons/dark/iconsDark.qrc">
+          <normaloff>:/iconsDark/icons/unlock.svg</normaloff>
+          <activeon>:/iconsDark/icons/lock.svg</activeon>
+          <selectedon>:/iconsDark/icons/lock.svg</selectedon>:/iconsDark/icons/unlock.svg</iconset>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="sendBtn">
+        <property name="minimumSize">
+         <size>
+          <width>23</width>
+          <height>23</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	background-color: rgb(44, 44, 44);
+	border: 2px solid  rgb(2, 20, 72);
+	border-radius:10px;
+	color: rgb(177, 177, 177);
+}
+QPushButton::hover{
+	background-color: rgb(23, 32, 42);
+}
+QPushButton::pressed{
+	background-color: rgb(3, 1, 59)
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources/icons/dark/iconsDark.qrc">
+          <normaloff>:/iconsDark/icons/send.svg</normaloff>:/iconsDark/icons/send.svg</iconset>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resources/icons/dark/iconsDark.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>freezeBtn</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>deleteBtn</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>321</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>162</x>
+     <y>26</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>freezeBtn</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>editBtn</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>321</x>
+     <y>8</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>17</x>
+     <y>15</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sendBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>editBtn</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>573</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>31</x>
+     <y>25</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sendBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>deleteBtn</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>592</x>
+     <y>16</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>16</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sendBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>freezeBtn</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>610</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>17</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sendBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>sendBtn</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>591</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>550</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
