@@ -1,4 +1,4 @@
-from loginPopup import Ui_Dialog
+from app.gui.baseClass.loginPopup import Ui_Dialog
 from PySide6.QtWidgets import QDialog 
 from PySide6.QtCore import Signal
 

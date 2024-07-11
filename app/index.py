@@ -7,13 +7,9 @@ from PySide6.QtGui import QColor
 
 from datetime import datetime
 
-sys.path.append("C:/Company/Effisync/GUI/app/baseClass")
-sys.path.append("C:/Company/Effisync/GUI/app/extendedClass")
 
-from mainApp import Ui_MainWindow
-from loginPopupControl import loginPopupControl
-from recordActionsBtnControl import recordActionBtnControl
-from confirmationDialogControl import confirmationDialogControl
+
+from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl
 
 class myApp(QMainWindow, Ui_MainWindow):
 

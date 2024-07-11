@@ -1,8 +1,8 @@
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
-from index import myApp
-from loginPopupControl import loginPopupControl
-from MainWindow import Ui_MainWindow
+from app.index import myApp
+from app.gui import loginPopupControl
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -17,7 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QPushButton, QSizePolicy, QWidget)
-import iconsDark_rc
+
+from app.gui import iconsDark_rc
 
 class Ui_recordActionButtons(object):
     def setupUi(self, recordActionButtons):

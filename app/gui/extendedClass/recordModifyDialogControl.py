@@ -1,6 +1,7 @@
-from recordModifyDialog import Ui_modifyRecord
 from PySide6.QtWidgets import QDialog, QTableWidget, QTableWidgetItem
 from PySide6.QtCore import Qt, QTime
+
+from app.gui.baseClass.recordModifyDialog import Ui_modifyRecord
 
 class recordModifyDialogControl(QDialog):
     project = None

@@ -22,8 +22,9 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractSpinBox, QApplication
     QStackedWidget, QTableWidget, QTableWidgetItem, QTextBrowser,
     QTextEdit, QVBoxLayout, QWidget)
 import sys
-sys.path.append("C:/Company/Effisync/GUI/resources/icons/dark")
-import iconsDark_rc
+
+from app.gui import iconsDark_rc
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):

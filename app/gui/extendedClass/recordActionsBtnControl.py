@@ -1,11 +1,12 @@
 from datetime import datetime
-from recordActions import Ui_recordActionButtons
-from confirmationDialogControl import confirmationDialogControl
+
 from PySide6.QtWidgets import QWidget, QTableWidgetItem
 from PySide6.QtGui import QColor
 from PySide6.QtCore import Qt
-from recordModifyDialogControl import recordModifyDialogControl
 
+from app.gui.extendedClass.recordModifyDialogControl import recordModifyDialogControl
+from app.gui.baseClass.recordActions import Ui_recordActionButtons
+from app.gui.extendedClass.confirmationDialogControl import confirmationDialogControl
 class recordActionBtnControl(QWidget):
 
     rowNr = None

@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from confirmationDialog import Ui_confirmationDialog
+from app.gui.baseClass.confirmationDialog import Ui_confirmationDialog
 from PySide6.QtWidgets import QDialog, QWidget
 
 class confirmationDialogControl(QDialog):
