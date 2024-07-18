@@ -8,7 +8,6 @@ from PySide6.QtGui import QColor
 from datetime import datetime
 
 
-
 from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl
 
 class myApp(QMainWindow, Ui_MainWindow):

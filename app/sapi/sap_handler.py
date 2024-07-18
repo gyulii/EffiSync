@@ -9,24 +9,17 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import WebDriverException
 
 import pandas as pd
 from datetime import datetime, timedelta
 import time
 
-from dataclasses import dataclass
+
 import collections
 
 
-@dataclass
-class BookingItem:
-    text: str = ""
-    booked_hours: float = 0
-    wbs: str = "O-HU-4-002-08-01"
-
-    def __post_init__(self):
-        self.booked_hours = str(self.booked_hours).replace(".", ",")
-
+from app.booking import BookingItem
 
 class EssDriver:
     def __init__(self, headless: bool = False):
@@ -168,8 +161,10 @@ class EssDriver:
         self.driver.maximize_window()
 
         self.driver.implicitly_wait(15)
-
-        self.driver.get("https://desktop.avl.com/corp/01/0062/02/15/PAGES/ESS.aspx")
+        try:
+            self.driver.get("https://desktop.avl.com/corp/01/0062/02/15/PAGES/ESS.aspx")
+        except WebDriverException:
+            print("Could not open ESS please, check if you are using the right VPN")
 
         self.driver.find_element(By.LINK_TEXT, "Language: English").click()
 

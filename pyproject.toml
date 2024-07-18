@@ -1,3 +1,23 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+[tool.setuptools]
+py-modules = ["app"]
+
+[project]
+name = "effisync"
+version = "0.0.1" 
+description = ""
+readme = "README.md"
+
+authors = [
+  {name = "Filled out", email = "Later@example.com" }
+]
+
+maintainers = [
+  {name = "A. Great Maintainer", email = "maintainer@example.com" }
+]
+
 [tool.ruff]
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
 select = ["E", "F"]
@@ -96,3 +116,5 @@ max-complexity = 10
 
 [tool.black]
 line-length = 160
+
+

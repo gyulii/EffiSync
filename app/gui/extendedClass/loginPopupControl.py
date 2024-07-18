@@ -9,6 +9,7 @@ class loginPopupControl(QDialog):
         super().__init__()
         self.diagUI = Ui_Dialog()
         self.diagUI.setupUi(self)
+        self.auth = False
 
         if type is not None:
             self.diagUI.loginWidget.hide()
