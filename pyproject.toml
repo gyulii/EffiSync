@@ -21,7 +21,7 @@ maintainers = [
 [tool.ruff]
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
 select = ["E", "F"]
-ignore = ["D107" , "E501" , "D100" , "T201", "D101" ,"D102" , "D103" , "ANN201", "ANN101"]
+ignore = ["D107" , "E501" , "D100" , "T201", "D101" ,"D102" , "D103" , "ANN201", "ANN101", "I001"]
 extend-select = [
     "C90",
     "I",
