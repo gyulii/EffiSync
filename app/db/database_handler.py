@@ -1,156 +1,188 @@
 
 #This module will handle all database related logic. It will be mostly used in the server side program A.K.A. in the boss machine. @Doni @Szabi
 import pathlib
-import datetime
+from datetime import datetime
 
 import sqlalchemy as sa
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import Integer, String, Float, DateTime, ForeignKey, select
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text, Float
+from sqlalchemy.sql import func
 from sqlalchemy.orm import (
     declarative_base,
     mapped_column,
     relationship,
     sessionmaker,
     Mapped,
+    Session
 )
+from logger import logger
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from sqlalchemy import select, delete, update, values
+
+import datetime
+from datetime import date, timedelta
+
+def handle_exceptions(f):
+    def wrapper(*args, **kw):
+        try:
+            return f(*args, **kw) # Call main function
+        except IntegrityError as e:
+            logger.error(e.orig)
+            raise e.orig
+        except SQLAlchemyError as e:
+            logger.error(f"Unexpected error when creating item: {e}")
+            raise e
+    return wrapper
 
 
 base_dir = pathlib.Path().cwd()
+engine = sa.create_engine(fr"sqlite:///{base_dir}\app\db\test.db")
+Session = sessionmaker(bind=engine)
+session = Session()
 
-db = sa.create_engine(fr"sqlite:///{base_dir}\app\db\test.db")
-Session = sessionmaker(bind=db)
+
 Base = declarative_base()
-Base.metadata.create_all(db)
-
-class db_BookingItemTable(Base):
-    __tablename__ = "BookingItemTable"
-    id = mapped_column(Integer, primary_key=True)
-    text = mapped_column(String)
-    wbs_id = mapped_column(Integer, ForeignKey("BookingWbsTable.id"))
-
-    booked_elements= relationship("db_BookingDateTable", back_populates="booked_item")
-    wbs= relationship("db_BookingWbsTable")
-
-    def __repr__(self) -> str:
-        return f"<db_BookingItemTable(wbs={self.wbs}, text={self.text})>"
-
-    
-    
-class db_BookingDateTable(Base):
-    __tablename__ = "BookingDateTable"
-    id = mapped_column(Integer, primary_key=True)
-    date= mapped_column(DateTime) 
-    booked_time  = mapped_column(Float)
-    booked_item_id = mapped_column(Integer, ForeignKey("BookingItemTable.id"))
-
-    booked_item = relationship("db_BookingItemTable", back_populates="booked_elements")
 
 
-class db_BookingWbsTable(Base):
-    __tablename__ = "BookingWbsTable"
-    id = mapped_column(Integer, primary_key=True)
-    wbs = mapped_column(String, unique=True)
+class BookingItem(Base):
+    __tablename__ = "bookingitem"
 
-    def __repr__(self) -> str:
-        return f"<wbs={self.wbs}>"
-    
+    id  = Column(Integer, primary_key=True, autoincrement="auto")
+    name = Column(Text, nullable=False)
+    wbs = Column(Text, nullable=False)
+
+    def __repr__(self):
+        return f"<id={self.id}, name={self.name}, wbs={self.wbs}>"
+
+
+class TimeTable(Base):
+    __tablename__ = "timetable"
+
+    id  = Column(Integer, primary_key=True, autoincrement="auto")
+    booking_item_id = Column(Integer, ForeignKey("bookingitem.id"))
+    date = Column(DateTime)
+    hours = Column(Float)
+
+    booking_item = relationship("BookingItem")
+
+    def __repr__(self):
+        return f"<id={self.id}, booking_item_id={self.booking_item_id}, date={self.date}, hours={self.hours}>"
 
 
 
+Base.metadata.create_all(engine)
 
-def initialize_db() -> None:
-    pass
+@handle_exceptions
+def create_booking_item(session: Session, new_booking_item: BookingItem):
+    exist = read_booking_item(session, new_booking_item)
+    if exist is None:
+        session.add(new_booking_item) 
+        session.commit() 
+        logger.info(f"Created user: {new_booking_item}")
+    else:
+        logger.warning(f"Booking item already exists in database: {exist}")
+    return read_booking_item(session, new_booking_item)
 
-def add_new_booking_item(wbs = 'Empty Wbs' , text = 'Default Booking item'):
-    with Session() as session:
-        try:
-            wbs_new = db_BookingWbsTable(wbs=wbs)
-            session.add(wbs_new)
-            session.commit()
-        except IntegrityError:
-            print("wbs already exists")
-            session.rollback()
-            wbs_new = session.scalars(select(db_BookingWbsTable).where(db_BookingWbsTable.wbs == wbs)).all()[0]
 
-        booking_item = db_BookingItemTable(wbs=wbs_new, text=text)
-        session.add(booking_item)
+@handle_exceptions
+def read_booking_item(session: Session, bookingitem: BookingItem):
+    item = session.scalars(select(BookingItem)
+                            .where(BookingItem.name == bookingitem.name)
+                            .where(BookingItem.wbs == bookingitem.wbs)).first()
+    return item
+
+
+@handle_exceptions
+def update_booking_item(session: Session, bookingitem: BookingItem , modified_bookingitem: BookingItem):
+    exist = read_booking_item(session, bookingitem)
+    if exist is None:
+        logger.info(f"No such item: {bookingitem}")
+    else:
+        stmt = (
+            update(BookingItem)
+            .where(BookingItem.name.is_(bookingitem.name))
+            .where(BookingItem.wbs.is_(bookingitem.wbs))
+            .values(name = modified_bookingitem.name))
+        session.execute(stmt)
         session.commit()
+        logger.info(f"Item modified from : {bookingitem}  to {exist}")
 
-def edit_booking_item():
-    pass
+
+@handle_exceptions
+def delete_booking_item(session: Session, bookingitem: BookingItem):
+    exist = read_booking_item(session, bookingitem)
+    if exist is None:
+        logger.info(f"No such item: {bookingitem}")
+    else:
+        stmt = (
+            delete(BookingItem)
+            .where(BookingItem.name.is_(bookingitem.name))
+            .where(BookingItem.wbs.is_(bookingitem.wbs)))
+        session.execute(stmt)
+        session.commit()
+        logger.info(f"Item deleted from : {exist}")
+
+
+
+def create_time_table_item(session: Session, new_timetable_item: TimeTable):
+    exist_booking_item = read_booking_item(session, new_timetable_item.booking_item)
+    new_timetable_item.booking_item = exist_booking_item
     
-def delete_booking_item():
+    if new_timetable_item.date is None:
+        new_timetable_item.date = date.today() 
+        
+    exist = read_time_table_item(session, new_timetable_item)
+    if exist is None:
+        session.add(new_timetable_item) 
+        session.commit() 
+        logger.info(f"Created new item: {new_timetable_item}")
+    else:
+        logger.warning(f"TimeTable item already exists in database: {exist}")
+    return read_time_table_item(session, new_timetable_item)
+
+
+def read_time_table_item(session: Session, timetable: TimeTable):
+    item = session.scalars(select(TimeTable)
+                            .where(TimeTable.booking_item == timetable.booking_item)
+                            .where(func.DATE(TimeTable.date) == timetable.date)).first()
+    return item
+
+
+def update_time_table_item(session: Session, timetable: TimeTable):
+    pass
+
+def delete_time_table_item(session: Session, timetable: TimeTable):
     pass
 
 
 
 
+b1 = BookingItem(
+    name = "New1111",
+    wbs = "Hey",
+)
 
-def main() -> None:
+b2 = BookingItem(
+    name = "Test1",
+    wbs = "Hey",
+)
 
+b3 = BookingItem(
+    name = "Test1",
+    wbs = "Heeey",
+)
 
+create_booking_item(session, b1)
 
-    with Session() as session:
-        try:
-            wbs = db_BookingWbsTable(wbs="wbs-123232")
-            session.add(wbs)
-            session.commit()
-        except IntegrityError:
-            print("wbs already exists")
+#update_booking_item(session, b1, b2)
 
-    with Session() as session:
-            #wbs =  session.execute(select(db_BookingWbsTable).where(db_BookingWbsTable.id == 2)).all()[0][0]
-            wbs = session.execute(select(db_BookingWbsTable).where(db_BookingWbsTable.wbs == '')).all()[0][0]
-            wbs2 = session.scalars(select(db_BookingWbsTable)).all()[0]
+#delete_booking_item(session, b3)
 
-            
-            booking_item = db_BookingItemTable(wbs=wbs, text="Bookking_text-Example123")
-            booking_item2 = db_BookingItemTable(wbs=wbs, text="Bookking_text-Example456")
-            booking_log1 = db_BookingDateTable(date = datetime.datetime(year = 1980, month = 3, day = 4), 
-                                               booked_time=8,
-                                               booked_item = booking_item)
-            #session.add(booking_item)
-            #session.add(booking_item2)
-            
-            #session.commit()
-            res = session.scalars(select(db_BookingDateTable)).all()[0]
-            print(res.booked_time)
+t1 = TimeTable(
 
+    hours = 6,
+    booking_item = b1
 
+)
 
-
-
-
-
-
-
-if __name__ == "__main__":
-    main()
-
-
-    add_new_booking_item()
-
-
-class UserAuth(Base):
-    __tablename__ = "user_auth"
-
-    id: int = sa.Column(
-        sa.Integer, sa.ForeignKey("users.id"), primary_key=True, index=True, unique=True
-    )
-    username: str = sa.Column(sa.String)
-    email: str = sa.Column(sa.String, unique=True)
-    password_hash: str = sa.Column(sa.String)
-    user: Mapped["User"] = relationship("User", back_populates="auth")
-
-    def __init__(self, username: str, email: str):
-        self.username = username
-        self.email = email
-
-    def set_password(self, password: str) -> None:
-        self.password_hash = hashlib.sha256(password.encode()).hexdigest()
-
-    def check_password(self, password: str) -> bool:
-        return self.password_hash == hashlib.sha256(password.encode()).hexdigest()
-
-    def __repr__(self) -> str:
-        return f"<UserAuth(username={self.username}, email={self.email})>"
+create_time_table_item(session, t1)

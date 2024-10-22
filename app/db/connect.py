@@ -1,3 +1,6 @@
+# Legacy db handling code without ORM from @warga1991. Project will move to SQLalchemy.
+#######################################################################################
+
 import psycopg2
 from configparser import ConfigParser
 import os

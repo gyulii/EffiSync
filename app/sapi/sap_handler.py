@@ -183,6 +183,10 @@ class EssDriver:
 
         self.driver.find_element(By.LINK_TEXT, "Record Working Time").click()
 
+        handles = self.driver.window_handles
+        new_tab_handle = handles[-1]  # The new tab should be the last one in the list
+        self.driver.switch_to.window(new_tab_handle)
+
         WebDriverWait(self.driver, 10).until(
             EC.frame_to_be_available_and_switch_to_it(
                 (
