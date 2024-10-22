@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>controlPane</class>
+ <widget class="QWidget" name="controlPane">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1081</width>
+    <height>27</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 0, 66);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>956</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QFrame" name="buttons">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="minimizeBtn">
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	background-color: rgb(0, 0, 66);
+}
+QPushButton:hover{
+	background-color: rgb(0, 0, 105);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/icons/dark/iconsDark.qrc">
+             <normaloff>:/iconsDark/icons/chevron-down.svg</normaloff>:/iconsDark/icons/chevron-down.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="maximizeBtn">
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	background-color: rgb(0, 0, 66);
+}
+QPushButton:hover{
+	background-color: rgb(0, 0, 105);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/icons/dark/iconsDark.qrc">
+             <normaloff>:/iconsDark/icons/chevron-up.svg</normaloff>:/iconsDark/icons/chevron-up.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="closeBtn">
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	background-color: rgb(140, 0, 0);
+}
+QPushButton:hover{
+	background-color: rgb(165, 0, 0);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/icons/dark/iconsDark.qrc">
+             <normaloff>:/iconsDark/icons/x.svg</normaloff>:/iconsDark/icons/x.svg</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../resources/icons/dark/iconsDark.qrc"/>
+ </resources>
+ <connections/>
+</ui>

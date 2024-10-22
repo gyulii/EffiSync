@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>confirmationDialog</class>
+ <widget class="QDialog" name="confirmationDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>361</width>
+    <height>162</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QFrame" name="window">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(7, 7, 7);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QFrame" name="labelFrame">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(186, 186, 186);
+</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="btnsFrame">
+        <property name="maximumSize">
+         <size>
+          <width>351</width>
+          <height>61</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QFrame{
+	padding: 5px
+}
+
+QPushButton{
+	color: rgb(179, 182, 186);
+	border: 2px solid rgb(10, 10, 29);
+	background-color: rgb(0, 0, 43);
+	border-radius: 10px;
+}
+
+QPushButton::hover{
+	color: rgb(143, 145, 148);
+	background-color: rgb(0, 0, 85);
+}
+
+QPushButton::pressed{
+	color: rgb(254, 254, 254);
+	background-color: rgb(0, 0, 135);
+}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>39</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="saveBtn">
+           <property name="minimumSize">
+            <size>
+             <width>121</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(36, 131, 31);</string>
+           </property>
+           <property name="text">
+            <string>Yes</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>38</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="discardBtn">
+           <property name="minimumSize">
+            <size>
+             <width>121</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(135, 47, 13);</string>
+           </property>
+           <property name="text">
+            <string>No</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>39</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

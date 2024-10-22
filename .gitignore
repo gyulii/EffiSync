@@ -11,6 +11,7 @@ thumbs.db
 .DS_Store
 .idea
 .env
+.e
 .vscode
 .ruff_cache
 extensions/
