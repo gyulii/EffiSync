@@ -51,7 +51,7 @@ class DemoTableModel(QAbstractTableModel):
     def __init__(self, parent, header, *args):
         QAbstractTableModel.__init__(self, parent, *args)
         # 5. fetch data
-        results = connection.execute(db.select([demoTable])).fetchall()
+        results = connection.execute(db.select(demoTable)).fetchall()
         self.mylist = results
         self.header = header
 
