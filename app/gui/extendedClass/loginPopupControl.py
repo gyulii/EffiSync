@@ -48,11 +48,11 @@ class loginPopupControl(QDialog):
         print(f"Username: {userName}. Password: {password}")
 
         if userName == "admin" and password == "admin":
-            print("The authentication was sucessfully")
+            print("The authentication was successful")
             self.close()
             self.auth = True
         else:
-            print("The authetication was unsucessfully")
+            print("The authentication was unsuccessful")
             self.diagUI.userNameInput.clear()
             self.diagUI.passwordInput.clear()
             self.diagUI.infoMsg.setText("The username or the passwor is incorrect. Try again!")
