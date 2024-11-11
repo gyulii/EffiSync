@@ -8,6 +8,7 @@ class confirmationDialogControl(QDialog):
         self.diag = Ui_confirmationDialog()
         self.diag.setupUi(self)
 
+        self.action = False
         if text is not None:
             self.diag.label.setText(text)
         
