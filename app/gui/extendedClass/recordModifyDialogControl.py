@@ -45,7 +45,7 @@ class recordModifyDialogControl(QDialog):
     def setProject(self, project):
         self.project = project
 
-    def setSatrt(self, start):
+    def setStart(self, start):
         self.start = start
 
     def setEnd(self, end):
@@ -57,7 +57,7 @@ class recordModifyDialogControl(QDialog):
     def getProject(self):
         return self.project
 
-    def getSatrt(self):
+    def getStart(self):
         return self.start
 
     def getEnd(self):
@@ -82,7 +82,7 @@ class recordModifyDialogControl(QDialog):
 
     def save(self):
         # data validity check needed
-
+        #TODO db update
         self.table.setItem(self.rowNr, 2, QTableWidgetItem(self.project))
         self.table.setItem(self.rowNr, 3, QTableWidgetItem(self.start.toString("hh:mm")))
         self.table.setItem(self.rowNr, 4, QTableWidgetItem(self.end.toString("hh:mm")))
