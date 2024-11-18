@@ -19,6 +19,7 @@ class myApp(QMainWindow, Ui_MainWindow):
     def __init__(self, type=None):
         super().__init__()
         self.setupUi(self)
+        #TODO db init
         self.effiLog("Open the UI.")
 
         self.userID = getpass.getuser()
