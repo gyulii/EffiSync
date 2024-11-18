@@ -65,6 +65,9 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.managerWidget.hide()
         self.managerWidgetMini.hide()
 
+        mock_data()
+        self.updateProjectList()
+
         self.bodyWidget.setCurrentIndex(0)
 
         header = ["#","User","Project","Start","End","Total","Actions"]
@@ -186,6 +189,18 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.userLog.setTextColor(QColor("#ff0000"))
             log = "<" + timestamp + "> ERROR: " + msg + "\n"
             self.userLog.setText(log)
+
+    def updateProjectList(self):
+        #TODO WIP
+        projects = self.db.read_all_booking_names()
+        self.projectDropDownList.clear()
+        self.projectDropDownList.addItems(projects)
+
+    def updateTopicList(self):
+        #TODO WIP, do we need this?
+        topics = self.db.getTopics()
+        self.topicDropDownList.clear()
+        self.topicDropDownList.addItems(topics)
 
     def startBtnActionDemo(self):
         rowNr = self.recordedTimesTable.rowCount()

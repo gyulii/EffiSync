@@ -121,6 +121,12 @@ class DatabaseHandler:
             self.session.commit()
             logger.info(f"Item deleted from : {exist}")
 
+    @handle_exceptions
+    def clean_booking_data(self):
+        stmt = delete(self.BookingItem)
+        self.session.execute(stmt)
+        self.session.commit()
+        logger.info("All booking data deleted")
 
     @handle_exceptions
     def create_time_table_item(self, new_timetable_item: TimeTable):
@@ -144,7 +150,7 @@ class DatabaseHandler:
                 .values(hours = exist.hours + new_timetable_item.hours))
             self.session.execute(stmt)
             self.session.commit()
-            logger.info(f"Item modified from : {exist}")
+            logger.info(f"Item modified to : {exist}")
         return self.read_time_table_item(new_timetable_item)
 
     @handle_exceptions
@@ -180,6 +186,26 @@ class DatabaseHandler:
             self.session.execute(stmt)
             self.session.commit()
             logger.info(f"Item deleted from : {exist}")
+
+def mock_data():
+    db=DatabaseHandler()
+    db.clean_booking_data()
+    b1 = db.BookingItem(
+        name = "Project 1",
+        wbs = "test1",
+    )
+    b2 = db.BookingItem(
+        name = "Project 2",
+        wbs = "test2",
+    )
+    b3 = db.BookingItem(
+        name = "Project 3",
+        wbs = "test3",
+    )
+    db.create_booking_item(b1)
+    db.create_booking_item(b2)
+    db.create_booking_item(b3)
+
 
 if __name__ == "__main__":
     db = DatabaseHandler()
