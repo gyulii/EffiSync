@@ -123,7 +123,7 @@ def delete_booking_item(session: Session, bookingitem: BookingItem):
         logger.info(f"Item deleted from : {exist}")
 
 
-
+@handle_exceptions
 def create_time_table_item(session: Session, new_timetable_item: TimeTable):
     exist_booking_item = read_booking_item(session, new_timetable_item.booking_item)
     new_timetable_item.booking_item = exist_booking_item
@@ -138,51 +138,76 @@ def create_time_table_item(session: Session, new_timetable_item: TimeTable):
         logger.info(f"Created new item: {new_timetable_item}")
     else:
         logger.warning(f"TimeTable item already exists in database: {exist}")
+        #add hours to existing item
+        stmt = (
+            update(TimeTable)
+            .where(TimeTable.id == exist.id)
+            .values(hours = exist.hours + new_timetable_item.hours))
     return read_time_table_item(session, new_timetable_item)
 
-
+@handle_exceptions
 def read_time_table_item(session: Session, timetable: TimeTable):
     item = session.scalars(select(TimeTable)
-                            .where(TimeTable.booking_item == timetable.booking_item)
+                            .where(TimeTable.booking_item == timetable.booking_item) #itt miért nem primary key alapján keresünk?
                             .where(func.DATE(TimeTable.date) == timetable.date)).first()
     return item
 
+@handle_exceptions
+def update_time_table_item(session: Session, timetable: TimeTable): #itt a booking_itemnél volt modified meg prev is, de igazából elég csak a modified, mert az id fix
+    exist = read_time_table_item(session, timetable)
+    if exist is None:
+        logger.info(f"No such item: {timetable}")
+    else:
+        stmt = (
+            update(TimeTable)
+            .where(TimeTable.id == exist.id)
+            .values(date = timetable.date, hours = timetable.hours))
+        session.execute(stmt)
+        session.commit()
+        logger.info(f"Item modified from : {exist}  to {timetable}")
 
-def update_time_table_item(session: Session, timetable: TimeTable):
-    pass
-
+@handle_exceptions
 def delete_time_table_item(session: Session, timetable: TimeTable):
-    pass
+    exist = read_time_table_item(session, timetable)
+    if exist is None:
+        logger.info(f"No such item: {timetable}")
+    else:
+        stmt = (
+            delete(TimeTable)
+            .where(TimeTable.id == exist.id))
+        session.execute(stmt)
+        session.commit()
+        logger.info(f"Item deleted from : {exist}")
 
 
 
 
-b1 = BookingItem(
-    name = "New1111",
-    wbs = "Hey",
-)
-
-b2 = BookingItem(
-    name = "Test1",
-    wbs = "Hey",
-)
-
-b3 = BookingItem(
-    name = "Test1",
-    wbs = "Heeey",
-)
-
-create_booking_item(session, b1)
-
-#update_booking_item(session, b1, b2)
-
-#delete_booking_item(session, b3)
-
-t1 = TimeTable(
-
-    hours = 6,
-    booking_item = b1
-
-)
-
-create_time_table_item(session, t1)
+# b1 = BookingItem(
+#     name = "New1111",
+#     wbs = "Hey",
+# )
+#
+# b2 = BookingItem(
+#     name = "Test1",
+#     wbs = "Hey",
+# )
+#
+# b3 = BookingItem(
+#     name = "Test1",
+#     wbs = "Heeey",
+# )
+#
+# create_booking_item(session, b1)
+#
+# update_booking_item(session, b1, b2)
+#
+# delete_booking_item(session, b3)
+#
+# t1 = TimeTable(
+#
+#     hours = 6,
+#     booking_item = b1
+#
+# )
+#
+# create_time_table_item(session, t1)
