@@ -78,6 +78,7 @@ class recordActionBtnControl(QWidget):
             self.recAcBtns.freezeBtn.setDisabled(True)
             self.recAcBtns.editBtn.setDisabled(True)
             self.recAcBtns.deleteBtn.setDisabled(True)
+            #TODO: send the record to the server
         else:
             self.log(f"The {self.rowNr} record is not freezed. Freeze the record first and after that send it.", "WARNING")
             self.recAcBtns.sendBtn.setEnabled(True)
