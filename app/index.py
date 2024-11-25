@@ -9,6 +9,8 @@ from datetime import datetime
 
 
 from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl
+from app.db.database_handler import DatabaseHandler, mock_data
+
 
 class myApp(QMainWindow, Ui_MainWindow):
 
@@ -19,7 +21,7 @@ class myApp(QMainWindow, Ui_MainWindow):
     def __init__(self, type=None):
         super().__init__()
         self.setupUi(self)
-        #TODO db init
+        self.db=DatabaseHandler()
         self.effiLog("Open the UI.")
 
         self.userID = getpass.getuser()

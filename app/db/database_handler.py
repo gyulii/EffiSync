@@ -90,21 +90,29 @@ class DatabaseHandler:
                             .where(self.BookingItem.wbs == bookingitem.wbs)).first()
         return item
 
+    @handle_exceptions
+    def read_all_booking_names(self):
+        names = self.session.scalars(select(self.BookingItem.name)).all()
+        return names
 
     @handle_exceptions
     def update_booking_item(self, bookingitem: BookingItem , modified_bookingitem: BookingItem):
         exist = self.read_booking_item(bookingitem)
+        modified_exist = self.read_booking_item(modified_bookingitem)
         if exist is None:
             logger.info(f"No such item: {bookingitem}")
         else:
-            stmt = (
-                update(self.BookingItem)
-                .where(self.BookingItem.name.is_(bookingitem.name))
-                .where(self.BookingItem.wbs.is_(bookingitem.wbs))
-                .values(name = modified_bookingitem.name))
-            self.session.execute(stmt)
-            self.session.commit()
-            logger.info(f"Item modified from : {bookingitem}  to {exist}")
+            if modified_exist is not None:
+                logger.info(f"Item already exists in database: {modified_exist}")
+            else:
+                stmt = (
+                    update(self.BookingItem)
+                    .where(self.BookingItem.name.is_(bookingitem.name))
+                    .where(self.BookingItem.wbs.is_(bookingitem.wbs))
+                    .values(name = modified_bookingitem.name))
+                self.session.execute(stmt)
+                self.session.commit()
+                logger.info(f"Item modified from : {bookingitem}  to {exist}") #NOTE: this log is not correct, bookingitem is getting modified along with the database object
 
 
     @handle_exceptions
@@ -166,6 +174,7 @@ class DatabaseHandler:
         if exist is None:
             logger.info(f"No such item: {timetable}")
         else:
+            #TODO: check unique constraint
             stmt = (
                 update(self.TimeTable)
                 .where(self.TimeTable.id == exist.id)
@@ -236,3 +245,5 @@ if __name__ == "__main__":
     )
 
     db.create_time_table_item(t1)
+
+    logger.info(db.read_all_booking_names())
