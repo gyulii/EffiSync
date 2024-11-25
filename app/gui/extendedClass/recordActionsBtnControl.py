@@ -55,6 +55,7 @@ class recordActionBtnControl(QWidget):
 
         self.log(f"The delete button for row: {self.rowNr} is pressed", "ERROR")
         if dialog.action:
+            #TODO: delete the record from the database
             for i in range(self.rowNr+1, self.table.rowCount()):
                 self.table.setItem(i,0,QTableWidgetItem(str(i)))
                 item = self.table.item(i, 0)
