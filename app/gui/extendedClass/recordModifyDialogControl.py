@@ -51,6 +51,9 @@ class recordModifyDialogControl(QDialog):
     def setEnd(self, end):
         self.end = end
 
+    def setEditNth(self, editNth):
+        pass
+
     def calcTotal(self):
         self.total = QTime.fromMSecsSinceStartOfDay(self.start.secsTo(self.end)*1000)
 

@@ -37,12 +37,19 @@ class recordActionBtnControl(QWidget):
     def setLog(self, log):
         self.log = log
 
+    def setDelNth(self, delNth):
+        self.delNth = delNth
+
+    def setEditNth(self, editNth):
+        self.editNth = editNth
+
     def editRecord(self):
         project = self.table.item(self.rowNr, 2).text()
         start = self.table.item(self.rowNr, 3).text()
         end = self.table.item(self.rowNr, 4).text()
         
         diag = recordModifyDialogControl(start, end, project)
+        diag.setEditNth(self.editNth)
         diag.setTable(self.table)
         diag.setRow(self.rowNr)
         diag.setLog(self.log)
@@ -55,16 +62,17 @@ class recordActionBtnControl(QWidget):
 
         self.log(f"The delete button for row: {self.rowNr} is pressed", "ERROR")
         if dialog.action:
-            #TODO: delete the record from the database
-            for i in range(self.rowNr+1, self.table.rowCount()):
-                self.table.setItem(i,0,QTableWidgetItem(str(i)))
-                item = self.table.item(i, 0)
-                item.setTextAlignment(Qt.AlignCenter)
-
-                widget = self.table.cellWidget(i,6)
-                widget.setRowNr(i-1)
-
-            self.table.removeRow(self.rowNr)
+            # TODO: delete the record from the database
+            self.delNth(self.rowNr)
+            # for i in range(self.rowNr+1, self.table.rowCount()):
+            #     self.table.setItem(i,0,QTableWidgetItem(str(i)))
+            #     item = self.table.item(i, 0)
+            #     item.setTextAlignment(Qt.AlignCenter)
+            #
+            #     widget = self.table.cellWidget(i,6)
+            #     widget.setRowNr(i-1)
+            #
+            # self.table.removeRow(self.rowNr)
 
     def freezeRecord(self):
         if self.recAcBtns.freezeBtn.isChecked():
