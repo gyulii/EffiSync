@@ -5,7 +5,7 @@ from datetime import datetime
 
 import sqlalchemy as sa
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text, Float
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text, Float, Date
 from sqlalchemy.sql import func
 from sqlalchemy.orm import (
     declarative_base,
@@ -54,7 +54,7 @@ class DatabaseHandler:
 
         id = Column(Integer, primary_key=True, autoincrement="auto")
         booking_item_id = Column(Integer, ForeignKey("bookingitem.id"))
-        date = Column(DateTime)
+        date = Column(Date)
         hours = Column(Float)
 
         booking_item = relationship("BookingItem")
@@ -94,6 +94,10 @@ class DatabaseHandler:
     def read_all_booking_names(self):
         names = self.session.scalars(select(self.BookingItem.name)).all()
         return names
+
+    def read_all_wbss(self):
+        wbss = self.session.scalars(select(self.BookingItem.wbs)).all()
+        return wbss
 
     @handle_exceptions
     def update_booking_item(self, bookingitem: BookingItem , modified_bookingitem: BookingItem):
@@ -169,19 +173,35 @@ class DatabaseHandler:
         return item
 
     @handle_exceptions
-    def update_time_table_item(self, timetable: TimeTable): #itt a booking_itemnél volt modified meg prev is, de igazából elég csak a modified, mert az id fix
+    def update_time_table_item(self, before: TimeTable, timetable: TimeTable): #itt a booking_itemnél volt modified meg prev is, de igazából elég csak a modified, mert az id fix
+        beforeExist = self.read_time_table_item(before)
         exist = self.read_time_table_item(timetable)
-        if exist is None:
-            logger.info(f"No such item: {timetable}")
+        if beforeExist is None:
+            logger.info(f"No such item: {before}")
         else:
             #TODO: check unique constraint
-            stmt = (
-                update(self.TimeTable)
-                .where(self.TimeTable.id == exist.id)
-                .values(date = timetable.date, hours = timetable.hours))
-            self.session.execute(stmt)
-            self.session.commit()
-            logger.info(f"Item modified from : {exist}  to {timetable}")
+            if not exist is None:
+                logger.info(f"Item already exists in database: {exist}")
+                #add hours to existing item
+                stmt = (
+                    update(self.TimeTable)
+                    .where(self.TimeTable.id == exist.id)
+                    .values(hours = exist.hours + timetable.hours))
+                self.session.execute(stmt)
+                stmt2 = (
+                    delete(self.TimeTable)
+                    .where(self.TimeTable.id == beforeExist.id))
+                self.session.execute(stmt2)
+                self.session.commit()
+                logger.info(f"Item {before} merged into {exist}")
+            else:
+                stmt = (
+                    update(self.TimeTable)
+                    .where(self.TimeTable.id == exist.id)
+                    .values(date = timetable.date, hours = timetable.hours))
+                self.session.execute(stmt)
+                self.session.commit()
+                logger.info(f"Item modified from : {before}  to {timetable}")
 
     @handle_exceptions
     def delete_time_table_item(self, timetable: TimeTable):
@@ -196,9 +216,23 @@ class DatabaseHandler:
             self.session.commit()
             logger.info(f"Item deleted from : {exist}")
 
+    @handle_exceptions
+    def read_all_time_table_items(self):
+        items = self.session.scalars(select(self.TimeTable)).all()
+        return items
+
+    @handle_exceptions
+    def clean_time_table_data(self):
+        stmt = delete(self.TimeTable)
+        self.session.execute(stmt)
+        self.session.commit()
+        logger.info("All time table data deleted")
+
+
 def mock_data():
     db=DatabaseHandler()
     db.clean_booking_data()
+    db.clean_time_table_data()
     b1 = db.BookingItem(
         name = "Project 1",
         wbs = "test1",
@@ -214,6 +248,18 @@ def mock_data():
     db.create_booking_item(b1)
     db.create_booking_item(b2)
     db.create_booking_item(b3)
+    t1 = db.TimeTable(
+        hours = 6,
+        date=date(2024, 11, 24),
+        booking_item = b1
+    )
+    t2 = db.TimeTable(
+        hours = 6,
+        date=date(2024, 11, 25),
+        booking_item = b2
+    )
+    db.create_time_table_item(t1)
+    db.create_time_table_item(t2)
 
 
 if __name__ == "__main__":

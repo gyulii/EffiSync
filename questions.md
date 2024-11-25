@@ -7,5 +7,7 @@
   - Will we scrap those columns long-term?
   - (This is important because when loading the data from the database, there won't be anything corresponding to this, but there will be one column for the day)
 
+- When sending a row, what will happen to those rows? Should they be deleted?
+
 - In the long term:
   - When a manager wants to export the timetables, what will be the filters?
