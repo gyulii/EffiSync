@@ -39,12 +39,21 @@ def handle_exceptions(f):
 class DatabaseHandler:
     Base = declarative_base()
 
+    class Location(Base):
+        __tablename__ = "location"
+
+        id = Column(Integer, primary_key=True, autoincrement="auto")
+        country = Column(Text, unique=True, nullable=False)
+        wbs = Column(Text, nullable=False)
+
+        def __repr__(self):
+            return f"<id={self.id}, name={self.name}, wbs={self.wbs}>"
+
     class BookingItem(Base):
         __tablename__ = "bookingitem"
 
         id = Column(Integer, primary_key=True, autoincrement="auto")
-        name = Column(Text, nullable=False)
-        wbs = Column(Text, nullable=False)
+        name = Column(Text, unique=True, nullable=False)  #are num
 
         def __repr__(self):
             return f"<id={self.id}, name={self.name}, wbs={self.wbs}>"
@@ -54,13 +63,16 @@ class DatabaseHandler:
 
         id = Column(Integer, primary_key=True, autoincrement="auto")
         booking_item_id = Column(Integer, ForeignKey("bookingitem.id"))
+        location_id = Column(Integer, ForeignKey("location.id"))
         date = Column(Date)
         hours = Column(Float)
 
         booking_item = relationship("BookingItem")
+        location = relationship("Location")
 
         def __repr__(self):
-            return f"<id={self.id}, booking_item_id={self.booking_item_id}, date={self.date}, hours={self.hours}>"
+            return f"<id={self.id}, project={self.booking_item.name}, location={self.location.country}, date={self.date}, hours={self.hours}>"
+
 
     def __init__(self):
         base_dir = pathlib.Path().cwd()
@@ -70,6 +82,70 @@ class DatabaseHandler:
         Base = declarative_base()
 
         Base.metadata.create_all(engine)
+
+    #Location CRUD, +readall, +clean
+
+    @handle_exceptions
+    def create_location(self, new_location: Location):
+        exist = self.read_location(new_location)
+        if exist is None:
+            self.session.add(new_location)
+            self.session.commit()
+            logger.info(f"Created location: {new_location}")
+        else:
+            logger.warning(f"Location already exists in database: {exist}")
+        return self.read_location(new_location)
+
+    @handle_exceptions
+    def read_location(self, location: Location):
+        loc = self.session.scalars(select(self.Location)
+                            .where(self.Location.country == location.country)).first()
+        return loc
+
+    @handle_exceptions
+    def update_location(self, location: Location, modified_location: Location):
+        exist = self.read_location(location)
+        modified_exist = self.read_location(modified_location)
+        if exist is None:
+            logger.info(f"No such location: {location}")
+        else:
+            if modified_exist is not None:
+                logger.info(f"Location already exists in database: {modified_exist}")
+            else:
+                stmt = (
+                    update(self.Location)
+                    .where(self.Location.country.is_(location.country))
+                    .values(country = modified_location.country, wbs = modified_location.wbs))
+                self.session.execute(stmt)
+                self.session.commit()
+                logger.info(f"Location modified from : {location}  to {modified_location}")
+
+    @handle_exceptions
+    def delete_location(self, location: Location):
+        exist = self.read_location(location)
+        if exist is None:
+            logger.info(f"No such location: {location}")
+        else:
+            stmt = (
+                delete(self.Location)
+                .where(self.Location.country.is_(location.country)))
+            self.session.execute(stmt)
+            self.session.commit()
+            logger.info(f"Location deleted from : {exist}")
+
+    @handle_exceptions
+    def clean_location_data(self):
+        stmt = delete(self.Location)
+        self.session.execute(stmt)
+        self.session.commit()
+        logger.info("All location data deleted")
+
+    @handle_exceptions
+    def read_all_location_names(self):
+        names = self.session.scalars(select(self.Location.country)).all()
+        return names
+
+    #BookingItem CRUD, +readall, +clean
 
     @handle_exceptions
     def create_booking_item(self, new_booking_item: BookingItem):
@@ -82,22 +158,16 @@ class DatabaseHandler:
             logger.warning(f"Booking item already exists in database: {exist}")
         return self.read_booking_item(new_booking_item)
 
-
     @handle_exceptions
     def read_booking_item(self, bookingitem: BookingItem):
         item = self.session.scalars(select(self.BookingItem)
-                            .where(self.BookingItem.name == bookingitem.name)
-                            .where(self.BookingItem.wbs == bookingitem.wbs)).first()
+                            .where(self.BookingItem.name == bookingitem.name)).first()
         return item
 
     @handle_exceptions
     def read_all_booking_names(self):
         names = self.session.scalars(select(self.BookingItem.name)).all()
         return names
-
-    def read_all_wbss(self):
-        wbss = self.session.scalars(select(self.BookingItem.wbs)).all()
-        return wbss
 
     @handle_exceptions
     def update_booking_item(self, bookingitem: BookingItem , modified_bookingitem: BookingItem):
@@ -112,7 +182,6 @@ class DatabaseHandler:
                 stmt = (
                     update(self.BookingItem)
                     .where(self.BookingItem.name.is_(bookingitem.name))
-                    .where(self.BookingItem.wbs.is_(bookingitem.wbs))
                     .values(name = modified_bookingitem.name))
                 self.session.execute(stmt)
                 self.session.commit()
@@ -127,8 +196,7 @@ class DatabaseHandler:
         else:
             stmt = (
                 delete(self.BookingItem)
-                .where(self.BookingItem.name.is_(bookingitem.name))
-                .where(self.BookingItem.wbs.is_(bookingitem.wbs)))
+                .where(self.BookingItem.name.is_(bookingitem.name)))
             self.session.execute(stmt)
             self.session.commit()
             logger.info(f"Item deleted from : {exist}")
@@ -139,6 +207,8 @@ class DatabaseHandler:
         self.session.execute(stmt)
         self.session.commit()
         logger.info("All booking data deleted")
+
+    #TimeTable CRUD, +readall, +clean
 
     @handle_exceptions
     def create_time_table_item(self, new_timetable_item: TimeTable):
