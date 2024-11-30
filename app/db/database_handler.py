@@ -47,7 +47,7 @@ class DatabaseHandler:
         wbs = Column(Text, nullable=False)
 
         def __repr__(self):
-            return f"<id={self.id}, name={self.name}, wbs={self.wbs}>"
+            return f"<id={self.id}, country={self.country}, wbs={self.wbs}>"
 
     class BookingItem(Base):
         __tablename__ = "bookingitem"
@@ -56,7 +56,7 @@ class DatabaseHandler:
         name = Column(Text, unique=True, nullable=False)  #are num
 
         def __repr__(self):
-            return f"<id={self.id}, name={self.name}, wbs={self.wbs}>"
+            return f"<id={self.id}, name={self.name}>"
 
     class TimeTable(Base):
         __tablename__ = "timetable"
@@ -71,7 +71,7 @@ class DatabaseHandler:
         location = relationship("Location")
 
         def __repr__(self):
-            return f"<id={self.id}, project={self.booking_item.name}, location={self.location.country}, date={self.date}, hours={self.hours}>"
+            return f"<id={self.id}, project_id={self.booking_item_id}, location_id={self.location_id}, date={self.date}, hours={self.hours}>"
 
 
     def __init__(self):
@@ -79,9 +79,8 @@ class DatabaseHandler:
         engine = sa.create_engine(fr"sqlite:///{base_dir}\app\db\test.db")
         Session = sessionmaker(bind=engine)
         self.session = Session()
-        Base = declarative_base()
 
-        Base.metadata.create_all(engine)
+        self.Base.metadata.create_all(engine)
 
     #Location CRUD, +readall, +clean
 
@@ -99,7 +98,7 @@ class DatabaseHandler:
     @handle_exceptions
     def read_location(self, location: Location):
         loc = self.session.scalars(select(self.Location)
-                            .where(self.Location.country == location.country)).first()
+                            .where(self.Location.country == location.country))
         return loc
 
     @handle_exceptions
@@ -301,32 +300,49 @@ class DatabaseHandler:
 
 def mock_data():
     db=DatabaseHandler()
+    db.clean_location_data()
     db.clean_booking_data()
     db.clean_time_table_data()
+    l1 = db.Location(
+        country="HUN",
+        wbs="wbs123"
+    )
+    l2 = db.Location(
+        country="GER",
+        wbs="GER"
+    )
+    l3 = db.Location(
+        country="MOR",
+        wbs="wbs256"
+    )
+    db.create_location(l1)
+    db.create_location(l2)
+    db.create_location(l3)
+
     b1 = db.BookingItem(
         name = "Project 1",
-        wbs = "test1",
     )
     b2 = db.BookingItem(
         name = "Project 2",
-        wbs = "test2",
     )
     b3 = db.BookingItem(
         name = "Project 3",
-        wbs = "test3",
     )
     db.create_booking_item(b1)
     db.create_booking_item(b2)
     db.create_booking_item(b3)
+
     t1 = db.TimeTable(
         hours = 6,
         date=date(2024, 11, 24),
-        booking_item = b1
+        booking_item = b1,
+        location=l1
     )
     t2 = db.TimeTable(
         hours = 6,
         date=date(2024, 11, 25),
-        booking_item = b2
+        booking_item = b2,
+        location=l2
     )
     db.create_time_table_item(t1)
     db.create_time_table_item(t2)
@@ -334,30 +350,35 @@ def mock_data():
 
 if __name__ == "__main__":
     db = DatabaseHandler()
+    db.clean_location_data()
+    db.clean_booking_data()
+    db.clean_time_table_data()
     b1 = db.BookingItem(
-        name = "New1111",
-        wbs = "Hey",
+        name = "New1111"
     )
 
     b2 = db.BookingItem(
-        name = "Test1",
-        wbs = "Hey",
+        name = "Test1"
     )
 
     b3 = db.BookingItem(
-        name = "Test1",
-        wbs = "Heeey",
+        name = "Test1"
     )
-
+    l1 = db.Location(
+        country="HUN",
+        wbs="wbs123"
+    )
+    db.create_location(l1)
     db.create_booking_item(b1)
 
     db.update_booking_item(b1, b2)
 
-    db.delete_booking_item(b3)
+    #db.delete_booking_item(b3)
 
     t1 = db.TimeTable(
         hours = 6,
-        booking_item = b1
+        booking_item = b1,
+        location=l1
     )
 
     db.create_time_table_item(t1)
