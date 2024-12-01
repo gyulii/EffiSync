@@ -251,7 +251,7 @@ class DatabaseHandler:
         if beforeExist is None:
             logger.info(f"No such item: {before}")
         else:
-            #TODO: check unique constraint
+            # check unique constraint
             if exist is not None:
                 logger.info(f"Item already exists in database: {exist}")
                 #add hours to existing item
