@@ -1,36 +1,36 @@
-from PySide6.QtWidgets import QDialog, QTableWidget, QTableWidgetItem
-from PySide6.QtCore import Qt, QTime
+import datetime
 
+from PySide6.QtWidgets import QDialog, QTableWidget, QTableWidgetItem
+from PySide6.QtCore import Qt, QTime, QDate
+
+from app.db.database_handler import DatabaseHandler
 from app.gui.baseClass.recordModifyDialog import Ui_modifyRecord
 
 class recordModifyDialogControl(QDialog):
     project = None
-    start = QTime()
-    end = QTime()
+    date = QDate()
     total = QTime()
+    db = DatabaseHandler()
 
     table = None
     rowNr = None
     log = None
 
-    def __init__(self, start=None, end=None, project=None):
+    def __init__(self, total=None, date=None, project=None, wbs=None):
         super().__init__()
         self.diag = Ui_modifyRecord()
         self.diag.setupUi(self)
 
-        if start is not None and end is not None and project is not None:
-            self.start = QTime().fromString(start, "hh:mm")
-            self.end = QTime().fromString(end,"hh:mm")
-            self.calcTotal()
-
+        if total is not None and date is not None and project is not None and wbs is not None:
+            self.total = QTime().fromMSecsSinceStartOfDay(float(total)*1000*3600)
+            self.date = QDate().fromString(date, "yyyy-MM-dd")
             self.project = project
+            self.wbs = wbs
 
             self.setupFields()
 
         self.diag.saveBtn.clicked.connect(self.save)
         self.diag.discardBtn.clicked.connect(self.close)
-        self.diag.startTime.timeChanged.connect(self.updateTotal)
-        self.diag.endTime.timeChanged.connect(self.updateTotal)
         self.diag.projectList.currentIndexChanged.connect(self.updateProject)
 
     def setTable(self, table):
@@ -52,10 +52,10 @@ class recordModifyDialogControl(QDialog):
         self.end = end
 
     def setEditNth(self, editNth):
-        pass
+        self.editNth = editNth
 
-    def calcTotal(self):
-        self.total = QTime.fromMSecsSinceStartOfDay(self.start.secsTo(self.end)*1000)
+    def setDB(self, db):
+        self.db = db
 
     def getProject(self):
         return self.project
@@ -67,28 +67,21 @@ class recordModifyDialogControl(QDialog):
         return self.end
 
     def setupFields(self):
-        self.diag.startTime.setTime(self.start)
-        self.diag.endTime.setTime(self.end)
+        self.diag.projectList.clear()
+        self.diag.projectList.addItems(self.db.read_all_booking_names())
         self.diag.totalTime.setTime(self.total)
+        self.diag.workDate.setDate(self.date)
 
         prjIdx = self.diag.projectList.findText(self.project)
+        # if project is not in the list, exception handling should be added
         self.diag.projectList.setCurrentIndex(prjIdx)
 
     def updateProject(self, projectIndex):
         self.project = self.diag.projectList.currentText()
 
-    def updateTotal(self):
-        self.start = self.diag.startTime.time()
-        self.end = self.diag.endTime.time()
-        self.calcTotal()
-        self.diag.totalTime.setTime(self.total)
-
     def save(self):
         # data validity check needed
         #TODO db update
-        self.table.setItem(self.rowNr, 2, QTableWidgetItem(self.project))
-        self.table.setItem(self.rowNr, 3, QTableWidgetItem(self.start.toString("hh:mm")))
-        self.table.setItem(self.rowNr, 4, QTableWidgetItem(self.end.toString("hh:mm")))
-        self.table.setItem(self.rowNr, 5, QTableWidgetItem(self.total.toString("hh:mm")))
+        self.editNth(self.rowNr, self.project, self.wbs, datetime.date.fromisoformat(self.date.toString("yyyy-MM-dd")), self.total.msecsSinceStartOfDay()/3600000)
 
         self.close()

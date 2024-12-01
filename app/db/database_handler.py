@@ -98,7 +98,7 @@ class DatabaseHandler:
     @handle_exceptions
     def read_location(self, location: Location):
         loc = self.session.scalars(select(self.Location)
-                            .where(self.Location.country == location.country))
+                            .where(self.Location.country == location.country)).first()
         return loc
 
     @handle_exceptions
@@ -236,8 +236,11 @@ class DatabaseHandler:
 
     @handle_exceptions
     def read_time_table_item(self, timetable: TimeTable):
+        bi_exist = self.read_booking_item(timetable.booking_item)
+        loc_exist = self.read_location(timetable.location)
         item = self.session.scalars(select(self.TimeTable)
-                                .where(self.TimeTable.booking_item == timetable.booking_item) #itt miért nem primary key alapján keresünk?
+                                .where(self.TimeTable.booking_item == bi_exist) #itt miért nem primary key alapján keresünk?
+                                .where(self.TimeTable.location == loc_exist)
                                 .where(func.DATE(self.TimeTable.date) == timetable.date)).first()
         return item
 
@@ -249,7 +252,7 @@ class DatabaseHandler:
             logger.info(f"No such item: {before}")
         else:
             #TODO: check unique constraint
-            if not exist is None:
+            if exist is not None:
                 logger.info(f"Item already exists in database: {exist}")
                 #add hours to existing item
                 stmt = (
@@ -264,10 +267,11 @@ class DatabaseHandler:
                 self.session.commit()
                 logger.info(f"Item {before} merged into {exist}")
             else:
+                bi_exist = self.read_booking_item(timetable.booking_item)
                 stmt = (
                     update(self.TimeTable)
-                    .where(self.TimeTable.id == exist.id)
-                    .values(date = timetable.date, hours = timetable.hours))
+                    .where(self.TimeTable.id == beforeExist.id)
+                    .values(booking_item_id=bi_exist.id, date = timetable.date, hours = timetable.hours))
                 self.session.execute(stmt)
                 self.session.commit()
                 logger.info(f"Item modified from : {before}  to {timetable}")
@@ -365,8 +369,8 @@ if __name__ == "__main__":
         name = "Test1"
     )
     l1 = db.Location(
-        country="HUN",
-        wbs="wbs123"
+        country="TUR",
+        wbs="wbs364"
     )
     db.create_location(l1)
     db.create_booking_item(b1)

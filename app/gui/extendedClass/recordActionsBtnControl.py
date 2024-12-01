@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QWidget, QTableWidgetItem
 from PySide6.QtGui import QColor
 from PySide6.QtCore import Qt
 
+from app.db.database_handler import DatabaseHandler
 from app.gui.extendedClass.recordModifyDialogControl import recordModifyDialogControl
 from app.gui.baseClass.recordActions import Ui_recordActionButtons
 from app.gui.extendedClass.confirmationDialogControl import confirmationDialogControl
@@ -18,6 +19,7 @@ class recordActionBtnControl(QWidget):
         super().__init__()
         self.recAcBtns = Ui_recordActionButtons()
         self.recAcBtns.setupUi(self)
+        self.db=DatabaseHandler()
 
         self.recAcBtns.editBtn.clicked.connect(self.editRecord)
         self.recAcBtns.deleteBtn.clicked.connect(self.deleteRecord)
@@ -45,14 +47,17 @@ class recordActionBtnControl(QWidget):
 
     def editRecord(self):
         project = self.table.item(self.rowNr, 2).text()
-        start = self.table.item(self.rowNr, 3).text()
-        end = self.table.item(self.rowNr, 4).text()
+        date = self.table.item(self.rowNr, 4).text()
+        total = self.table.item(self.rowNr, 5).text()
+        wbs = self.table.item(self.rowNr, 3).text()
         
-        diag = recordModifyDialogControl(start, end, project)
+        diag = recordModifyDialogControl(total, date, project, wbs)
         diag.setEditNth(self.editNth)
+        #diag.setDB(self.db)
         diag.setTable(self.table)
         diag.setRow(self.rowNr)
         diag.setLog(self.log)
+        #diag.setupFields()
         diag.exec()
         self.log(f"The edit button for row: {self.rowNr} is pressed", "INFO")
 
