@@ -67,9 +67,10 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.managerWidget.hide()
         self.managerWidgetMini.hide()
 
-        mock_data()
+        #mock_data()
         self.updateProjectList()
-        self.updateTopicList()
+        self.updateLocationList()
+        self.bookingtextDropDownList.hide()
 
         self.bodyWidget.setCurrentIndex(0)
 
@@ -195,16 +196,14 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.userLog.setText(log)
 
     def updateProjectList(self):
-        #TODO WIP
         projects = self.db.read_all_booking_names()
         self.bookingtextDropDownList.clear()
         self.bookingtextDropDownList.addItems(projects)
 
-    def updateTopicList(self):
-        #TODO WIP, do we need this?
-        topics = self.db.read_all_wbss()
+    def updateLocationList(self):
+        locations = self.db.read_all_location_names()
         self.topicDropDownList.clear()
-        self.topicDropDownList.addItems(topics)
+        self.topicDropDownList.addItems(locations)
 
     def loadTimeTable(self):
         #TODO WIP
@@ -221,7 +220,7 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.recordedTimesTable.setItem(i, 0, QTableWidgetItem(str(i+1)))
             self.recordedTimesTable.setItem(i, 1, QTableWidgetItem(str(self.userID)))
             self.recordedTimesTable.setItem(i, 2, QTableWidgetItem(str(self.timeTables[i].booking_item.name)))
-            self.recordedTimesTable.setItem(i, 3, QTableWidgetItem(str(self.timeTables[i].booking_item.wbs)))
+            self.recordedTimesTable.setItem(i, 3, QTableWidgetItem(str(self.timeTables[i].location.wbs)))
             self.recordedTimesTable.setItem(i, 4, QTableWidgetItem(str(self.timeTables[i].date)))
             self.recordedTimesTable.setItem(i, 5, QTableWidgetItem(str(self.timeTables[i].hours)))
 
@@ -246,8 +245,8 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.db.delete_time_table_item(self.timeTables[row])
         self.loadTimeTable()
 
-    def editNthRow(self, row, project, topic, date, hours):
-        self.db.update_time_table_item(self.timeTables[row], self.db.Timetable(hours=hours, booking_item=self.db.BookingItem(name=project, wbs=topic), date=date))
+    def editNthRow(self, row, project, wbs, date, hours):
+        self.db.update_time_table_item(self.timeTables[row], self.db.TimeTable(hours=hours, booking_item=self.db.BookingItem(name=project), location=self.db.Location(wbs=wbs), date=date))
         self.loadTimeTable()
 
     def startBtnActionDemo(self):
@@ -285,7 +284,8 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.recordedTimesTable.setCellWidget(rowNr, 6, actionBtns)
 
     def startBtnAction(self):
-        self.currentProject = self.db.read_booking_item(self.db.BookingItem(name=self.bookingtextDropDownList.currentText(), wbs=self.topicDropDownList.currentText()))
+        self.currentProject = self.db.read_booking_item(self.db.BookingItem(name=self.bookingtextDropDownList.currentText()))
+        self.currentLocation = self.db.read_location(self.db.Location(location=self.topicDropDownList.currentText()))
         self.date = QDateTime.currentDateTime().date()
         self.startTime = QDateTime.currentDateTime()
 
@@ -329,7 +329,7 @@ class myApp(QMainWindow, Ui_MainWindow):
     def stopBtnAction(self):
         stopTime = QDateTime.currentDateTime()
         deltaTime = self.startTime.secsTo(stopTime)/3600 #in hours
-        self.db.create_time_table_item(self.db.TimeTable(hours=deltaTime, booking_item=self.currentProject, date=self.date))
+        self.db.create_time_table_item(self.db.TimeTable(hours=deltaTime, booking_item=self.currentProject, location=self.currentLocation, date=self.date))
         #update the table
         self.loadTimeTable()
 

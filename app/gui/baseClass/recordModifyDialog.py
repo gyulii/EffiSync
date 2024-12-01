@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'modifyRecord.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.8.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,16 +15,16 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QComboBox, QDialog,
-    QFrame, QGridLayout, QHBoxLayout, QLabel,
-    QPushButton, QSizePolicy, QSpacerItem, QTimeEdit,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QComboBox, QDateEdit,
+    QDialog, QFrame, QGridLayout, QHBoxLayout,
+    QLabel, QPushButton, QSizePolicy, QSpacerItem,
+    QTimeEdit, QVBoxLayout, QWidget)
 
 class Ui_modifyRecord(object):
     def setupUi(self, modifyRecord):
         if not modifyRecord.objectName():
             modifyRecord.setObjectName(u"modifyRecord")
-        modifyRecord.resize(351, 364)
+        modifyRecord.resize(351, 302)
         self.gridLayout = QGridLayout(modifyRecord)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -32,15 +32,15 @@ class Ui_modifyRecord(object):
         self.frame = QFrame(modifyRecord)
         self.frame.setObjectName(u"frame")
         self.frame.setStyleSheet(u"background-color: rgb(7, 7, 7);")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
+        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout = QVBoxLayout(self.frame)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.projectFrame = QFrame(self.frame)
         self.projectFrame.setObjectName(u"projectFrame")
         self.projectFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
-        self.projectFrame.setFrameShape(QFrame.StyledPanel)
-        self.projectFrame.setFrameShadow(QFrame.Raised)
+        self.projectFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.projectFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout = QHBoxLayout(self.projectFrame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.projectLabel = QLabel(self.projectFrame)
@@ -69,100 +69,74 @@ class Ui_modifyRecord(object):
 
         self.horizontalLayout.addWidget(self.projectList)
 
-        self.horizontalSpacer = QSpacerItem(25, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(25, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
 
         self.verticalLayout.addWidget(self.projectFrame)
 
-        self.startFrame = QFrame(self.frame)
-        self.startFrame.setObjectName(u"startFrame")
-        self.startFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
-        self.startFrame.setFrameShape(QFrame.StyledPanel)
-        self.startFrame.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_2 = QHBoxLayout(self.startFrame)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.startLabel = QLabel(self.startFrame)
-        self.startLabel.setObjectName(u"startLabel")
-        self.startLabel.setMinimumSize(QSize(0, 31))
-        self.startLabel.setFont(font)
-
-        self.horizontalLayout_2.addWidget(self.startLabel)
-
-        self.startTime = QTimeEdit(self.startFrame)
-        self.startTime.setObjectName(u"startTime")
-        self.startTime.setMinimumSize(QSize(190, 31))
-        self.startTime.setFont(font1)
-
-        self.horizontalLayout_2.addWidget(self.startTime)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
-
-
-        self.verticalLayout.addWidget(self.startFrame)
-
-        self.endFrame = QFrame(self.frame)
-        self.endFrame.setObjectName(u"endFrame")
-        self.endFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
-        self.endFrame.setFrameShape(QFrame.StyledPanel)
-        self.endFrame.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_3 = QHBoxLayout(self.endFrame)
+        self.dateFrame = QFrame(self.frame)
+        self.dateFrame.setObjectName(u"dateFrame")
+        self.dateFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
+        self.dateFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.dateFrame.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_3 = QHBoxLayout(self.dateFrame)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.endLabel = QLabel(self.endFrame)
-        self.endLabel.setObjectName(u"endLabel")
-        self.endLabel.setMinimumSize(QSize(0, 31))
-        self.endLabel.setFont(font)
+        self.dateLabel = QLabel(self.dateFrame)
+        self.dateLabel.setObjectName(u"dateLabel")
+        self.dateLabel.setMinimumSize(QSize(0, 31))
+        self.dateLabel.setFont(font)
 
-        self.horizontalLayout_3.addWidget(self.endLabel)
+        self.horizontalLayout_3.addWidget(self.dateLabel)
 
-        self.endTime = QTimeEdit(self.endFrame)
-        self.endTime.setObjectName(u"endTime")
-        self.endTime.setMinimumSize(QSize(190, 31))
-        self.endTime.setFont(font1)
+        self.workDate = QDateEdit(self.dateFrame)
+        self.workDate.setObjectName(u"workDate")
+        self.workDate.setMinimumSize(QSize(190, 31))
+        self.workDate.setFont(font1)
+        self.workDate.setDate(QDate(2000, 1, 1))
 
-        self.horizontalLayout_3.addWidget(self.endTime)
+        self.horizontalLayout_3.addWidget(self.workDate)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_3)
 
 
-        self.verticalLayout.addWidget(self.endFrame)
+        self.verticalLayout.addWidget(self.dateFrame)
 
-        self.totalFrame = QFrame(self.frame)
-        self.totalFrame.setObjectName(u"totalFrame")
-        self.totalFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
-        self.totalFrame.setFrameShape(QFrame.StyledPanel)
-        self.totalFrame.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_4 = QHBoxLayout(self.totalFrame)
+        self.timeFrame = QFrame(self.frame)
+        self.timeFrame.setObjectName(u"timeFrame")
+        self.timeFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
+        self.timeFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.timeFrame.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.timeFrame)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.totalLabel = QLabel(self.totalFrame)
-        self.totalLabel.setObjectName(u"totalLabel")
-        self.totalLabel.setMinimumSize(QSize(0, 31))
-        self.totalLabel.setFont(font)
+        self.timeLabel = QLabel(self.timeFrame)
+        self.timeLabel.setObjectName(u"timeLabel")
+        self.timeLabel.setEnabled(True)
+        self.timeLabel.setMinimumSize(QSize(0, 31))
+        self.timeLabel.setFont(font)
 
-        self.horizontalLayout_4.addWidget(self.totalLabel)
+        self.horizontalLayout_4.addWidget(self.timeLabel)
 
-        self.totalTime = QTimeEdit(self.totalFrame)
+        self.totalTime = QTimeEdit(self.timeFrame)
         self.totalTime.setObjectName(u"totalTime")
         self.totalTime.setMinimumSize(QSize(190, 31))
         self.totalTime.setFont(font1)
-        self.totalTime.setReadOnly(True)
-        self.totalTime.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.totalTime.setReadOnly(False)
+        self.totalTime.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.UpDownArrows)
 
         self.horizontalLayout_4.addWidget(self.totalTime)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer_4)
 
 
-        self.verticalLayout.addWidget(self.totalFrame)
+        self.verticalLayout.addWidget(self.timeFrame)
 
-        self.verticalSpacer = QSpacerItem(20, 64, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 64, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
@@ -188,12 +162,12 @@ class Ui_modifyRecord(object):
 "	color: rgb(254, 254, 254);\n"
 "	background-color: rgb(0, 0, 135);\n"
 "}")
-        self.btnsFrame.setFrameShape(QFrame.StyledPanel)
-        self.btnsFrame.setFrameShadow(QFrame.Raised)
+        self.btnsFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.btnsFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_5 = QHBoxLayout(self.btnsFrame)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_5 = QSpacerItem(39, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(39, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_5)
 
@@ -204,7 +178,7 @@ class Ui_modifyRecord(object):
 
         self.horizontalLayout_5.addWidget(self.saveBtn)
 
-        self.horizontalSpacer_6 = QSpacerItem(38, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_6 = QSpacerItem(38, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_6)
 
@@ -215,7 +189,7 @@ class Ui_modifyRecord(object):
 
         self.horizontalLayout_5.addWidget(self.discardBtn)
 
-        self.horizontalSpacer_7 = QSpacerItem(39, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_7 = QSpacerItem(39, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_7)
 
@@ -241,9 +215,9 @@ class Ui_modifyRecord(object):
         self.projectList.setItemText(4, QCoreApplication.translate("modifyRecord", u"Project5", None))
         self.projectList.setItemText(5, QCoreApplication.translate("modifyRecord", u"Project6", None))
 
-        self.startLabel.setText(QCoreApplication.translate("modifyRecord", u"Start:     ", None))
-        self.endLabel.setText(QCoreApplication.translate("modifyRecord", u"End:      ", None))
-        self.totalLabel.setText(QCoreApplication.translate("modifyRecord", u"Total:    ", None))
+        self.dateLabel.setText(QCoreApplication.translate("modifyRecord", u"Date:     ", None))
+        self.workDate.setDisplayFormat(QCoreApplication.translate("modifyRecord", u"yyyy/MM/dd", None))
+        self.timeLabel.setText(QCoreApplication.translate("modifyRecord", u"Time:     ", None))
         self.saveBtn.setText(QCoreApplication.translate("modifyRecord", u"Save", None))
         self.discardBtn.setText(QCoreApplication.translate("modifyRecord", u"Discard", None))
     # retranslateUi
