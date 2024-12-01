@@ -212,7 +212,9 @@ class DatabaseHandler:
     @handle_exceptions
     def create_time_table_item(self, new_timetable_item: TimeTable):
         exist_booking_item = self.read_booking_item(new_timetable_item.booking_item)
+        exist_location = self.read_location(new_timetable_item.location)
         new_timetable_item.booking_item = exist_booking_item
+        new_timetable_item.location = exist_location
 
         if new_timetable_item.date is None:
             new_timetable_item.date = date.today()
@@ -236,8 +238,8 @@ class DatabaseHandler:
 
     @handle_exceptions
     def read_time_table_item(self, timetable: TimeTable):
-        bi_exist = self.read_booking_item(timetable.booking_item)
-        loc_exist = self.read_location(timetable.location)
+        bi_exist = self.read_booking_item(timetable.booking_item) if timetable.booking_item is not None else None
+        loc_exist = self.read_location(timetable.location) if timetable.location is not None else None
         item = self.session.scalars(select(self.TimeTable)
                                 .where(self.TimeTable.booking_item == bi_exist) #itt miért nem primary key alapján keresünk?
                                 .where(self.TimeTable.location == loc_exist)

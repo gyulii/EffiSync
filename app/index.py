@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt, QDateTime, QTime, QPoint
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QTableWidgetItem, QMessageBox, QDialog, QHeaderView
 from PySide6.QtGui import QColor
 
-from datetime import datetime
+import datetime
 
 
 from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl
@@ -70,7 +70,7 @@ class myApp(QMainWindow, Ui_MainWindow):
         #mock_data()
         self.updateProjectList()
         self.updateLocationList()
-        self.bookingtextDropDownList.hide()
+        self.bookingtextFrame.hide()
 
         self.bodyWidget.setCurrentIndex(0)
 
@@ -169,7 +169,7 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.effiLog("The To date calendar is closed.")
 
     def effiLog(self, text):
-        time = datetime.now()
+        time = datetime.datetime.now()
         timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
         newRow = "<" + timestamp + ">: " + text
         curtext = self.textBrowser.toPlainText()
@@ -177,7 +177,7 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.textBrowser.setText(log)
 
     def miniLog(self, msg, state):
-        time = datetime.now()
+        time = datetime.datetime.now()
         timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
 
         self.effiLog(msg)
@@ -197,8 +197,8 @@ class myApp(QMainWindow, Ui_MainWindow):
 
     def updateProjectList(self):
         projects = self.db.read_all_booking_names()
-        self.bookingtextDropDownList.clear()
-        self.bookingtextDropDownList.addItems(projects)
+        self.projectDropDownList.clear()
+        self.projectDropDownList.addItems(projects)
 
     def updateLocationList(self):
         locations = self.db.read_all_location_names()
@@ -284,10 +284,10 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.recordedTimesTable.setCellWidget(rowNr, 6, actionBtns)
 
     def startBtnAction(self):
-        self.currentProject = self.db.read_booking_item(self.db.BookingItem(name=self.bookingtextDropDownList.currentText()))
-        self.currentLocation = self.db.read_location(self.db.Location(location=self.topicDropDownList.currentText()))
-        self.date = QDateTime.currentDateTime().date()
-        self.startTime = QDateTime.currentDateTime()
+        self.currentProject = self.db.BookingItem(name=self.projectDropDownList.currentText())
+        self.currentLocation = self.db.Location(country=self.topicDropDownList.currentText())
+        self.date = datetime.date.today()
+        self.startTime = datetime.datetime.now()
 
         self.startBtn.setDisabled(True)
         self.startBtn_2.setDisabled(True)
@@ -327,8 +327,8 @@ class myApp(QMainWindow, Ui_MainWindow):
         # self.lockAllBtn.setDisabled(True)
 
     def stopBtnAction(self):
-        stopTime = QDateTime.currentDateTime()
-        deltaTime = self.startTime.secsTo(stopTime)/3600 #in hours
+        stopTime = datetime.datetime.now()
+        deltaTime = (stopTime - self.startTime).seconds / 3600
         self.db.create_time_table_item(self.db.TimeTable(hours=deltaTime, booking_item=self.currentProject, location=self.currentLocation, date=self.date))
         #update the table
         self.loadTimeTable()
