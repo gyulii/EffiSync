@@ -206,7 +206,7 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.topicDropDownList.addItems(locations)
 
     def loadTimeTable(self):
-        #TODO WIP
+        # WIP
         self.timeTables = self.db.read_all_time_table_items()
         #clear the table
         self.recordedTimesTable.setRowCount(0)

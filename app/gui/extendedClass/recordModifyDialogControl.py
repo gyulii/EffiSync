@@ -32,6 +32,8 @@ class recordModifyDialogControl(QDialog):
         self.diag.saveBtn.clicked.connect(self.save)
         self.diag.discardBtn.clicked.connect(self.close)
         self.diag.projectList.currentIndexChanged.connect(self.updateProject)
+        self.diag.workDate.dateChanged.connect(self.updateDate)
+        self.diag.totalTime.timeChanged.connect(self.updateTotal)
 
     def setTable(self, table):
         self.table = table
@@ -79,9 +81,15 @@ class recordModifyDialogControl(QDialog):
     def updateProject(self, projectIndex):
         self.project = self.diag.projectList.currentText()
 
+    def updateDate(self, date):
+        self.date = date
+
+    def updateTotal(self, total):
+        self.total = total
+
     def save(self):
         # data validity check needed
-        #TODO db update
+        # db update
         self.editNth(self.rowNr, self.project, self.wbs, datetime.date.fromisoformat(self.date.toString("yyyy-MM-dd")), self.total.msecsSinceStartOfDay()/3600000)
 
         self.close()
