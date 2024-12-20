@@ -54,6 +54,7 @@ class DatabaseHandler:
 
         id = Column(Integer, primary_key=True, autoincrement="auto")
         name = Column(Text, unique=True, nullable=False)  #are num
+        active = Column(Boolean, default=True)
 
         def __repr__(self):
             return f"<id={self.id}, name={self.name}, active={self.active}>"
@@ -178,7 +179,7 @@ class DatabaseHandler:
 
     @handle_exceptions
     def read_all_booking_names(self):
-        names = self.session.scalars(select(self.BookingItem.name)).all()
+        names = self.session.scalars(select(self.BookingItem.name).where(self.BookingItem.active==True)).all()
         return names
 
     @handle_exceptions
@@ -194,11 +195,25 @@ class DatabaseHandler:
                 stmt = (
                     update(self.BookingItem)
                     .where(self.BookingItem.name.is_(bookingitem.name))
-                    .values(name = modified_bookingitem.name))
+                    .values(name = modified_bookingitem.name, active = modified_bookingitem.active))
                 self.session.execute(stmt)
                 self.session.commit()
                 logger.info(f"Item modified from : {bookingitem}  to {exist}") #NOTE: this log is not correct, bookingitem is getting modified along with the database object
 
+
+    @handle_exceptions
+    def archive_booking_item(self, bookingitem: BookingItem):
+        exist = self.read_booking_item(bookingitem)
+        if exist is None:
+            logger.info(f"No such item: {bookingitem}")
+        else:
+            stmt = (
+                update(self.BookingItem)
+                .where(self.BookingItem.name.is_(bookingitem.name))
+                .values(active = False))
+            self.session.execute(stmt)
+            self.session.commit()
+            logger.info(f"Item archived: {exist}")
 
     @handle_exceptions
     def delete_booking_item(self, bookingitem: BookingItem):
