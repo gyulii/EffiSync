@@ -5,7 +5,7 @@ import requests
 def access_sse_stream(url):
     """Access and process events from a Server-Sent Events (SSE) stream."""
     try:
-        with requests.get(url, stream=True) as response:
+        with requests.get(url, stream=True, verify=False) as response:
             # Ensure the response was successful
             response.raise_for_status()
 
@@ -23,5 +23,12 @@ def access_sse_stream(url):
 
 if __name__ == "__main__":
     # The URL where the SSE stream is accessible
-    sse_url = "http://128.140.86.58/subscribe"
-    access_sse_stream(sse_url)
+    url = "https://152.66.182.112:5002/send"
+    data = {"wbs": "GER",
+            "day": "2021-10-01",
+            "hours": 4.5,
+            "project": "Python"}
+    for line in requests.post(url, json=data, verify=False).iter_lines():
+        print(line)
+    #sse_url = "https://152.66.182.112:5002/subscribe"
+    #access_sse_stream(sse_url)
