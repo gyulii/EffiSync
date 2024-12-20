@@ -56,22 +56,35 @@ class DatabaseHandler:
         name = Column(Text, unique=True, nullable=False)  #are num
 
         def __repr__(self):
-            return f"<id={self.id}, name={self.name}>"
+            return f"<id={self.id}, name={self.name}, active={self.active}>"
+
+    class Topic(Base):
+        __tablename__ = "topic"
+
+        id = Column(Integer, primary_key=True, autoincrement="auto")
+        booking_item_id = Column(Integer, ForeignKey("bookingitem.id"))
+        name = Column(Text, unique=True, nullable=False)
+        active = Column(Boolean, default=True)
+
+        booking_item = relationship("BookingItem")
+
+        def __repr__(self):
+            return f"<id={self.id}, booking_item_id={self.booking_item_id}, name={self.name}, active={self.active}>"
 
     class TimeTable(Base):
         __tablename__ = "timetable"
 
         id = Column(Integer, primary_key=True, autoincrement="auto")
-        booking_item_id = Column(Integer, ForeignKey("bookingitem.id"))
+        topic_id = Column(Integer, ForeignKey("topic.id"))
         location_id = Column(Integer, ForeignKey("location.id"))
         date = Column(Date)
         hours = Column(Float)
 
-        booking_item = relationship("BookingItem")
+        topic = relationship("Topic")
         location = relationship("Location")
 
         def __repr__(self):
-            return f"<id={self.id}, project_id={self.booking_item_id}, location_id={self.location_id}, date={self.date}, hours={self.hours}>"
+            return f"<id={self.id}, project_id={self.topic_id}, location_id={self.location_id}, date={self.date}, hours={self.hours}>"
 
 
     def __init__(self):
@@ -207,13 +220,77 @@ class DatabaseHandler:
         self.session.commit()
         logger.info("All booking data deleted")
 
+
+    #Topic CRUD, +readall, +clean
+
+    @handle_exceptions
+    def create_topic(self, new_topic: Topic):
+        exist = self.read_topic(new_topic)
+        if exist is None:
+            self.session.add(new_topic)
+            self.session.commit()
+            logger.info(f"Created topic: {new_topic}")
+        else:
+            logger.warning(f"Topic already exists in database: {exist}")
+        return self.read_topic(new_topic)
+
+    @handle_exceptions
+    def read_topic(self, topic: Topic):
+        booking_item_exist = self.read_booking_item(topic.booking_item)
+        item = self.session.scalars(select(self.Topic)
+                            .where(self.Topic.name == topic.name)
+                            .where(self.Topic.booking_item_id == booking_item_exist.id)).first()
+        return item
+
+    @handle_exceptions
+    def read_all_topic_names(self, booking_item: BookingItem):
+        booking_item_exist = self.read_booking_item(booking_item)
+        names = self.session.scalars(select(self.Topic.name)
+                            .where(self.Topic.booking_item_id == booking_item_exist.id)
+                            .where(self.Topic.active==True)).all()
+        return names
+
+    def archive_topic(self, topic: Topic):
+        exist = self.read_topic(topic)
+        if exist is None:
+            logger.info(f"No such topic: {topic}")
+        else:
+            stmt = (
+                update(self.Topic)
+                .where(self.Topic.id == exist.id)
+                .values(active = False))
+            self.session.execute(stmt)
+            self.session.commit()
+            logger.info(f"Topic archived: {exist}")
+
+    @handle_exceptions
+    def update_topic(self, topic: Topic, modified_topic: Topic):
+        exist = self.read_topic(topic)
+        bi_exist = self.read_booking_item(topic.booking_item)
+        modified_exist = self.read_topic(modified_topic)
+        bi_modified_exist = self.read_booking_item(modified_topic.booking_item)
+        if exist is None:
+            logger.info(f"No such item: {topic}")
+        else:
+            if modified_exist is not None:
+                logger.info(f"Item already exists in database: {modified_exist}")
+            else:
+                stmt = (
+                    update(self.Topic)
+                    .where(self.Topic.name.is_(topic.name))
+                    .where(self.Topic.booking_item_id == bi_exist.id)
+                    .values(name = modified_topic.name, booking_item_id = bi_modified_exist.id, active = modified_topic.active))
+                self.session.execute(stmt)
+                self.session.commit()
+                logger.info(f"Item modified from : {topic}  to {exist}")
+
     #TimeTable CRUD, +readall, +clean
 
     @handle_exceptions
     def create_time_table_item(self, new_timetable_item: TimeTable):
-        exist_booking_item = self.read_booking_item(new_timetable_item.booking_item)
+        exist_topic = self.read_topic(new_timetable_item.topic)
         exist_location = self.read_location(new_timetable_item.location)
-        new_timetable_item.booking_item = exist_booking_item
+        new_timetable_item.topic = exist_topic
         new_timetable_item.location = exist_location
 
         if new_timetable_item.date is None:
@@ -238,19 +315,19 @@ class DatabaseHandler:
 
     @handle_exceptions
     def read_time_table_item(self, timetable: TimeTable):
-        bi_exist = self.read_booking_item(timetable.booking_item) if timetable.booking_item is not None else None
+        topic_exist = self.read_topic(timetable.topic) if timetable.topic is not None else None
         loc_exist = self.read_location(timetable.location) if timetable.location is not None else None
         item = self.session.scalars(select(self.TimeTable)
-                                .where(self.TimeTable.booking_item == bi_exist) #itt miért nem primary key alapján keresünk?
+                                .where(self.TimeTable.topic == topic_exist) #itt miért nem primary key alapján keresünk?
                                 .where(self.TimeTable.location == loc_exist)
                                 .where(func.DATE(self.TimeTable.date) == timetable.date)).first()
         return item
 
     @handle_exceptions
     def update_time_table_item(self, before: TimeTable, timetable: TimeTable): #itt a booking_itemnél volt modified meg prev is, de igazából elég csak a modified, mert az id fix
-        beforeExist = self.read_time_table_item(before)
+        before_exist = self.read_time_table_item(before)
         exist = self.read_time_table_item(timetable)
-        if beforeExist is None:
+        if before_exist is None:
             logger.info(f"No such item: {before}")
         else:
             # check unique constraint
@@ -264,7 +341,7 @@ class DatabaseHandler:
                 self.session.execute(stmt)
                 stmt2 = (
                     delete(self.TimeTable)
-                    .where(self.TimeTable.id == beforeExist.id))
+                    .where(self.TimeTable.id == before_exist.id))
                 self.session.execute(stmt2)
                 self.session.commit()
                 logger.info(f"Item {before} merged into {exist}")
@@ -272,7 +349,7 @@ class DatabaseHandler:
                 bi_exist = self.read_booking_item(timetable.booking_item)
                 stmt = (
                     update(self.TimeTable)
-                    .where(self.TimeTable.id == beforeExist.id)
+                    .where(self.TimeTable.id == before_exist.id)
                     .values(booking_item_id=bi_exist.id, date = timetable.date, hours = timetable.hours))
                 self.session.execute(stmt)
                 self.session.commit()
