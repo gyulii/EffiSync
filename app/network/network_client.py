@@ -2,6 +2,7 @@
 
 import requests
 
+
 def access_sse_stream(url):
     """Access and process events from a Server-Sent Events (SSE) stream."""
     try:
@@ -21,6 +22,7 @@ def access_sse_stream(url):
     except requests.RequestException as e:
         print(f"An error occurred: {e}")
 
+
 if __name__ == "__main__":
     # The URL where the SSE stream is accessible
     url = "https://152.66.182.112:5002/send"
@@ -30,5 +32,3 @@ if __name__ == "__main__":
             "project": "Python"}
     for line in requests.post(url, json=data, verify=False).iter_lines():
         print(line)
-    #sse_url = "https://152.66.182.112:5002/subscribe"
-    #access_sse_stream(sse_url)

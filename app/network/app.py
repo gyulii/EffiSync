@@ -12,9 +12,9 @@ from flask_queue_sse import ServerSentEvents
 from dataclasses import dataclass
 import datetime
 
-
 app = Flask(__name__)
 sse: ServerSentEvents = None
+
 
 @dataclass
 class TimetableRecord:
@@ -23,50 +23,34 @@ class TimetableRecord:
     project: str
     day: datetime.date
     hours: float
+    user: str = "Test User"
 
     def __str__(self):
-        return f"{self.wbs} - {self.project} - {self.day} - {self.hours}"
+        return f"{self.user} - {self.wbs} - {self.project} - {self.day} - {self.hours}"
 
-records = []
+
+records = {}
+
 
 @app.route("/send", methods=["POST"])
 def send():
     json_data = request.get_json()
     record = TimetableRecord(**json_data)
+    if record.project not in records:
+        records[record.project] = []
+    records[record.project].append(record)
     return str(record)
 
-    global sse
 
-    if sse:
-        sse.send({"msg": "Python is awesome!"})
-    else:
-        return "NO CONNECTION"
+@app.route("/get/<project>", methods=["GET"])
+def get(project):
+    authorized = request.authorization
+    # Check if the request is authorized
 
-    return "OK"
-
-
-@app.route("/end")
-def end():
-    global sse
-
-    if sse:
-        sse.send(event="end")
-        sse = None
-    else:
-        return "NO CONNECTION"
-
-    return "FINISHED"
-
-
-@app.route("/subscribe")
-def subscribe():
-    global sse
-
-    # create a new server sent events channel
-    sse = ServerSentEvents()
-
-    return sse.response()
+    r = records.get(project, [])
+    records[project] = []
+    return str(r)
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0' , port=5002, ssl_context='adhoc')
+    app.run(host='0.0.0.0', port=5002, ssl_context='adhoc')
