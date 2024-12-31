@@ -45,7 +45,7 @@ def send():
 @app.route("/get/<project>", methods=["GET"])
 def get(project):
     authorized = request.authorization
-    # Check if the request is authorized
+    # TODO Check if the request is authorized
 
     r = records.get(project, [])
     records[project] = []

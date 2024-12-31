@@ -6,6 +6,7 @@ from PySide6.QtCore import Qt, QTime, QDate
 from app.db.database_handler import DatabaseHandler
 from app.gui.baseClass.recordModifyDialog import Ui_modifyRecord
 
+
 class recordModifyDialogControl(QDialog):
     project = None
     date = QDate()
@@ -22,7 +23,7 @@ class recordModifyDialogControl(QDialog):
         self.diag.setupUi(self)
 
         if total is not None and date is not None and project is not None and wbs is not None:
-            self.total = QTime().fromMSecsSinceStartOfDay(float(total)*1000*3600)
+            self.total = QTime().fromMSecsSinceStartOfDay(float(total) * 1000 * 3600)
             self.date = QDate().fromString(date, "yyyy-MM-dd")
             self.project = project
             self.wbs = wbs
@@ -90,6 +91,7 @@ class recordModifyDialogControl(QDialog):
     def save(self):
         # data validity check needed
         # db update
-        self.editNth(self.rowNr, self.project, self.wbs, datetime.date.fromisoformat(self.date.toString("yyyy-MM-dd")), self.total.msecsSinceStartOfDay()/3600000)
+        self.editNth(self.rowNr, self.project, self.wbs, datetime.date.fromisoformat(self.date.toString("yyyy-MM-dd")),
+                     self.total.msecsSinceStartOfDay() / 3600000)
 
         self.close()
