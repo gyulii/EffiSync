@@ -73,11 +73,6 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.bookingtextFrame.hide()
 
         self.bodyWidget.setCurrentIndex(0)
-
-        # header = ["#","User","Project","Start","End","Total","Actions"]
-        # self.recordedTimesTable.setColumnCount(7)
-        # self.recordedTimesTable.setHorizontalHeaderLabels(header)
-        # self.recordedTimesTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.loadTimeTable()
         
         if type == "Manager":
@@ -294,38 +289,6 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.stopBtn.setEnabled(True)
         self.stopBtn_2.setEnabled(True)
 
-        #Will remove this when data is loaded from the database
-        # rowNr = self.recordedTimesTable.rowCount()
-        # self.recordedTimesTable.insertRow(rowNr)
-        #
-        # self.recordedTimesTable.setItem(rowNr, 0, QTableWidgetItem(str(rowNr+1)))
-        #
-        # item = self.recordedTimesTable.item(rowNr, 0)
-        # item.setTextAlignment(Qt.AlignCenter)
-        #
-        # self.recordedTimesTable.setItem(rowNr, 1, QTableWidgetItem(str(self.userID)))
-        # self.recordedTimesTable.setItem(rowNr, 2, QTableWidgetItem(str(self.projectDropDownList.currentText())))
-        #
-        # startTime = QDateTime.currentDateTime().time().toString("hh:mm")
-        #
-        # self.recordedTimesTable.setItem(rowNr, 3, QTableWidgetItem(startTime))
-        #
-        # actionBtns = recordActionBtnControl()
-        # actionBtns.setLog(self.miniLog)
-        # actionBtns.setRowNr(rowNr)
-        # actionBtns.setTable(self.recordedTimesTable)
-        # actionBtns.setlogField(self.userLog)
-        #
-        # actionBtns.recAcBtns.editBtn.setDisabled(True)
-        # actionBtns.recAcBtns.freezeBtn.setDisabled(True)
-        # actionBtns.recAcBtns.deleteBtn.setDisabled(True)
-        # actionBtns.recAcBtns.sendBtn.setDisabled(True)
-        #
-        # self.recordedTimesTable.setCellWidget(rowNr, 6, actionBtns)
-        #
-        # self.sendAllBtn.setDisabled(True)
-        # self.lockAllBtn.setDisabled(True)
-
     def stopBtnAction(self):
         stopTime = datetime.datetime.now()
         deltaTime = (stopTime - self.startTime).seconds / 3600
@@ -337,31 +300,6 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.startBtn_2.setEnabled(True)
         self.stopBtn.setDisabled(True)
         self.stopBtn_2.setDisabled(True)
-
-        #Will remove this when data is loaded from the database
-        # rowNr = self.recordedTimesTable.rowCount() - 1
-        #
-        # endTime = QDateTime.currentDateTime().time().toString("hh:mm")
-        # self.recordedTimesTable.setItem(rowNr, 4, QTableWidgetItem(endTime))
-        #
-        # startTime = self.recordedTimesTable.item(rowNr, 3).text()
-        #
-        # start = QTime.fromString(startTime, "hh:mm")
-        # end = QTime.fromString(endTime, "hh:mm")
-        #
-        # elips = start.secsTo(end)
-        # total = QTime.fromMSecsSinceStartOfDay(elips*1000)
-        # self.recordedTimesTable.setItem(rowNr, 5, QTableWidgetItem(total.toString("hh:mm")))
-        #
-        # actionBtns = self.recordedTimesTable.cellWidget(rowNr, 6)
-        #
-        # actionBtns.recAcBtns.editBtn.setEnabled(True)
-        # actionBtns.recAcBtns.freezeBtn.setEnabled(True)
-        # actionBtns.recAcBtns.deleteBtn.setEnabled(True)
-        # actionBtns.recAcBtns.sendBtn.setEnabled(True)
-        #
-        # self.lockAllBtn.setEnabled(True)
-        # self.sendAllBtn.setEnabled(True)
 
     def lockAllBtnAction(self):
         rowNr = self.recordedTimesTable.rowCount()
