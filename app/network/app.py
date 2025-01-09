@@ -7,7 +7,7 @@
 # python -m flask --app examples/routes run
 
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_queue_sse import ServerSentEvents
 from dataclasses import dataclass
 import datetime
@@ -49,7 +49,7 @@ def get(project):
 
     r = records.get(project, [])
     records[project] = []
-    return str(r)
+    return jsonify(r)
 
 
 if __name__ == "__main__":
