@@ -10,7 +10,7 @@ import datetime
 
 from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl
 from app.db.database_handler import DatabaseHandler, mock_data
-
+from app.sapi.sap_handler import EssDriver
 
 class myApp(QMainWindow, Ui_MainWindow):
 
@@ -23,6 +23,8 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.db=DatabaseHandler()
         self.effiLog("Open the UI.")
+
+        self.driver = EssDriver()
 
         self.userID = getpass.getuser()
 
@@ -226,6 +228,7 @@ class myApp(QMainWindow, Ui_MainWindow):
             actionBtns.setlogField(self.userLog)
             actionBtns.setDelNth(self.delNthRow)
             actionBtns.setEditNth(self.editNthRow)
+            actionBtns.setDriver(self.driver)
 
             actionBtns.recAcBtns.editBtn.setEnabled(True)
             actionBtns.recAcBtns.freezeBtn.setEnabled(True)
@@ -341,6 +344,7 @@ class myApp(QMainWindow, Ui_MainWindow):
                 recBtn = self.recordedTimesTable.cellWidget(i, 6)
                 recBtn.recAcBtns.sendBtn.click()
                 self.miniLog("All records are sent...", "INFO")
+            self.driver.execute_booking()
 
     def closeEvent(self, event):
         dialog = confirmationDialogControl("Are you sure to want to exit from the app?")
