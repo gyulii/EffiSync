@@ -85,16 +85,16 @@ class recordActionBtnControl(QWidget):
             #SAPI
             record = BookingItem(self.table.item(self.rowNr, 2).text(), float(self.table.item(self.rowNr, 5).text()), self.table.item(self.rowNr, 3).text())
             #is this fine without the date?
-            self.driver.add_booking_item_to_queue(record)
+            #self.driver.add_booking_item_to_queue(record)
 
             #Manager - relay server
             data = {
                 "wbs": self.table.item(self.rowNr, 3).text(),
                 "project": self.table.item(self.rowNr, 2).text(),
-                "day": datetime.strptime(self.table.item(self.rowNr, 4).text(), "%Y.%m.%d"),
+                "day": self.table.item(self.rowNr, 4).text(),
                 "hours": float(self.table.item(self.rowNr, 5).text())
             }
-            url = os.environ["RELAY_URL"]
+            url = "https://152.66.182.112:5002/send"
             response = requests.post(url, json=data, verify=False)
             self.log(f"{response.text} sent to manager", "INFO")
 
