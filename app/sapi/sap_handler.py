@@ -196,6 +196,8 @@ class EssDriver:
             )
         )
 
+        self.driver.execute_script("document.body.style.zoom='40%'") # You need this since the whole page is dynamic JS based
+
         current_ess_date_raw = self.driver.find_element(By.XPATH, "//input[contains(@id, 'WD')]").get_attribute("Value")
         current_ess_date = datetime.strptime(current_ess_date_raw, "%Y.%m.%d")
 
@@ -231,7 +233,7 @@ def get_current_date_formated():
 # Example usage
 
 if __name__ == "__main__":
-    driver = EssDriver()
+    driver = EssDriver(headless=False)
     book1 = BookingItem(text="Booking_text_sample", booked_hours=4)
     driver.add_booking_item_to_queue(book1)
     driver.execute_booking()
