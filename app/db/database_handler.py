@@ -43,20 +43,22 @@ class DatabaseHandler:
         __tablename__ = "location"
 
         id = Column(Integer, primary_key=True, autoincrement="auto")
-        country = Column(Text, unique=True, nullable=False)
+        country = Column(Text, nullable=False)
         wbs = Column(Text, nullable=False)
+        active = Column(Boolean, default=False)
 
         def __repr__(self):
-            return f"<id={self.id}, country={self.country}, wbs={self.wbs}>"
+            return f"<id={self.id}, country={self.country}, wbs={self.wbs}, active={self.active}>"
 
     class BookingItem(Base):
         __tablename__ = "bookingitem"
 
         id = Column(Integer, primary_key=True, autoincrement="auto")
         name = Column(Text, unique=True, nullable=False)  #are num
+        active = Column(Boolean, default=False)
 
         def __repr__(self):
-            return f"<id={self.id}, name={self.name}>"
+            return f"<id={self.id}, name={self.name}, active={self.active}>"
 
     class TimeTable(Base):
         __tablename__ = "timetable"
@@ -66,6 +68,7 @@ class DatabaseHandler:
         location_id = Column(Integer, ForeignKey("location.id"))
         date = Column(Date)
         hours = Column(Float)
+        sent = Column(Boolean, default=False)
 
         booking_item = relationship("BookingItem")
         location = relationship("Location")
@@ -120,17 +123,34 @@ class DatabaseHandler:
                 logger.info(f"Location modified from : {location}  to {modified_location}")
 
     @handle_exceptions
-    def delete_location(self, location: Location):
+    def archive_location(self, location: Location):
         exist = self.read_location(location)
         if exist is None:
             logger.info(f"No such location: {location}")
         else:
             stmt = (
-                delete(self.Location)
-                .where(self.Location.country.is_(location.country)))
+                update(self.Location)
+                .where(self.Location.country.is_(location.country))
+                .values(active = False))
             self.session.execute(stmt)
             self.session.commit()
-            logger.info(f"Location deleted from : {exist}")
+            logger.info(f"Location archived : {exist}")
+
+
+    @handle_exceptions
+    def activate_location(self, location: Location):
+        exist = self.read_location(location)
+        if exist is None:
+            logger.info(f"No such location: {location}")
+        else:
+            stmt = (
+                update(self.Location)
+                .where(self.Location.country.is_(location.country))
+                .values(active = True))
+            self.session.execute(stmt)
+            self.session.commit()
+            logger.info(f"Location activated : {exist}")
+
 
     @handle_exceptions
     def clean_location_data(self):
@@ -140,8 +160,8 @@ class DatabaseHandler:
         logger.info("All location data deleted")
 
     @handle_exceptions
-    def read_all_location_names(self):
-        names = self.session.scalars(select(self.Location.country)).all()
+    def read_active_location_names(self):
+        names = self.session.scalars(select(self.Location.country).where(self.Location.active==True)).all()
         return names
 
     #BookingItem CRUD, +readall, +clean
@@ -164,8 +184,8 @@ class DatabaseHandler:
         return item
 
     @handle_exceptions
-    def read_all_booking_names(self):
-        names = self.session.scalars(select(self.BookingItem.name)).all()
+    def read_active_booking_names(self):
+        names = self.session.scalars(select(self.BookingItem.name).where(self.BookingItem.active==True)).all()
         return names
 
     @handle_exceptions
@@ -188,17 +208,33 @@ class DatabaseHandler:
 
 
     @handle_exceptions
-    def delete_booking_item(self, bookingitem: BookingItem):
+    def archive_booking_item(self, bookingitem: BookingItem):
         exist = self.read_booking_item(bookingitem)
         if exist is None:
             logger.info(f"No such item: {bookingitem}")
         else:
             stmt = (
-                delete(self.BookingItem)
-                .where(self.BookingItem.name.is_(bookingitem.name)))
+                update(self.BookingItem)
+                .where(self.BookingItem.name.is_(bookingitem.name))
+                .values(active = False))
             self.session.execute(stmt)
             self.session.commit()
-            logger.info(f"Item deleted from : {exist}")
+            logger.info(f"Item archived : {exist}")
+
+    @handle_exceptions
+    def activate_booking_item(self, bookingitem: BookingItem):
+        exist = self.read_booking_item(bookingitem)
+        if exist is None:
+            logger.info(f"No such item: {bookingitem}")
+        else:
+            stmt = (
+                update(self.BookingItem)
+                .where(self.BookingItem.name.is_(bookingitem.name))
+                .values(active = True))
+            self.session.execute(stmt)
+            self.session.commit()
+            logger.info(f"Item activated : {exist}")
+
 
     @handle_exceptions
     def clean_booking_data(self):
@@ -279,21 +315,22 @@ class DatabaseHandler:
                 logger.info(f"Item modified from : {before}  to {timetable}")
 
     @handle_exceptions
-    def delete_time_table_item(self, timetable: TimeTable):
+    def archive_time_table_item(self, timetable: TimeTable):
         exist = self.read_time_table_item(timetable)
         if exist is None:
             logger.info(f"No such item: {timetable}")
         else:
             stmt = (
-                delete(self.TimeTable)
-                .where(self.TimeTable.id == exist.id))
+                update(self.TimeTable)
+                .where(self.TimeTable.id == exist.id)
+                .values(sent = True))
             self.session.execute(stmt)
             self.session.commit()
-            logger.info(f"Item deleted from : {exist}")
+            logger.info(f"Item achived : {exist}")
 
     @handle_exceptions
-    def read_all_time_table_items(self):
-        items = self.session.scalars(select(self.TimeTable)).all()
+    def read_active_time_table_items(self):
+        items = self.session.scalars(select(self.TimeTable).where(self.TimeTable.sent==False)).all()
         return items
 
     @handle_exceptions
@@ -389,4 +426,4 @@ if __name__ == "__main__":
 
     db.create_time_table_item(t1)
 
-    logger.info(db.read_all_booking_names())
+    logger.info(db.read_active_booking_names())
