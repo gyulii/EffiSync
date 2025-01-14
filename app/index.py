@@ -193,18 +193,18 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.userLog.setText(log)
 
     def updateProjectList(self):
-        projects = self.db.read_all_booking_names()
+        projects = self.db.read_active_booking_names()
         self.projectDropDownList.clear()
         self.projectDropDownList.addItems(projects)
 
     def updateLocationList(self):
-        locations = self.db.read_all_location_names()
+        locations = self.db.read_active_location_names()
         self.topicDropDownList.clear()
         self.topicDropDownList.addItems(locations)
 
     def loadTimeTable(self):
         # WIP
-        self.timeTables = self.db.read_all_time_table_items()
+        self.timeTables = self.db.read_active_time_table_items()
         #clear the table
         self.recordedTimesTable.setRowCount(0)
         #set columns
@@ -344,7 +344,7 @@ class myApp(QMainWindow, Ui_MainWindow):
                 recBtn = self.recordedTimesTable.cellWidget(i, 6)
                 recBtn.recAcBtns.sendBtn.click()
                 self.miniLog("All records are sent...", "INFO")
-            self.driver.execute_booking()
+            #self.driver.execute_booking()
 
     def closeEvent(self, event):
         dialog = confirmationDialogControl("Are you sure to want to exit from the app?")

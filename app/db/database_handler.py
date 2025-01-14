@@ -334,6 +334,19 @@ class DatabaseHandler:
         return items
 
     @handle_exceptions
+    def delete_time_table_item(self, timetable: TimeTable):
+        exist = self.read_time_table_item(timetable)
+        if exist is None:
+            logger.info(f"No such item: {timetable}")
+        else:
+            stmt = (
+                delete(self.TimeTable)
+                .where(self.TimeTable.id == exist.id))
+            self.session.execute(stmt)
+            self.session.commit()
+            logger.info(f"Item deleted : {exist}")
+
+    @handle_exceptions
     def clean_time_table_data(self):
         stmt = delete(self.TimeTable)
         self.session.execute(stmt)
