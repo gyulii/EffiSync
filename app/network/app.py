@@ -30,7 +30,20 @@ class TimetableRecord:
 
 
 records = {}
+keys = {}
 
+@app.route("/genkeys", methods=["GET"])
+def genkeys():
+    pass
+
+@app.route("/sync/manager", methods=["POST"])
+def sync_manager():
+    key = request.authorization.token
+    pass
+
+@app.route("/sync/user", methods=["GET"])
+def sync_user():
+    pass
 
 @app.route("/send", methods=["POST"])
 def send():
