@@ -1,4 +1,5 @@
-# Implementation through websocket or SSE 
+# Implementation through websocket or SSE
+import token
 
 import requests
 
@@ -30,5 +31,5 @@ if __name__ == "__main__":
             "day": "2021-10-01",
             "hours": 4.5,
             "project": "Python"}
-    for line in requests.post(url, json=data, verify=False).iter_lines():
+    for line in requests.post(url, json=data, headers={'val':"aaaaaaaa"}, verify=False).iter_lines():
         print(line)

@@ -17,10 +17,10 @@ class TimetableRecord:
         return f"{self.user} - {self.wbs} - {self.project} - {self.day} - {self.hours}"
 
 
-def get_project_data(project):
+def get_project_data():
     """Get the timetable records for a specific project."""
-    url = f"https://152.66.182.112:5002/get/{project}"
-    response = requests.get(url, auth=('user', 'pass'), verify=False)
+    url = f"https://152.66.182.112:5002/get"
+    response = requests.get(url, headers={'key': 'a'}, verify=False)
     if response.status_code == 200:
         records = response.json()
         return [TimetableRecord(**record) for record in records]
@@ -28,7 +28,6 @@ def get_project_data(project):
         return []
 
 if __name__ == "__main__":
-    project = "Python"
-    records = get_project_data(project)
+    records = get_project_data()
     for record in records:
         print(record)
