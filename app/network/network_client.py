@@ -1,27 +1,43 @@
-# Implementation through websocket or SSE
-import token
-
 import requests
 
+class RelayClient:
+    val = None
+    datas = []
 
-def access_sse_stream(url):
-    """Access and process events from a Server-Sent Events (SSE) stream."""
-    try:
-        with requests.get(url, stream=True, verify=False) as response:
-            # Ensure the response was successful
-            response.raise_for_status()
+    def __init__(self, url: str="https://152.66.182.112:5002", verify: bool=False):
+        self.url = url
+        self.verify = verify
 
-            # Loop indefinitely to process all events as they come in
-            for line in response.iter_lines():
-                # Filter out keep-alive new lines
-                if line:
-                    decoded_line = line.decode('utf-8')
-                    print(f"Received event: {decoded_line}")
-                    # Here you can add logic to process the event
-                    # For example, you could parse the event data and act accordingly
+    def add_to_queue(self, data: dict):
+        self.datas.append(data)
 
-    except requests.RequestException as e:
-        print(f"An error occurred: {e}")
+    def send_queue(self):
+        if self.val is None:
+            return False, "No val set"
+        for data in self.datas:
+            if not self.send_data(data)[0]:
+                return False, "Error sending data"
+            else:
+                self.datas.remove(data)
+        return True, "All data sent"
+
+    def send_data(self, data: dict):
+        if self.val is None:
+            return False, "No val set"
+        response = requests.post(f"{self.url}/send", json=data, headers={'val': self.val}, verify=self.verify)
+        if response.status_code == 200:
+            return True, response.text
+        else:
+            return False, response.text
+
+    def sync_projects_topics(self, date: str):
+        if self.val is None:
+            return False, "No val set"
+        response = requests.get(f"{self.url}/sync/user", json={'date': date}, headers={'val': self.val}, verify=self.verify)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return False, response.text
 
 
 if __name__ == "__main__":
