@@ -30,39 +30,51 @@ class TimetableRecord:
 
 
 records = {}
-keys = {}
+keys_to_vals = {"a":"aaaaaaaa", "b":"bbbbbbbb", "c":"cccccccc"}
+vals_to_keys = {"aaaaaaaa":"a", "bbbbbbbb":"b", "cccccccc":"c"}
+
 
 @app.route("/genkeys", methods=["GET"])
 def genkeys():
     pass
+
 
 @app.route("/sync/manager", methods=["POST"])
 def sync_manager():
     key = request.authorization.token
     pass
 
+
 @app.route("/sync/user", methods=["GET"])
 def sync_user():
     pass
 
+
 @app.route("/send", methods=["POST"])
 def send():
     json_data = request.get_json()
+    val = request.headers.get('val')
     record = TimetableRecord(**json_data)
-    if record.project not in records:
-        records[record.project] = []
-    records[record.project].append(record)
-    return str(record)
+    if val in vals_to_keys:
+        key = vals_to_keys[val]
+        if key not in records:
+            records[key] = []
+        records[key].append(record)
+        return str(record)
+    else:
+        return "Unauthorized", 401
 
 
-@app.route("/get/<project>", methods=["GET"])
-def get(project):
-    authorized = request.authorization
-    # TODO Check if the request is authorized
+@app.route("/get", methods=["GET"])
+def get():
+    key = request.headers.get('key')
+    if key in keys_to_vals:
+        r = records.get(key, [])
+        records[key] = []
+        return jsonify(r)
+    else:
+        return "Unauthorized", 401
 
-    r = records.get(project, [])
-    records[project] = []
-    return jsonify(r)
 
 
 if __name__ == "__main__":
