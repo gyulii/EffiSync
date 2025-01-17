@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'mainUI.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.8.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -21,16 +21,13 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractSpinBox, QApplication
     QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
     QStackedWidget, QTableWidget, QTableWidgetItem, QTextBrowser,
     QTextEdit, QVBoxLayout, QWidget)
-import sys
-
-from app.gui import iconsDark_rc
-
+import iconsDark_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.setWindowModality(Qt.NonModal)
+        MainWindow.setWindowModality(Qt.WindowModality.NonModal)
         MainWindow.resize(1138, 681)
         MainWindow.setStyleSheet(u"background-color: rgb(18, 18, 18);")
         self.centralwidget = QWidget(MainWindow)
@@ -61,8 +58,8 @@ class Ui_MainWindow(object):
 "	border:none;\n"
 "	margin:5px;\n"
 "}")
-        self.menuBtnFrameMini.setFrameShape(QFrame.StyledPanel)
-        self.menuBtnFrameMini.setFrameShadow(QFrame.Raised)
+        self.menuBtnFrameMini.setFrameShape(QFrame.Shape.StyledPanel)
+        self.menuBtnFrameMini.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_30 = QVBoxLayout(self.menuBtnFrameMini)
         self.verticalLayout_30.setObjectName(u"verticalLayout_30")
         self.menuBtnMini = QPushButton(self.menuBtnFrameMini)
@@ -89,7 +86,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon = QIcon()
-        icon.addFile(u":/iconsDark/icons/menu.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/iconsDark/icons/menu.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.menuBtnMini.setIcon(icon)
         self.menuBtnMini.setCheckable(True)
 
@@ -104,8 +101,8 @@ class Ui_MainWindow(object):
 "	border: none;\n"
 "	margin:5px;\n"
 "}")
-        self.navigationBtnsFrameMini.setFrameShape(QFrame.StyledPanel)
-        self.navigationBtnsFrameMini.setFrameShadow(QFrame.Raised)
+        self.navigationBtnsFrameMini.setFrameShape(QFrame.Shape.StyledPanel)
+        self.navigationBtnsFrameMini.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_29 = QVBoxLayout(self.navigationBtnsFrameMini)
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
         self.verticalLayout_29.setContentsMargins(6, -1, -1, -1)
@@ -130,7 +127,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u":/iconsDark/icons/home.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u":/iconsDark/icons/home.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.homeBtnMini.setIcon(icon1)
 
         self.verticalLayout_29.addWidget(self.homeBtnMini)
@@ -156,7 +153,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon2 = QIcon()
-        icon2.addFile(u":/iconsDark/icons/clock.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u":/iconsDark/icons/clock.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.recordTimeBtnMini.setIcon(icon2)
 
         self.verticalLayout_29.addWidget(self.recordTimeBtnMini)
@@ -182,7 +179,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon3 = QIcon()
-        icon3.addFile(u":/iconsDark/icons/table.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u":/iconsDark/icons/table.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.recordedTimesBtnMini.setIcon(icon3)
 
         self.verticalLayout_29.addWidget(self.recordedTimesBtnMini)
@@ -208,7 +205,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon4 = QIcon()
-        icon4.addFile(u":/iconsDark/icons/user.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u":/iconsDark/icons/user.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.managerBtnMini.setIcon(icon4)
         self.managerBtnMini.setCheckable(True)
         self.managerBtnMini.setChecked(False)
@@ -224,8 +221,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_17.setContentsMargins(3, 0, 0, 0)
         self.employeeBtnFrameMini = QFrame(self.managerWidgetMini)
         self.employeeBtnFrameMini.setObjectName(u"employeeBtnFrameMini")
-        self.employeeBtnFrameMini.setFrameShape(QFrame.StyledPanel)
-        self.employeeBtnFrameMini.setFrameShadow(QFrame.Raised)
+        self.employeeBtnFrameMini.setFrameShape(QFrame.Shape.StyledPanel)
+        self.employeeBtnFrameMini.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_17 = QHBoxLayout(self.employeeBtnFrameMini)
         self.horizontalLayout_17.setSpacing(0)
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
@@ -253,7 +250,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon5 = QIcon()
-        icon5.addFile(u":/iconsDark/icons/users.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon5.addFile(u":/iconsDark/icons/users.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.employeeBtnMini.setIcon(icon5)
 
         self.horizontalLayout_17.addWidget(self.employeeBtnMini)
@@ -263,8 +260,8 @@ class Ui_MainWindow(object):
 
         self.projectsBtnFrameMini = QFrame(self.managerWidgetMini)
         self.projectsBtnFrameMini.setObjectName(u"projectsBtnFrameMini")
-        self.projectsBtnFrameMini.setFrameShape(QFrame.StyledPanel)
-        self.projectsBtnFrameMini.setFrameShadow(QFrame.Raised)
+        self.projectsBtnFrameMini.setFrameShape(QFrame.Shape.StyledPanel)
+        self.projectsBtnFrameMini.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_18 = QHBoxLayout(self.projectsBtnFrameMini)
         self.horizontalLayout_18.setSpacing(0)
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
@@ -289,7 +286,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon6 = QIcon()
-        icon6.addFile(u":/iconsDark/icons/folder.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon6.addFile(u":/iconsDark/icons/folder.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.projectsBtnMini.setIcon(icon6)
 
         self.horizontalLayout_18.addWidget(self.projectsBtnMini)
@@ -299,8 +296,8 @@ class Ui_MainWindow(object):
 
         self.topicsBtnFrameMini = QFrame(self.managerWidgetMini)
         self.topicsBtnFrameMini.setObjectName(u"topicsBtnFrameMini")
-        self.topicsBtnFrameMini.setFrameShape(QFrame.StyledPanel)
-        self.topicsBtnFrameMini.setFrameShadow(QFrame.Raised)
+        self.topicsBtnFrameMini.setFrameShape(QFrame.Shape.StyledPanel)
+        self.topicsBtnFrameMini.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_19 = QHBoxLayout(self.topicsBtnFrameMini)
         self.horizontalLayout_19.setSpacing(0)
         self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
@@ -325,7 +322,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon7 = QIcon()
-        icon7.addFile(u":/iconsDark/icons/message-square.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon7.addFile(u":/iconsDark/icons/message-square.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.topicsbtnMini.setIcon(icon7)
 
         self.horizontalLayout_19.addWidget(self.topicsbtnMini)
@@ -335,8 +332,8 @@ class Ui_MainWindow(object):
 
         self.bookintextsBtnFrameMini = QFrame(self.managerWidgetMini)
         self.bookintextsBtnFrameMini.setObjectName(u"bookintextsBtnFrameMini")
-        self.bookintextsBtnFrameMini.setFrameShape(QFrame.StyledPanel)
-        self.bookintextsBtnFrameMini.setFrameShadow(QFrame.Raised)
+        self.bookintextsBtnFrameMini.setFrameShape(QFrame.Shape.StyledPanel)
+        self.bookintextsBtnFrameMini.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_22 = QHBoxLayout(self.bookintextsBtnFrameMini)
         self.horizontalLayout_22.setSpacing(0)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
@@ -361,7 +358,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon8 = QIcon()
-        icon8.addFile(u":/iconsDark/icons/book-open.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon8.addFile(u":/iconsDark/icons/book-open.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bookingtextsBtnMini.setIcon(icon8)
 
         self.horizontalLayout_22.addWidget(self.bookingtextsBtnMini)
@@ -371,8 +368,8 @@ class Ui_MainWindow(object):
 
         self.exportBtnFrameMini = QFrame(self.managerWidgetMini)
         self.exportBtnFrameMini.setObjectName(u"exportBtnFrameMini")
-        self.exportBtnFrameMini.setFrameShape(QFrame.StyledPanel)
-        self.exportBtnFrameMini.setFrameShadow(QFrame.Raised)
+        self.exportBtnFrameMini.setFrameShape(QFrame.Shape.StyledPanel)
+        self.exportBtnFrameMini.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_20 = QHBoxLayout(self.exportBtnFrameMini)
         self.horizontalLayout_20.setSpacing(0)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
@@ -397,7 +394,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon9 = QIcon()
-        icon9.addFile(u":/iconsDark/icons/external-link.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon9.addFile(u":/iconsDark/icons/external-link.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.exportBtnMini.setIcon(icon9)
 
         self.horizontalLayout_20.addWidget(self.exportBtnMini)
@@ -429,7 +426,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon10 = QIcon()
-        icon10.addFile(u":/iconsDark/icons/code.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon10.addFile(u":/iconsDark/icons/code.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.developerBtnMini.setIcon(icon10)
 
         self.verticalLayout_29.addWidget(self.developerBtnMini)
@@ -443,12 +440,12 @@ class Ui_MainWindow(object):
 "	border:none;\n"
 "	margin:5px;\n"
 "}")
-        self.powerBtnFrameMini.setFrameShape(QFrame.StyledPanel)
-        self.powerBtnFrameMini.setFrameShadow(QFrame.Raised)
+        self.powerBtnFrameMini.setFrameShape(QFrame.Shape.StyledPanel)
+        self.powerBtnFrameMini.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_28 = QVBoxLayout(self.powerBtnFrameMini)
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.verticalLayout_28.setContentsMargins(9, 9, 9, 9)
-        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_28.addItem(self.verticalSpacer_6)
 
@@ -473,7 +470,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon11 = QIcon()
-        icon11.addFile(u":/iconsDark/icons/power.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon11.addFile(u":/iconsDark/icons/power.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.exitBtnMini.setIcon(icon11)
 
         self.verticalLayout_28.addWidget(self.exitBtnMini)
@@ -490,23 +487,23 @@ class Ui_MainWindow(object):
         self.bodyFrame = QFrame(self.centralwidget)
         self.bodyFrame.setObjectName(u"bodyFrame")
         self.bodyFrame.setMinimumSize(QSize(791, 611))
-        self.bodyFrame.setFrameShape(QFrame.StyledPanel)
-        self.bodyFrame.setFrameShadow(QFrame.Raised)
+        self.bodyFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.bodyFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_5 = QGridLayout(self.bodyFrame)
         self.gridLayout_5.setSpacing(0)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
         self.bodyContentFrame = QFrame(self.bodyFrame)
         self.bodyContentFrame.setObjectName(u"bodyContentFrame")
-        self.bodyContentFrame.setFrameShape(QFrame.StyledPanel)
-        self.bodyContentFrame.setFrameShadow(QFrame.Raised)
+        self.bodyContentFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.bodyContentFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_14 = QVBoxLayout(self.bodyContentFrame)
         self.verticalLayout_14.setSpacing(0)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
         self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
         self.bodyWidget = QStackedWidget(self.bodyContentFrame)
         self.bodyWidget.setObjectName(u"bodyWidget")
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.bodyWidget.sizePolicy().hasHeightForWidth())
@@ -535,14 +532,14 @@ class Ui_MainWindow(object):
         self.verticalLayout_36.setContentsMargins(0, 0, 0, 0)
         self.recordTimePageFrame = QFrame(self.recordTimePage)
         self.recordTimePageFrame.setObjectName(u"recordTimePageFrame")
-        self.recordTimePageFrame.setFrameShape(QFrame.StyledPanel)
-        self.recordTimePageFrame.setFrameShadow(QFrame.Raised)
+        self.recordTimePageFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.recordTimePageFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_35 = QVBoxLayout(self.recordTimePageFrame)
         self.verticalLayout_35.setObjectName(u"verticalLayout_35")
         self.recordTimePageTitleFrame = QFrame(self.recordTimePageFrame)
         self.recordTimePageTitleFrame.setObjectName(u"recordTimePageTitleFrame")
-        self.recordTimePageTitleFrame.setFrameShape(QFrame.StyledPanel)
-        self.recordTimePageTitleFrame.setFrameShadow(QFrame.Raised)
+        self.recordTimePageTitleFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.recordTimePageTitleFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_33 = QVBoxLayout(self.recordTimePageTitleFrame)
         self.verticalLayout_33.setObjectName(u"verticalLayout_33")
         self.title = QLabel(self.recordTimePageTitleFrame)
@@ -562,21 +559,21 @@ class Ui_MainWindow(object):
         self.recordTimeContentFrame.setStyleSheet(u"QComboBox{\n"
 "	color: rgb(186, 186, 186);\n"
 "}")
-        self.recordTimeContentFrame.setFrameShape(QFrame.StyledPanel)
-        self.recordTimeContentFrame.setFrameShadow(QFrame.Raised)
+        self.recordTimeContentFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.recordTimeContentFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_34 = QVBoxLayout(self.recordTimeContentFrame)
         self.verticalLayout_34.setObjectName(u"verticalLayout_34")
         self.verticalLayout_34.setContentsMargins(9, -1, -1, -1)
         self.recordTimeSettingFrame = QFrame(self.recordTimeContentFrame)
         self.recordTimeSettingFrame.setObjectName(u"recordTimeSettingFrame")
-        self.recordTimeSettingFrame.setFrameShape(QFrame.StyledPanel)
-        self.recordTimeSettingFrame.setFrameShadow(QFrame.Raised)
+        self.recordTimeSettingFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.recordTimeSettingFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_27 = QHBoxLayout(self.recordTimeSettingFrame)
         self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
         self.projectFrame = QFrame(self.recordTimeSettingFrame)
         self.projectFrame.setObjectName(u"projectFrame")
-        self.projectFrame.setFrameShape(QFrame.StyledPanel)
-        self.projectFrame.setFrameShadow(QFrame.Raised)
+        self.projectFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.projectFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_26 = QVBoxLayout(self.projectFrame)
         self.verticalLayout_26.setSpacing(9)
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
@@ -608,8 +605,8 @@ class Ui_MainWindow(object):
 
         self.topicFrame = QFrame(self.recordTimeSettingFrame)
         self.topicFrame.setObjectName(u"topicFrame")
-        self.topicFrame.setFrameShape(QFrame.StyledPanel)
-        self.topicFrame.setFrameShadow(QFrame.Raised)
+        self.topicFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.topicFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_27 = QVBoxLayout(self.topicFrame)
         self.verticalLayout_27.setSpacing(9)
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
@@ -638,8 +635,8 @@ class Ui_MainWindow(object):
 
         self.bookingtextFrame = QFrame(self.recordTimeSettingFrame)
         self.bookingtextFrame.setObjectName(u"bookingtextFrame")
-        self.bookingtextFrame.setFrameShape(QFrame.StyledPanel)
-        self.bookingtextFrame.setFrameShadow(QFrame.Raised)
+        self.bookingtextFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.bookingtextFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_32 = QVBoxLayout(self.bookingtextFrame)
         self.verticalLayout_32.setSpacing(9)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
@@ -666,11 +663,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_27.addWidget(self.bookingtextFrame)
 
-        self.horizontalSpacer_7 = QSpacerItem(88, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_7 = QSpacerItem(88, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_27.addItem(self.horizontalSpacer_7)
 
-        self.horizontalSpacer_8 = QSpacerItem(88, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_8 = QSpacerItem(88, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_27.addItem(self.horizontalSpacer_8)
 
@@ -679,8 +676,8 @@ class Ui_MainWindow(object):
 
         self.buttonsFrame = QFrame(self.recordTimeContentFrame)
         self.buttonsFrame.setObjectName(u"buttonsFrame")
-        self.buttonsFrame.setFrameShape(QFrame.StyledPanel)
-        self.buttonsFrame.setFrameShadow(QFrame.Raised)
+        self.buttonsFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.buttonsFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_28 = QHBoxLayout(self.buttonsFrame)
         self.horizontalLayout_28.setObjectName(u"horizontalLayout_28")
         self.horizontalLayout_28.setContentsMargins(0, -1, -1, -1)
@@ -704,7 +701,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon12 = QIcon()
-        icon12.addFile(u":/iconsDark/icons/play.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon12.addFile(u":/iconsDark/icons/play.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.startBtn_2.setIcon(icon12)
 
         self.horizontalLayout_28.addWidget(self.startBtn_2)
@@ -730,31 +727,31 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon13 = QIcon()
-        icon13.addFile(u":/iconsDark/icons/stop-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon13.addFile(u":/iconsDark/icons/stop-circle.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.stopBtn_2.setIcon(icon13)
 
         self.horizontalLayout_28.addWidget(self.stopBtn_2)
 
-        self.horizontalSpacer_12 = QSpacerItem(270, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_12 = QSpacerItem(270, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_28.addItem(self.horizontalSpacer_12)
 
-        self.horizontalSpacer_13 = QSpacerItem(270, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_13 = QSpacerItem(270, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_28.addItem(self.horizontalSpacer_13)
 
 
         self.verticalLayout_34.addWidget(self.buttonsFrame)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 89, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_3 = QSpacerItem(20, 89, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_34.addItem(self.verticalSpacer_3)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 89, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_4 = QSpacerItem(20, 89, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_34.addItem(self.verticalSpacer_4)
 
-        self.verticalSpacer_5 = QSpacerItem(20, 89, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_5 = QSpacerItem(20, 89, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_34.addItem(self.verticalSpacer_5)
 
@@ -777,8 +774,8 @@ class Ui_MainWindow(object):
         self.recordedTimePageFrame = QFrame(self.recordedTimePage)
         self.recordedTimePageFrame.setObjectName(u"recordedTimePageFrame")
         self.recordedTimePageFrame.setMinimumSize(QSize(781, 541))
-        self.recordedTimePageFrame.setFrameShape(QFrame.StyledPanel)
-        self.recordedTimePageFrame.setFrameShadow(QFrame.Raised)
+        self.recordedTimePageFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.recordedTimePageFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_13 = QVBoxLayout(self.recordedTimePageFrame)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.verticalLayout_13.setContentsMargins(9, 9, -1, -1)
@@ -788,13 +785,13 @@ class Ui_MainWindow(object):
         self.recordedTimeTitleFrame.setSizePolicy(sizePolicy)
         self.recordedTimeTitleFrame.setMaximumSize(QSize(16777215, 75))
         self.recordedTimeTitleFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
-        self.recordedTimeTitleFrame.setFrameShape(QFrame.StyledPanel)
-        self.recordedTimeTitleFrame.setFrameShadow(QFrame.Raised)
+        self.recordedTimeTitleFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.recordedTimeTitleFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_29 = QHBoxLayout(self.recordedTimeTitleFrame)
         self.horizontalLayout_29.setObjectName(u"horizontalLayout_29")
         self.recordedTimeTitle = QLabel(self.recordedTimeTitleFrame)
         self.recordedTimeTitle.setObjectName(u"recordedTimeTitle")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.recordedTimeTitle.sizePolicy().hasHeightForWidth())
@@ -803,15 +800,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_29.addWidget(self.recordedTimeTitle)
 
-        self.horizontalSpacer_9 = QSpacerItem(89, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_9 = QSpacerItem(89, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_29.addItem(self.horizontalSpacer_9)
 
-        self.horizontalSpacer_10 = QSpacerItem(90, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_10 = QSpacerItem(90, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_29.addItem(self.horizontalSpacer_10)
 
-        self.horizontalSpacer_11 = QSpacerItem(89, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_11 = QSpacerItem(89, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_29.addItem(self.horizontalSpacer_11)
 
@@ -836,9 +833,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon14 = QIcon()
-        icon14.addFile(u":/iconsDark/icons/unlock.svg", QSize(), QIcon.Normal, QIcon.Off)
-        icon14.addFile(u":/iconsDark/icons/lock.svg", QSize(), QIcon.Active, QIcon.On)
-        icon14.addFile(u":/iconsDark/icons/lock.svg", QSize(), QIcon.Selected, QIcon.On)
+        icon14.addFile(u":/iconsDark/icons/unlock.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon14.addFile(u":/iconsDark/icons/lock.svg", QSize(), QIcon.Mode.Active, QIcon.State.On)
+        icon14.addFile(u":/iconsDark/icons/lock.svg", QSize(), QIcon.Mode.Selected, QIcon.State.On)
         self.lockAllBtn.setIcon(icon14)
         self.lockAllBtn.setCheckable(True)
 
@@ -865,12 +862,12 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon15 = QIcon()
-        icon15.addFile(u":/iconsDark/icons/send.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon15.addFile(u":/iconsDark/icons/send.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.sendAllBtn.setIcon(icon15)
 
         self.horizontalLayout_29.addWidget(self.sendAllBtn)
 
-        self.horizontalSpacer_14 = QSpacerItem(20, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        self.horizontalSpacer_14 = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_29.addItem(self.horizontalSpacer_14)
 
@@ -881,8 +878,8 @@ class Ui_MainWindow(object):
         self.recordedTimeContentFrame.setObjectName(u"recordedTimeContentFrame")
         sizePolicy.setHeightForWidth(self.recordedTimeContentFrame.sizePolicy().hasHeightForWidth())
         self.recordedTimeContentFrame.setSizePolicy(sizePolicy)
-        self.recordedTimeContentFrame.setFrameShape(QFrame.StyledPanel)
-        self.recordedTimeContentFrame.setFrameShadow(QFrame.Raised)
+        self.recordedTimeContentFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.recordedTimeContentFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_12 = QVBoxLayout(self.recordedTimeContentFrame)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.verticalLayout_12.setContentsMargins(12, -1, 13, -1)
@@ -895,11 +892,11 @@ class Ui_MainWindow(object):
 "	alternate-background-color: rgb(1, 65, 63);\n"
 "	color: rgb(186, 186, 186);\n"
 "}")
-        self.recordedTimesTable.setFrameShape(QFrame.StyledPanel)
-        self.recordedTimesTable.setFrameShadow(QFrame.Sunken)
+        self.recordedTimesTable.setFrameShape(QFrame.Shape.StyledPanel)
+        self.recordedTimesTable.setFrameShadow(QFrame.Shadow.Sunken)
         self.recordedTimesTable.setLineWidth(3)
         self.recordedTimesTable.setMidLineWidth(0)
-        self.recordedTimesTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.recordedTimesTable.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.recordedTimesTable.setAlternatingRowColors(True)
         self.recordedTimesTable.setShowGrid(True)
         self.recordedTimesTable.setWordWrap(True)
@@ -926,8 +923,8 @@ class Ui_MainWindow(object):
         self.employeesPageFrame = QFrame(self.employeePage)
         self.employeesPageFrame.setObjectName(u"employeesPageFrame")
         self.employeesPageFrame.setMinimumSize(QSize(781, 541))
-        self.employeesPageFrame.setFrameShape(QFrame.StyledPanel)
-        self.employeesPageFrame.setFrameShadow(QFrame.Raised)
+        self.employeesPageFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.employeesPageFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_18 = QVBoxLayout(self.employeesPageFrame)
         self.verticalLayout_18.setObjectName(u"verticalLayout_18")
         self.verticalLayout_18.setContentsMargins(9, 9, -1, -1)
@@ -937,8 +934,8 @@ class Ui_MainWindow(object):
         self.employeesTitleFrame.setSizePolicy(sizePolicy)
         self.employeesTitleFrame.setMaximumSize(QSize(16777215, 150))
         self.employeesTitleFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
-        self.employeesTitleFrame.setFrameShape(QFrame.StyledPanel)
-        self.employeesTitleFrame.setFrameShadow(QFrame.Raised)
+        self.employeesTitleFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.employeesTitleFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_23 = QHBoxLayout(self.employeesTitleFrame)
         self.horizontalLayout_23.setSpacing(0)
         self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
@@ -971,7 +968,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(3, 1, 59)\n"
 "}")
         icon16 = QIcon()
-        icon16.addFile(u":/iconsDark/icons/user-plus.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon16.addFile(u":/iconsDark/icons/user-plus.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.addNewEmployeeBtn.setIcon(icon16)
 
         self.horizontalLayout_23.addWidget(self.addNewEmployeeBtn)
@@ -983,8 +980,8 @@ class Ui_MainWindow(object):
         self.employeesContentFrame.setObjectName(u"employeesContentFrame")
         sizePolicy.setHeightForWidth(self.employeesContentFrame.sizePolicy().hasHeightForWidth())
         self.employeesContentFrame.setSizePolicy(sizePolicy)
-        self.employeesContentFrame.setFrameShape(QFrame.StyledPanel)
-        self.employeesContentFrame.setFrameShadow(QFrame.Raised)
+        self.employeesContentFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.employeesContentFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_20 = QVBoxLayout(self.employeesContentFrame)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
         self.verticalLayout_20.setContentsMargins(12, -1, 13, -1)
@@ -997,11 +994,11 @@ class Ui_MainWindow(object):
 "	alternate-background-color: rgb(1, 65, 63);\n"
 "	color: rgb(186, 186, 186);\n"
 "}")
-        self.employeesTable.setFrameShape(QFrame.StyledPanel)
-        self.employeesTable.setFrameShadow(QFrame.Sunken)
+        self.employeesTable.setFrameShape(QFrame.Shape.StyledPanel)
+        self.employeesTable.setFrameShadow(QFrame.Shadow.Sunken)
         self.employeesTable.setLineWidth(3)
         self.employeesTable.setMidLineWidth(0)
-        self.employeesTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.employeesTable.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.employeesTable.setAlternatingRowColors(True)
         self.employeesTable.setShowGrid(True)
         self.employeesTable.setWordWrap(True)
@@ -1028,8 +1025,8 @@ class Ui_MainWindow(object):
         self.projectsPageFrame = QFrame(self.projectsPage)
         self.projectsPageFrame.setObjectName(u"projectsPageFrame")
         self.projectsPageFrame.setMinimumSize(QSize(781, 541))
-        self.projectsPageFrame.setFrameShape(QFrame.StyledPanel)
-        self.projectsPageFrame.setFrameShadow(QFrame.Raised)
+        self.projectsPageFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.projectsPageFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_19 = QVBoxLayout(self.projectsPageFrame)
         self.verticalLayout_19.setObjectName(u"verticalLayout_19")
         self.verticalLayout_19.setContentsMargins(9, 9, -1, -1)
@@ -1039,12 +1036,10 @@ class Ui_MainWindow(object):
         self.projectsTitleFrame.setSizePolicy(sizePolicy)
         self.projectsTitleFrame.setMaximumSize(QSize(16777215, 150))
         self.projectsTitleFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
-        self.projectsTitleFrame.setFrameShape(QFrame.StyledPanel)
-        self.projectsTitleFrame.setFrameShadow(QFrame.Raised)
+        self.projectsTitleFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.projectsTitleFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_24 = QHBoxLayout(self.projectsTitleFrame)
-        self.horizontalLayout_24.setSpacing(0)
         self.horizontalLayout_24.setObjectName(u"horizontalLayout_24")
-        self.horizontalLayout_24.setContentsMargins(16, 0, 16, 0)
         self.projectsTitle = QLabel(self.projectsTitleFrame)
         self.projectsTitle.setObjectName(u"projectsTitle")
         sizePolicy1.setHeightForWidth(self.projectsTitle.sizePolicy().hasHeightForWidth())
@@ -1052,6 +1047,31 @@ class Ui_MainWindow(object):
         self.projectsTitle.setFont(font2)
 
         self.horizontalLayout_24.addWidget(self.projectsTitle)
+
+        self.syncProjectsBtn = QPushButton(self.projectsTitleFrame)
+        self.syncProjectsBtn.setObjectName(u"syncProjectsBtn")
+        self.syncProjectsBtn.setMinimumSize(QSize(0, 31))
+        self.syncProjectsBtn.setFont(font)
+        self.syncProjectsBtn.setStyleSheet(u"QPushButton{\n"
+"	background-color: rgb(44, 44, 44);\n"
+"	border: 2px solid  rgb(2, 20, 72);\n"
+"	border-radius: 15px;\n"
+"	color: rgb(177, 177, 177);\n"
+"	padding-left: 20px;\n"
+"	padding-right: 20px;\n"
+"	text-align: left;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	background-color: rgb(23, 32, 42);\n"
+"}\n"
+"QPushButton::pressed{\n"
+"	background-color: rgb(3, 1, 59)\n"
+"}")
+        icon17 = QIcon()
+        icon17.addFile(u":/iconsDark/icons/plus.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.syncProjectsBtn.setIcon(icon17)
+
+        self.horizontalLayout_24.addWidget(self.syncProjectsBtn)
 
         self.addNewProjectBtn = QPushButton(self.projectsTitleFrame)
         self.addNewProjectBtn.setObjectName(u"addNewProjectBtn")
@@ -1072,8 +1092,6 @@ class Ui_MainWindow(object):
 "QPushButton::pressed{\n"
 "	background-color: rgb(3, 1, 59)\n"
 "}")
-        icon17 = QIcon()
-        icon17.addFile(u":/iconsDark/icons/plus.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.addNewProjectBtn.setIcon(icon17)
 
         self.horizontalLayout_24.addWidget(self.addNewProjectBtn)
@@ -1083,33 +1101,44 @@ class Ui_MainWindow(object):
 
         self.projectsContentFrame = QFrame(self.projectsPageFrame)
         self.projectsContentFrame.setObjectName(u"projectsContentFrame")
-        sizePolicy.setHeightForWidth(self.projectsContentFrame.sizePolicy().hasHeightForWidth())
-        self.projectsContentFrame.setSizePolicy(sizePolicy)
-        self.projectsContentFrame.setFrameShape(QFrame.StyledPanel)
-        self.projectsContentFrame.setFrameShadow(QFrame.Raised)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.projectsContentFrame.sizePolicy().hasHeightForWidth())
+        self.projectsContentFrame.setSizePolicy(sizePolicy2)
+        self.projectsContentFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.projectsContentFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_21 = QVBoxLayout(self.projectsContentFrame)
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
         self.verticalLayout_21.setContentsMargins(12, -1, 13, -1)
         self.projectsTable = QTableWidget(self.projectsContentFrame)
-        if (self.projectsTable.columnCount() < 7):
-            self.projectsTable.setColumnCount(7)
+        if (self.projectsTable.columnCount() < 2):
+            self.projectsTable.setColumnCount(2)
         self.projectsTable.setObjectName(u"projectsTable")
-        self.projectsTable.setMinimumSize(QSize(748, 431))
+        self.projectsTable.setEnabled(True)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Expanding)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.projectsTable.sizePolicy().hasHeightForWidth())
+        self.projectsTable.setSizePolicy(sizePolicy3)
+        self.projectsTable.setMinimumSize(QSize(342, 430))
         self.projectsTable.setStyleSheet(u"QTableWidget{\n"
 "	alternate-background-color: rgb(1, 65, 63);\n"
 "	color: rgb(186, 186, 186);\n"
 "}")
-        self.projectsTable.setFrameShape(QFrame.StyledPanel)
-        self.projectsTable.setFrameShadow(QFrame.Sunken)
+        self.projectsTable.setFrameShape(QFrame.Shape.StyledPanel)
+        self.projectsTable.setFrameShadow(QFrame.Shadow.Sunken)
         self.projectsTable.setLineWidth(3)
         self.projectsTable.setMidLineWidth(0)
-        self.projectsTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.projectsTable.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.projectsTable.setAlternatingRowColors(True)
         self.projectsTable.setShowGrid(True)
         self.projectsTable.setWordWrap(True)
         self.projectsTable.setCornerButtonEnabled(False)
         self.projectsTable.setRowCount(0)
-        self.projectsTable.setColumnCount(7)
+        self.projectsTable.setColumnCount(2)
+        self.projectsTable.horizontalHeader().setMinimumSectionSize(40)
+        self.projectsTable.horizontalHeader().setDefaultSectionSize(170)
         self.projectsTable.verticalHeader().setVisible(False)
 
         self.verticalLayout_21.addWidget(self.projectsTable)
@@ -1130,8 +1159,8 @@ class Ui_MainWindow(object):
         self.topicsPageFrame = QFrame(self.topicsPage)
         self.topicsPageFrame.setObjectName(u"topicsPageFrame")
         self.topicsPageFrame.setMinimumSize(QSize(781, 541))
-        self.topicsPageFrame.setFrameShape(QFrame.StyledPanel)
-        self.topicsPageFrame.setFrameShadow(QFrame.Raised)
+        self.topicsPageFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.topicsPageFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_22 = QVBoxLayout(self.topicsPageFrame)
         self.verticalLayout_22.setObjectName(u"verticalLayout_22")
         self.verticalLayout_22.setContentsMargins(9, 9, -1, -1)
@@ -1141,12 +1170,10 @@ class Ui_MainWindow(object):
         self.topicsTitleFrame.setSizePolicy(sizePolicy)
         self.topicsTitleFrame.setMaximumSize(QSize(16777215, 150))
         self.topicsTitleFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
-        self.topicsTitleFrame.setFrameShape(QFrame.StyledPanel)
-        self.topicsTitleFrame.setFrameShadow(QFrame.Raised)
+        self.topicsTitleFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.topicsTitleFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_25 = QHBoxLayout(self.topicsTitleFrame)
-        self.horizontalLayout_25.setSpacing(0)
         self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
-        self.horizontalLayout_25.setContentsMargins(16, 0, 16, 0)
         self.topicTitle = QLabel(self.topicsTitleFrame)
         self.topicTitle.setObjectName(u"topicTitle")
         sizePolicy1.setHeightForWidth(self.topicTitle.sizePolicy().hasHeightForWidth())
@@ -1154,6 +1181,29 @@ class Ui_MainWindow(object):
         self.topicTitle.setFont(font2)
 
         self.horizontalLayout_25.addWidget(self.topicTitle)
+
+        self.syncTopicsBtn = QPushButton(self.topicsTitleFrame)
+        self.syncTopicsBtn.setObjectName(u"syncTopicsBtn")
+        self.syncTopicsBtn.setMinimumSize(QSize(0, 31))
+        self.syncTopicsBtn.setFont(font)
+        self.syncTopicsBtn.setStyleSheet(u"QPushButton{\n"
+"	background-color: rgb(44, 44, 44);\n"
+"	border: 2px solid  rgb(2, 20, 72);\n"
+"	border-radius: 15px;\n"
+"	color: rgb(177, 177, 177);\n"
+"	padding-left: 20px;\n"
+"	padding-right: 20px;\n"
+"	text-align: left;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	background-color: rgb(23, 32, 42);\n"
+"}\n"
+"QPushButton::pressed{\n"
+"	background-color: rgb(3, 1, 59)\n"
+"}")
+        self.syncTopicsBtn.setIcon(icon17)
+
+        self.horizontalLayout_25.addWidget(self.syncTopicsBtn)
 
         self.addNewTopicBtn = QPushButton(self.topicsTitleFrame)
         self.addNewTopicBtn.setObjectName(u"addNewTopicBtn")
@@ -1183,33 +1233,36 @@ class Ui_MainWindow(object):
 
         self.topicsContentFrame = QFrame(self.topicsPageFrame)
         self.topicsContentFrame.setObjectName(u"topicsContentFrame")
-        sizePolicy.setHeightForWidth(self.topicsContentFrame.sizePolicy().hasHeightForWidth())
-        self.topicsContentFrame.setSizePolicy(sizePolicy)
-        self.topicsContentFrame.setFrameShape(QFrame.StyledPanel)
-        self.topicsContentFrame.setFrameShadow(QFrame.Raised)
+        sizePolicy3.setHeightForWidth(self.topicsContentFrame.sizePolicy().hasHeightForWidth())
+        self.topicsContentFrame.setSizePolicy(sizePolicy3)
+        self.topicsContentFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.topicsContentFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_23 = QVBoxLayout(self.topicsContentFrame)
         self.verticalLayout_23.setObjectName(u"verticalLayout_23")
         self.verticalLayout_23.setContentsMargins(12, -1, 13, -1)
         self.topicsTable = QTableWidget(self.topicsContentFrame)
-        if (self.topicsTable.columnCount() < 7):
-            self.topicsTable.setColumnCount(7)
+        if (self.topicsTable.columnCount() < 3):
+            self.topicsTable.setColumnCount(3)
         self.topicsTable.setObjectName(u"topicsTable")
-        self.topicsTable.setMinimumSize(QSize(748, 431))
+        sizePolicy3.setHeightForWidth(self.topicsTable.sizePolicy().hasHeightForWidth())
+        self.topicsTable.setSizePolicy(sizePolicy3)
+        self.topicsTable.setMinimumSize(QSize(512, 431))
         self.topicsTable.setStyleSheet(u"QTableWidget{\n"
 "	alternate-background-color: rgb(1, 65, 63);\n"
 "	color: rgb(186, 186, 186);\n"
 "}")
-        self.topicsTable.setFrameShape(QFrame.StyledPanel)
-        self.topicsTable.setFrameShadow(QFrame.Sunken)
+        self.topicsTable.setFrameShape(QFrame.Shape.StyledPanel)
+        self.topicsTable.setFrameShadow(QFrame.Shadow.Sunken)
         self.topicsTable.setLineWidth(3)
         self.topicsTable.setMidLineWidth(0)
-        self.topicsTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.topicsTable.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.topicsTable.setAlternatingRowColors(True)
         self.topicsTable.setShowGrid(True)
         self.topicsTable.setWordWrap(True)
         self.topicsTable.setCornerButtonEnabled(False)
         self.topicsTable.setRowCount(0)
-        self.topicsTable.setColumnCount(7)
+        self.topicsTable.setColumnCount(3)
+        self.topicsTable.horizontalHeader().setDefaultSectionSize(170)
         self.topicsTable.verticalHeader().setVisible(False)
 
         self.verticalLayout_23.addWidget(self.topicsTable)
@@ -1230,8 +1283,8 @@ class Ui_MainWindow(object):
         self.bookingtextsPageFrame = QFrame(self.bookingtextsPage)
         self.bookingtextsPageFrame.setObjectName(u"bookingtextsPageFrame")
         self.bookingtextsPageFrame.setMinimumSize(QSize(781, 541))
-        self.bookingtextsPageFrame.setFrameShape(QFrame.StyledPanel)
-        self.bookingtextsPageFrame.setFrameShadow(QFrame.Raised)
+        self.bookingtextsPageFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.bookingtextsPageFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_24 = QVBoxLayout(self.bookingtextsPageFrame)
         self.verticalLayout_24.setObjectName(u"verticalLayout_24")
         self.verticalLayout_24.setContentsMargins(9, 9, -1, -1)
@@ -1241,8 +1294,8 @@ class Ui_MainWindow(object):
         self.bookingtextsTitleFrame.setSizePolicy(sizePolicy)
         self.bookingtextsTitleFrame.setMaximumSize(QSize(16777215, 150))
         self.bookingtextsTitleFrame.setStyleSheet(u"color: rgb(186, 186, 186);")
-        self.bookingtextsTitleFrame.setFrameShape(QFrame.StyledPanel)
-        self.bookingtextsTitleFrame.setFrameShadow(QFrame.Raised)
+        self.bookingtextsTitleFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.bookingtextsTitleFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_26 = QHBoxLayout(self.bookingtextsTitleFrame)
         self.horizontalLayout_26.setSpacing(0)
         self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
@@ -1285,8 +1338,8 @@ class Ui_MainWindow(object):
         self.bookingtextsContentFrame.setObjectName(u"bookingtextsContentFrame")
         sizePolicy.setHeightForWidth(self.bookingtextsContentFrame.sizePolicy().hasHeightForWidth())
         self.bookingtextsContentFrame.setSizePolicy(sizePolicy)
-        self.bookingtextsContentFrame.setFrameShape(QFrame.StyledPanel)
-        self.bookingtextsContentFrame.setFrameShadow(QFrame.Raised)
+        self.bookingtextsContentFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.bookingtextsContentFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_25 = QVBoxLayout(self.bookingtextsContentFrame)
         self.verticalLayout_25.setObjectName(u"verticalLayout_25")
         self.verticalLayout_25.setContentsMargins(12, -1, 13, -1)
@@ -1299,11 +1352,11 @@ class Ui_MainWindow(object):
 "	alternate-background-color: rgb(1, 65, 63);\n"
 "	color: rgb(186, 186, 186);\n"
 "}")
-        self.bookingtextsTable.setFrameShape(QFrame.StyledPanel)
-        self.bookingtextsTable.setFrameShadow(QFrame.Sunken)
+        self.bookingtextsTable.setFrameShape(QFrame.Shape.StyledPanel)
+        self.bookingtextsTable.setFrameShadow(QFrame.Shadow.Sunken)
         self.bookingtextsTable.setLineWidth(3)
         self.bookingtextsTable.setMidLineWidth(0)
-        self.bookingtextsTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.bookingtextsTable.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.bookingtextsTable.setAlternatingRowColors(True)
         self.bookingtextsTable.setShowGrid(True)
         self.bookingtextsTable.setWordWrap(True)
@@ -1334,16 +1387,16 @@ class Ui_MainWindow(object):
         self.exportPageFrame = QFrame(self.exportPage)
         self.exportPageFrame.setObjectName(u"exportPageFrame")
         self.exportPageFrame.setMinimumSize(QSize(781, 541))
-        self.exportPageFrame.setFrameShape(QFrame.StyledPanel)
-        self.exportPageFrame.setFrameShadow(QFrame.Raised)
+        self.exportPageFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.exportPageFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_9 = QVBoxLayout(self.exportPageFrame)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.exportTitleFrame = QFrame(self.exportPageFrame)
         self.exportTitleFrame.setObjectName(u"exportTitleFrame")
         self.exportTitleFrame.setMaximumSize(QSize(16777215, 150))
-        self.exportTitleFrame.setFrameShape(QFrame.StyledPanel)
-        self.exportTitleFrame.setFrameShadow(QFrame.Raised)
+        self.exportTitleFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.exportTitleFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_6 = QGridLayout(self.exportTitleFrame)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.exportPageTitle = QLabel(self.exportTitleFrame)
@@ -1357,32 +1410,32 @@ class Ui_MainWindow(object):
 
         self.exportContentFrame = QFrame(self.exportPageFrame)
         self.exportContentFrame.setObjectName(u"exportContentFrame")
-        self.exportContentFrame.setFrameShape(QFrame.StyledPanel)
-        self.exportContentFrame.setFrameShadow(QFrame.Raised)
+        self.exportContentFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.exportContentFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_5 = QVBoxLayout(self.exportContentFrame)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.optionsFrame_2 = QFrame(self.exportContentFrame)
         self.optionsFrame_2.setObjectName(u"optionsFrame_2")
-        self.optionsFrame_2.setFrameShape(QFrame.StyledPanel)
-        self.optionsFrame_2.setFrameShadow(QFrame.Raised)
+        self.optionsFrame_2.setFrameShape(QFrame.Shape.StyledPanel)
+        self.optionsFrame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_4 = QVBoxLayout(self.optionsFrame_2)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.settingFrame = QFrame(self.optionsFrame_2)
         self.settingFrame.setObjectName(u"settingFrame")
-        self.settingFrame.setFrameShape(QFrame.StyledPanel)
-        self.settingFrame.setFrameShadow(QFrame.Raised)
+        self.settingFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.settingFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_9 = QHBoxLayout(self.settingFrame)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.fromFrame = QFrame(self.settingFrame)
         self.fromFrame.setObjectName(u"fromFrame")
-        self.fromFrame.setFrameShape(QFrame.StyledPanel)
-        self.fromFrame.setFrameShadow(QFrame.Raised)
+        self.fromFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.fromFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_6 = QVBoxLayout(self.fromFrame)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.fromDateFrame = QFrame(self.fromFrame)
         self.fromDateFrame.setObjectName(u"fromDateFrame")
-        self.fromDateFrame.setFrameShape(QFrame.StyledPanel)
-        self.fromDateFrame.setFrameShadow(QFrame.Raised)
+        self.fromDateFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.fromDateFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_6 = QHBoxLayout(self.fromDateFrame)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.label = QLabel(self.fromDateFrame)
@@ -1395,7 +1448,7 @@ class Ui_MainWindow(object):
         self.fromLabel.setObjectName(u"fromLabel")
         self.fromLabel.setFont(font)
         self.fromLabel.setReadOnly(True)
-        self.fromLabel.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.fromLabel.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
 
         self.horizontalLayout_6.addWidget(self.fromLabel)
 
@@ -1430,14 +1483,14 @@ class Ui_MainWindow(object):
 
         self.toFrame = QFrame(self.settingFrame)
         self.toFrame.setObjectName(u"toFrame")
-        self.toFrame.setFrameShape(QFrame.StyledPanel)
-        self.toFrame.setFrameShadow(QFrame.Raised)
+        self.toFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.toFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_7 = QVBoxLayout(self.toFrame)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.toDateFrame = QFrame(self.toFrame)
         self.toDateFrame.setObjectName(u"toDateFrame")
-        self.toDateFrame.setFrameShape(QFrame.StyledPanel)
-        self.toDateFrame.setFrameShadow(QFrame.Raised)
+        self.toDateFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.toDateFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_7 = QHBoxLayout(self.toDateFrame)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.toLabel = QLabel(self.toDateFrame)
@@ -1450,7 +1503,7 @@ class Ui_MainWindow(object):
         self.toDate.setObjectName(u"toDate")
         self.toDate.setFont(font)
         self.toDate.setReadOnly(True)
-        self.toDate.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.toDate.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
 
         self.horizontalLayout_7.addWidget(self.toDate)
 
@@ -1485,14 +1538,14 @@ class Ui_MainWindow(object):
 
         self.optionsFrame = QFrame(self.settingFrame)
         self.optionsFrame.setObjectName(u"optionsFrame")
-        self.optionsFrame.setFrameShape(QFrame.StyledPanel)
-        self.optionsFrame.setFrameShadow(QFrame.Raised)
+        self.optionsFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.optionsFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.optionsFrame)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.optionsLabelFrame = QFrame(self.optionsFrame)
         self.optionsLabelFrame.setObjectName(u"optionsLabelFrame")
-        self.optionsLabelFrame.setFrameShape(QFrame.StyledPanel)
-        self.optionsLabelFrame.setFrameShadow(QFrame.Raised)
+        self.optionsLabelFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.optionsLabelFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.optionsLabelFrame)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.horizontalLayout_8.setContentsMargins(0, -1, -1, -1)
@@ -1526,8 +1579,8 @@ class Ui_MainWindow(object):
 
         self.calendarFrame = QFrame(self.optionsFrame_2)
         self.calendarFrame.setObjectName(u"calendarFrame")
-        self.calendarFrame.setFrameShape(QFrame.StyledPanel)
-        self.calendarFrame.setFrameShadow(QFrame.Raised)
+        self.calendarFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.calendarFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_10 = QHBoxLayout(self.calendarFrame)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
         self.fromCalendar = QCalendarWidget(self.calendarFrame)
@@ -1538,7 +1591,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_10.addWidget(self.fromCalendar)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_10.addItem(self.horizontalSpacer_4)
 
@@ -1550,7 +1603,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_10.addWidget(self.toCalendar)
 
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_10.addItem(self.horizontalSpacer_6)
 
@@ -1560,17 +1613,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addWidget(self.optionsFrame_2)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 113, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_2 = QSpacerItem(20, 113, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_5.addItem(self.verticalSpacer_2)
 
         self.exportBtnFrame = QFrame(self.exportContentFrame)
         self.exportBtnFrame.setObjectName(u"exportBtnFrame")
-        self.exportBtnFrame.setFrameShape(QFrame.StyledPanel)
-        self.exportBtnFrame.setFrameShadow(QFrame.Raised)
+        self.exportBtnFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.exportBtnFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_5 = QHBoxLayout(self.exportBtnFrame)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalSpacer_3 = QSpacerItem(261, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(261, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_3)
 
@@ -1597,7 +1650,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5.addWidget(self.exportDataBtn)
 
-        self.horizontalSpacer_5 = QSpacerItem(261, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(261, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_5)
 
@@ -1628,15 +1681,15 @@ class Ui_MainWindow(object):
         self.developerPageFrame = QFrame(self.developerPage)
         self.developerPageFrame.setObjectName(u"developerPageFrame")
         self.developerPageFrame.setMinimumSize(QSize(781, 541))
-        self.developerPageFrame.setFrameShape(QFrame.StyledPanel)
-        self.developerPageFrame.setFrameShadow(QFrame.Raised)
+        self.developerPageFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.developerPageFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.developerPageFrame)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.titleFrame = QFrame(self.developerPageFrame)
         self.titleFrame.setObjectName(u"titleFrame")
         self.titleFrame.setMaximumSize(QSize(16777215, 150))
-        self.titleFrame.setFrameShape(QFrame.StyledPanel)
-        self.titleFrame.setFrameShadow(QFrame.Raised)
+        self.titleFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.titleFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_4 = QGridLayout(self.titleFrame)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.developerPageTitle = QLabel(self.titleFrame)
@@ -1650,8 +1703,8 @@ class Ui_MainWindow(object):
 
         self.contentFrame = QFrame(self.developerPageFrame)
         self.contentFrame.setObjectName(u"contentFrame")
-        self.contentFrame.setFrameShape(QFrame.StyledPanel)
-        self.contentFrame.setFrameShadow(QFrame.Raised)
+        self.contentFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.contentFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.contentFrame)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.textBrowser = QTextBrowser(self.contentFrame)
@@ -1675,8 +1728,8 @@ class Ui_MainWindow(object):
         self.userLogFrame = QFrame(self.bodyFrame)
         self.userLogFrame.setObjectName(u"userLogFrame")
         self.userLogFrame.setMaximumSize(QSize(16777215, 150))
-        self.userLogFrame.setFrameShape(QFrame.StyledPanel)
-        self.userLogFrame.setFrameShadow(QFrame.Raised)
+        self.userLogFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.userLogFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_11 = QHBoxLayout(self.userLogFrame)
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.horizontalLayout_11.setContentsMargins(20, -1, 20, -1)
@@ -1699,8 +1752,8 @@ class Ui_MainWindow(object):
 "	\n"
 "	background-color: rgb(0, 0, 27);\n"
 "}")
-        self.headBarFrame.setFrameShape(QFrame.StyledPanel)
-        self.headBarFrame.setFrameShadow(QFrame.Raised)
+        self.headBarFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.headBarFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.headBarFrame)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(0, 4, 0, 9)
@@ -1710,8 +1763,8 @@ class Ui_MainWindow(object):
 "	border:none;\n"
 "	margin:3px;\n"
 "}")
-        self.startsoptBtnFrame.setFrameShape(QFrame.StyledPanel)
-        self.startsoptBtnFrame.setFrameShadow(QFrame.Raised)
+        self.startsoptBtnFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.startsoptBtnFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout = QHBoxLayout(self.startsoptBtnFrame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(-1, 5, -1, 6)
@@ -1765,7 +1818,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_4.addWidget(self.startsoptBtnFrame)
 
-        self.horizontalSpacer = QSpacerItem(57, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(57, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer)
 
@@ -1774,8 +1827,8 @@ class Ui_MainWindow(object):
         self.frame.setStyleSheet(u"QFrame{\n"
 "	border:none;\n"
 "}")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
+        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_2 = QHBoxLayout(self.frame)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.dateLCD = QLCDNumber(self.frame)
@@ -1783,9 +1836,9 @@ class Ui_MainWindow(object):
         self.dateLCD.setMinimumSize(QSize(171, 31))
         self.dateLCD.setSmallDecimalPoint(False)
         self.dateLCD.setDigitCount(11)
-        self.dateLCD.setSegmentStyle(QLCDNumber.Filled)
-        self.dateLCD.setProperty("value", 2024.000000000000000)
-        self.dateLCD.setProperty("intValue", 2024)
+        self.dateLCD.setSegmentStyle(QLCDNumber.SegmentStyle.Filled)
+        self.dateLCD.setProperty(u"value", 2024.000000000000000)
+        self.dateLCD.setProperty(u"intValue", 2024)
 
         self.horizontalLayout_2.addWidget(self.dateLCD)
 
@@ -1795,7 +1848,7 @@ class Ui_MainWindow(object):
         self.timeLCD.setStyleSheet(u"QFrame{\n"
 "	border:none;\n"
 "}")
-        self.timeLCD.setProperty("value", 16.210000000000001)
+        self.timeLCD.setProperty(u"value", 16.210000000000001)
 
         self.horizontalLayout_2.addWidget(self.timeLCD)
 
@@ -1804,7 +1857,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_4.addWidget(self.frame)
 
-        self.horizontalSpacer_2 = QSpacerItem(58, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(58, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer_2)
 
@@ -1813,8 +1866,8 @@ class Ui_MainWindow(object):
         self.userFrame.setStyleSheet(u"QFrame{\n"
 "	border:none;\n"
 "}")
-        self.userFrame.setFrameShape(QFrame.StyledPanel)
-        self.userFrame.setFrameShadow(QFrame.Raised)
+        self.userFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.userFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.userFrame)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(-1, 5, -1, 5)
@@ -1861,8 +1914,8 @@ class Ui_MainWindow(object):
 "	border:none;\n"
 "	margin:5px;\n"
 "}")
-        self.menuBtnFrame.setFrameShape(QFrame.StyledPanel)
-        self.menuBtnFrame.setFrameShadow(QFrame.Raised)
+        self.menuBtnFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.menuBtnFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout = QGridLayout(self.menuBtnFrame)
         self.gridLayout.setObjectName(u"gridLayout")
         self.menuBtn = QPushButton(self.menuBtnFrame)
@@ -1898,8 +1951,8 @@ class Ui_MainWindow(object):
 "	border: none;\n"
 "	margin:5px;\n"
 "}")
-        self.navigationBtnsFrame.setFrameShape(QFrame.StyledPanel)
-        self.navigationBtnsFrame.setFrameShadow(QFrame.Raised)
+        self.navigationBtnsFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.navigationBtnsFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout = QVBoxLayout(self.navigationBtnsFrame)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(9, -1, -1, -1)
@@ -2006,8 +2059,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_10.setContentsMargins(9, 0, 0, 0)
         self.employeeBtnFrame = QFrame(self.managerWidget)
         self.employeeBtnFrame.setObjectName(u"employeeBtnFrame")
-        self.employeeBtnFrame.setFrameShape(QFrame.StyledPanel)
-        self.employeeBtnFrame.setFrameShadow(QFrame.Raised)
+        self.employeeBtnFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.employeeBtnFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_12 = QHBoxLayout(self.employeeBtnFrame)
         self.horizontalLayout_12.setSpacing(0)
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
@@ -2040,8 +2093,8 @@ class Ui_MainWindow(object):
 
         self.projectsBtnFrame = QFrame(self.managerWidget)
         self.projectsBtnFrame.setObjectName(u"projectsBtnFrame")
-        self.projectsBtnFrame.setFrameShape(QFrame.StyledPanel)
-        self.projectsBtnFrame.setFrameShadow(QFrame.Raised)
+        self.projectsBtnFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.projectsBtnFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_13 = QHBoxLayout(self.projectsBtnFrame)
         self.horizontalLayout_13.setSpacing(0)
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
@@ -2074,8 +2127,8 @@ class Ui_MainWindow(object):
 
         self.topicsBtnFrame = QFrame(self.managerWidget)
         self.topicsBtnFrame.setObjectName(u"topicsBtnFrame")
-        self.topicsBtnFrame.setFrameShape(QFrame.StyledPanel)
-        self.topicsBtnFrame.setFrameShadow(QFrame.Raised)
+        self.topicsBtnFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.topicsBtnFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_14 = QHBoxLayout(self.topicsBtnFrame)
         self.horizontalLayout_14.setSpacing(0)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
@@ -2108,8 +2161,8 @@ class Ui_MainWindow(object):
 
         self.bookingtextsBtnFrame = QFrame(self.managerWidget)
         self.bookingtextsBtnFrame.setObjectName(u"bookingtextsBtnFrame")
-        self.bookingtextsBtnFrame.setFrameShape(QFrame.StyledPanel)
-        self.bookingtextsBtnFrame.setFrameShadow(QFrame.Raised)
+        self.bookingtextsBtnFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.bookingtextsBtnFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_15 = QHBoxLayout(self.bookingtextsBtnFrame)
         self.horizontalLayout_15.setSpacing(0)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
@@ -2142,8 +2195,8 @@ class Ui_MainWindow(object):
 
         self.exportBttnFrame = QFrame(self.managerWidget)
         self.exportBttnFrame.setObjectName(u"exportBttnFrame")
-        self.exportBttnFrame.setFrameShape(QFrame.StyledPanel)
-        self.exportBttnFrame.setFrameShadow(QFrame.Raised)
+        self.exportBttnFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.exportBttnFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_16 = QHBoxLayout(self.exportBttnFrame)
         self.horizontalLayout_16.setSpacing(0)
         self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
@@ -2209,11 +2262,11 @@ class Ui_MainWindow(object):
 "	border:none;\n"
 "	margin:5px;\n"
 "}")
-        self.powerBtnFrame.setFrameShape(QFrame.StyledPanel)
-        self.powerBtnFrame.setFrameShadow(QFrame.Raised)
+        self.powerBtnFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.powerBtnFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_3 = QGridLayout(self.powerBtnFrame)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_3.addItem(self.verticalSpacer, 0, 0, 1, 1)
 
@@ -2279,7 +2332,7 @@ class Ui_MainWindow(object):
         self.bookingtextsBtnMini.clicked.connect(self.bookingtextsBtn.click)
         self.exportBtnMini.clicked.connect(self.exportBtn.click)
 
-        self.bodyWidget.setCurrentIndex(2)
+        self.bodyWidget.setCurrentIndex(5)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2329,8 +2382,10 @@ class Ui_MainWindow(object):
         self.employeesTitle.setText(QCoreApplication.translate("MainWindow", u"Employees", None))
         self.addNewEmployeeBtn.setText(QCoreApplication.translate("MainWindow", u"Add new employee", None))
         self.projectsTitle.setText(QCoreApplication.translate("MainWindow", u"Projects", None))
+        self.syncProjectsBtn.setText(QCoreApplication.translate("MainWindow", u"Sync projects with employees", None))
         self.addNewProjectBtn.setText(QCoreApplication.translate("MainWindow", u"Add new project", None))
         self.topicTitle.setText(QCoreApplication.translate("MainWindow", u"Topics", None))
+        self.syncTopicsBtn.setText(QCoreApplication.translate("MainWindow", u"Sync topics with employees", None))
         self.addNewTopicBtn.setText(QCoreApplication.translate("MainWindow", u"Add new topic", None))
         self.bookingtextsTitle.setText(QCoreApplication.translate("MainWindow", u"Booking texts", None))
         self.addNewBookingtextsBtn.setText(QCoreApplication.translate("MainWindow", u"Add new booking text", None))
@@ -2350,10 +2405,13 @@ class Ui_MainWindow(object):
         self.exportDataBtn.setText(QCoreApplication.translate("MainWindow", u"Export", None))
         self.developerPageTitle.setText(QCoreApplication.translate("MainWindow", u"Log", None))
         self.textBrowser.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;\"><br /></p></body></html>", None))
         self.startBtn.setText(QCoreApplication.translate("MainWindow", u"Start", None))
         self.stopBtn.setText(QCoreApplication.translate("MainWindow", u"Stop", None))
         self.user.setText(QCoreApplication.translate("MainWindow", u"User: u98o29", None))

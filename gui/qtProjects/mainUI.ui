@@ -3,7 +3,7 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="windowModality">
-   <enum>Qt::NonModal</enum>
+   <enum>Qt::WindowModality::NonModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -95,10 +95,10 @@
 }</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+             <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+             <enum>QFrame::Shadow::Raised</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_30">
              <item>
@@ -162,10 +162,10 @@ QPushButton::pressed{
 }</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+             <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+             <enum>QFrame::Shadow::Raised</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_29">
              <property name="leftMargin">
@@ -388,10 +388,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="employeeBtnFrameMini">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
                    <property name="spacing">
@@ -455,10 +455,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="projectsBtnFrameMini">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_18">
                    <property name="spacing">
@@ -522,10 +522,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="topicsBtnFrameMini">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_19">
                    <property name="spacing">
@@ -589,10 +589,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="bookintextsBtnFrameMini">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_22">
                    <property name="spacing">
@@ -656,10 +656,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="exportBtnFrameMini">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_20">
                    <property name="spacing">
@@ -781,10 +781,10 @@ QPushButton::pressed{
 }</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+             <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+             <enum>QFrame::Shadow::Raised</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_28">
              <property name="leftMargin">
@@ -802,7 +802,7 @@ QPushButton::pressed{
              <item>
               <spacer name="verticalSpacer_6">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -876,10 +876,10 @@ QPushButton::pressed{
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+       <enum>QFrame::Shape::StyledPanel</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+       <enum>QFrame::Shadow::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_5">
        <property name="leftMargin">
@@ -900,10 +900,10 @@ QPushButton::pressed{
        <item row="0" column="0">
         <widget class="QFrame" name="bodyContentFrame">
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::Shape::StyledPanel</enum>
          </property>
          <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::Shadow::Raised</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_14">
           <property name="spacing">
@@ -930,7 +930,7 @@ QPushButton::pressed{
              </sizepolicy>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>5</number>
             </property>
             <widget class="QWidget" name="homePage">
              <property name="sizePolicy">
@@ -987,19 +987,19 @@ QComboBox{
               <item>
                <widget class="QFrame" name="recordTimePageFrame">
                 <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
+                 <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
+                 <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_35">
                  <item>
                   <widget class="QFrame" name="recordTimePageTitleFrame">
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_33">
                     <item>
@@ -1026,10 +1026,10 @@ QComboBox{
 }</string>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_34">
                     <property name="leftMargin">
@@ -1038,19 +1038,19 @@ QComboBox{
                     <item>
                      <widget class="QFrame" name="recordTimeSettingFrame">
                       <property name="frameShape">
-                       <enum>QFrame::StyledPanel</enum>
+                       <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
                       <property name="frameShadow">
-                       <enum>QFrame::Raised</enum>
+                       <enum>QFrame::Shadow::Raised</enum>
                       </property>
                       <layout class="QHBoxLayout" name="horizontalLayout_27">
                        <item>
                         <widget class="QFrame" name="projectFrame">
                          <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
+                          <enum>QFrame::Shape::StyledPanel</enum>
                          </property>
                          <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
+                          <enum>QFrame::Shadow::Raised</enum>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_26">
                           <property name="spacing">
@@ -1131,10 +1131,10 @@ QComboBox{
                        <item>
                         <widget class="QFrame" name="topicFrame">
                          <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
+                          <enum>QFrame::Shape::StyledPanel</enum>
                          </property>
                          <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
+                          <enum>QFrame::Shadow::Raised</enum>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_27">
                           <property name="spacing">
@@ -1212,10 +1212,10 @@ QComboBox{
                        <item>
                         <widget class="QFrame" name="bookingtextFrame">
                          <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
+                          <enum>QFrame::Shape::StyledPanel</enum>
                          </property>
                          <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
+                          <enum>QFrame::Shadow::Raised</enum>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_32">
                           <property name="spacing">
@@ -1290,7 +1290,7 @@ QComboBox{
                        <item>
                         <spacer name="horizontalSpacer_7">
                          <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
+                          <enum>Qt::Orientation::Horizontal</enum>
                          </property>
                          <property name="sizeHint" stdset="0">
                           <size>
@@ -1303,7 +1303,7 @@ QComboBox{
                        <item>
                         <spacer name="horizontalSpacer_8">
                          <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
+                          <enum>Qt::Orientation::Horizontal</enum>
                          </property>
                          <property name="sizeHint" stdset="0">
                           <size>
@@ -1319,10 +1319,10 @@ QComboBox{
                     <item>
                      <widget class="QFrame" name="buttonsFrame">
                       <property name="frameShape">
-                       <enum>QFrame::StyledPanel</enum>
+                       <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
                       <property name="frameShadow">
-                       <enum>QFrame::Raised</enum>
+                       <enum>QFrame::Shadow::Raised</enum>
                       </property>
                       <layout class="QHBoxLayout" name="horizontalLayout_28">
                        <property name="leftMargin">
@@ -1414,7 +1414,7 @@ QPushButton::pressed{
                        <item>
                         <spacer name="horizontalSpacer_12">
                          <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
+                          <enum>Qt::Orientation::Horizontal</enum>
                          </property>
                          <property name="sizeHint" stdset="0">
                           <size>
@@ -1427,7 +1427,7 @@ QPushButton::pressed{
                        <item>
                         <spacer name="horizontalSpacer_13">
                          <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
+                          <enum>Qt::Orientation::Horizontal</enum>
                          </property>
                          <property name="sizeHint" stdset="0">
                           <size>
@@ -1443,7 +1443,7 @@ QPushButton::pressed{
                     <item>
                      <spacer name="verticalSpacer_3">
                       <property name="orientation">
-                       <enum>Qt::Vertical</enum>
+                       <enum>Qt::Orientation::Vertical</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
@@ -1456,7 +1456,7 @@ QPushButton::pressed{
                     <item>
                      <spacer name="verticalSpacer_4">
                       <property name="orientation">
-                       <enum>Qt::Vertical</enum>
+                       <enum>Qt::Orientation::Vertical</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
@@ -1469,7 +1469,7 @@ QPushButton::pressed{
                     <item>
                      <spacer name="verticalSpacer_5">
                       <property name="orientation">
-                       <enum>Qt::Vertical</enum>
+                       <enum>Qt::Orientation::Vertical</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
@@ -1525,10 +1525,10 @@ QPushButton::pressed{
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
+                 <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
+                 <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_13">
                  <property name="leftMargin">
@@ -1555,10 +1555,10 @@ QPushButton::pressed{
                     <string notr="true">color: rgb(186, 186, 186);</string>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_29">
                     <item>
@@ -1583,7 +1583,7 @@ QPushButton::pressed{
                     <item>
                      <spacer name="horizontalSpacer_9">
                       <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
+                       <enum>Qt::Orientation::Horizontal</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
@@ -1596,7 +1596,7 @@ QPushButton::pressed{
                     <item>
                      <spacer name="horizontalSpacer_10">
                       <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
+                       <enum>Qt::Orientation::Horizontal</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
@@ -1609,7 +1609,7 @@ QPushButton::pressed{
                     <item>
                      <spacer name="horizontalSpacer_11">
                       <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
+                       <enum>Qt::Orientation::Horizontal</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
@@ -1713,10 +1713,10 @@ QPushButton::pressed{
                     <item>
                      <spacer name="horizontalSpacer_14">
                       <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
+                       <enum>Qt::Orientation::Horizontal</enum>
                       </property>
                       <property name="sizeType">
-                       <enum>QSizePolicy::Fixed</enum>
+                       <enum>QSizePolicy::Policy::Fixed</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
@@ -1738,10 +1738,10 @@ QPushButton::pressed{
                     </sizepolicy>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_12">
                     <property name="leftMargin">
@@ -1765,10 +1765,10 @@ QPushButton::pressed{
 }</string>
                       </property>
                       <property name="frameShape">
-                       <enum>QFrame::StyledPanel</enum>
+                       <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
                       <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
+                       <enum>QFrame::Shadow::Sunken</enum>
                       </property>
                       <property name="lineWidth">
                        <number>3</number>
@@ -1777,7 +1777,7 @@ QPushButton::pressed{
                        <number>0</number>
                       </property>
                       <property name="editTriggers">
-                       <set>QAbstractItemView::NoEditTriggers</set>
+                       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                       </property>
                       <property name="alternatingRowColors">
                        <bool>true</bool>
@@ -1843,10 +1843,10 @@ QPushButton::pressed{
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
+                 <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
+                 <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_18">
                  <property name="leftMargin">
@@ -1873,10 +1873,10 @@ QPushButton::pressed{
                     <string notr="true">color: rgb(186, 186, 186);</string>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_23">
                     <property name="spacing">
@@ -1965,10 +1965,10 @@ QPushButton::pressed{
                     </sizepolicy>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_20">
                     <property name="leftMargin">
@@ -1992,10 +1992,10 @@ QPushButton::pressed{
 }</string>
                       </property>
                       <property name="frameShape">
-                       <enum>QFrame::StyledPanel</enum>
+                       <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
                       <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
+                       <enum>QFrame::Shadow::Sunken</enum>
                       </property>
                       <property name="lineWidth">
                        <number>3</number>
@@ -2004,7 +2004,7 @@ QPushButton::pressed{
                        <number>0</number>
                       </property>
                       <property name="editTriggers">
-                       <set>QAbstractItemView::NoEditTriggers</set>
+                       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                       </property>
                       <property name="alternatingRowColors">
                        <bool>true</bool>
@@ -2070,10 +2070,10 @@ QPushButton::pressed{
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
+                 <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
+                 <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_19">
                  <property name="leftMargin">
@@ -2100,27 +2100,12 @@ QPushButton::pressed{
                     <string notr="true">color: rgb(186, 186, 186);</string>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_24">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>16</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>16</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
                     <item>
                      <widget class="QLabel" name="projectsTitle">
                       <property name="sizePolicy">
@@ -2137,6 +2122,46 @@ QPushButton::pressed{
                       </property>
                       <property name="text">
                        <string>Projects</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="syncProjectsBtn">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>31</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Times New Roman</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QPushButton{
+	background-color: rgb(44, 44, 44);
+	border: 2px solid  rgb(2, 20, 72);
+	border-radius: 15px;
+	color: rgb(177, 177, 177);
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: left;
+}
+QPushButton::hover{
+	background-color: rgb(23, 32, 42);
+}
+QPushButton::pressed{
+	background-color: rgb(3, 1, 59)
+}</string>
+                      </property>
+                      <property name="text">
+                       <string>Sync projects with employees</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="../resources/icons/dark/iconsDark.qrc">
+                        <normaloff>:/iconsDark/icons/plus.svg</normaloff>:/iconsDark/icons/plus.svg</iconset>
                       </property>
                      </widget>
                     </item>
@@ -2186,16 +2211,16 @@ QPushButton::pressed{
                  <item>
                   <widget class="QFrame" name="projectsContentFrame">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_21">
                     <property name="leftMargin">
@@ -2206,10 +2231,19 @@ QPushButton::pressed{
                     </property>
                     <item>
                      <widget class="QTableWidget" name="projectsTable">
+                      <property name="enabled">
+                       <bool>true</bool>
+                      </property>
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <property name="minimumSize">
                        <size>
-                        <width>748</width>
-                        <height>431</height>
+                        <width>342</width>
+                        <height>430</height>
                        </size>
                       </property>
                       <property name="styleSheet">
@@ -2219,10 +2253,10 @@ QPushButton::pressed{
 }</string>
                       </property>
                       <property name="frameShape">
-                       <enum>QFrame::StyledPanel</enum>
+                       <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
                       <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
+                       <enum>QFrame::Shadow::Sunken</enum>
                       </property>
                       <property name="lineWidth">
                        <number>3</number>
@@ -2231,7 +2265,7 @@ QPushButton::pressed{
                        <number>0</number>
                       </property>
                       <property name="editTriggers">
-                       <set>QAbstractItemView::NoEditTriggers</set>
+                       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                       </property>
                       <property name="alternatingRowColors">
                        <bool>true</bool>
@@ -2249,16 +2283,17 @@ QPushButton::pressed{
                        <number>0</number>
                       </property>
                       <property name="columnCount">
-                       <number>7</number>
+                       <number>2</number>
                       </property>
+                      <attribute name="horizontalHeaderMinimumSectionSize">
+                       <number>40</number>
+                      </attribute>
+                      <attribute name="horizontalHeaderDefaultSectionSize">
+                       <number>170</number>
+                      </attribute>
                       <attribute name="verticalHeaderVisible">
                        <bool>false</bool>
                       </attribute>
-                      <column/>
-                      <column/>
-                      <column/>
-                      <column/>
-                      <column/>
                       <column/>
                       <column/>
                      </widget>
@@ -2297,10 +2332,10 @@ QPushButton::pressed{
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
+                 <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
+                 <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_22">
                  <property name="leftMargin">
@@ -2327,27 +2362,12 @@ QPushButton::pressed{
                     <string notr="true">color: rgb(186, 186, 186);</string>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_25">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>16</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>16</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
                     <item>
                      <widget class="QLabel" name="topicTitle">
                       <property name="sizePolicy">
@@ -2364,6 +2384,46 @@ QPushButton::pressed{
                       </property>
                       <property name="text">
                        <string>Topics</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="syncTopicsBtn">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>31</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Times New Roman</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QPushButton{
+	background-color: rgb(44, 44, 44);
+	border: 2px solid  rgb(2, 20, 72);
+	border-radius: 15px;
+	color: rgb(177, 177, 177);
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: left;
+}
+QPushButton::hover{
+	background-color: rgb(23, 32, 42);
+}
+QPushButton::pressed{
+	background-color: rgb(3, 1, 59)
+}</string>
+                      </property>
+                      <property name="text">
+                       <string>Sync topics with employees</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="../resources/icons/dark/iconsDark.qrc">
+                        <normaloff>:/iconsDark/icons/plus.svg</normaloff>:/iconsDark/icons/plus.svg</iconset>
                       </property>
                      </widget>
                     </item>
@@ -2413,16 +2473,16 @@ QPushButton::pressed{
                  <item>
                   <widget class="QFrame" name="topicsContentFrame">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_23">
                     <property name="leftMargin">
@@ -2433,9 +2493,15 @@ QPushButton::pressed{
                     </property>
                     <item>
                      <widget class="QTableWidget" name="topicsTable">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <property name="minimumSize">
                        <size>
-                        <width>748</width>
+                        <width>512</width>
                         <height>431</height>
                        </size>
                       </property>
@@ -2446,10 +2512,10 @@ QPushButton::pressed{
 }</string>
                       </property>
                       <property name="frameShape">
-                       <enum>QFrame::StyledPanel</enum>
+                       <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
                       <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
+                       <enum>QFrame::Shadow::Sunken</enum>
                       </property>
                       <property name="lineWidth">
                        <number>3</number>
@@ -2458,7 +2524,7 @@ QPushButton::pressed{
                        <number>0</number>
                       </property>
                       <property name="editTriggers">
-                       <set>QAbstractItemView::NoEditTriggers</set>
+                       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                       </property>
                       <property name="alternatingRowColors">
                        <bool>true</bool>
@@ -2476,15 +2542,14 @@ QPushButton::pressed{
                        <number>0</number>
                       </property>
                       <property name="columnCount">
-                       <number>7</number>
+                       <number>3</number>
                       </property>
+                      <attribute name="horizontalHeaderDefaultSectionSize">
+                       <number>170</number>
+                      </attribute>
                       <attribute name="verticalHeaderVisible">
                        <bool>false</bool>
                       </attribute>
-                      <column/>
-                      <column/>
-                      <column/>
-                      <column/>
                       <column/>
                       <column/>
                       <column/>
@@ -2524,10 +2589,10 @@ QPushButton::pressed{
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
+                 <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
+                 <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_24">
                  <property name="leftMargin">
@@ -2554,10 +2619,10 @@ QPushButton::pressed{
                     <string notr="true">color: rgb(186, 186, 186);</string>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_26">
                     <property name="spacing">
@@ -2646,10 +2711,10 @@ QPushButton::pressed{
                     </sizepolicy>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_25">
                     <property name="leftMargin">
@@ -2673,10 +2738,10 @@ QPushButton::pressed{
 }</string>
                       </property>
                       <property name="frameShape">
-                       <enum>QFrame::StyledPanel</enum>
+                       <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
                       <property name="frameShadow">
-                       <enum>QFrame::Sunken</enum>
+                       <enum>QFrame::Shadow::Sunken</enum>
                       </property>
                       <property name="lineWidth">
                        <number>3</number>
@@ -2685,7 +2750,7 @@ QPushButton::pressed{
                        <number>0</number>
                       </property>
                       <property name="editTriggers">
-                       <set>QAbstractItemView::NoEditTriggers</set>
+                       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                       </property>
                       <property name="alternatingRowColors">
                        <bool>true</bool>
@@ -2766,10 +2831,10 @@ QPushButton::pressed{
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
+                 <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
+                 <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_9">
                  <property name="leftMargin">
@@ -2793,10 +2858,10 @@ QPushButton::pressed{
                     </size>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_6">
                     <item row="0" column="0">
@@ -2818,46 +2883,46 @@ QPushButton::pressed{
                  <item>
                   <widget class="QFrame" name="exportContentFrame">
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_5">
                     <item>
                      <widget class="QFrame" name="optionsFrame_2">
                       <property name="frameShape">
-                       <enum>QFrame::StyledPanel</enum>
+                       <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
                       <property name="frameShadow">
-                       <enum>QFrame::Raised</enum>
+                       <enum>QFrame::Shadow::Raised</enum>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_4">
                        <item>
                         <widget class="QFrame" name="settingFrame">
                          <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
+                          <enum>QFrame::Shape::StyledPanel</enum>
                          </property>
                          <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
+                          <enum>QFrame::Shadow::Raised</enum>
                          </property>
                          <layout class="QHBoxLayout" name="horizontalLayout_9">
                           <item>
                            <widget class="QFrame" name="fromFrame">
                             <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
+                             <enum>QFrame::Shape::StyledPanel</enum>
                             </property>
                             <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
+                             <enum>QFrame::Shadow::Raised</enum>
                             </property>
                             <layout class="QVBoxLayout" name="verticalLayout_6">
                              <item>
                               <widget class="QFrame" name="fromDateFrame">
                                <property name="frameShape">
-                                <enum>QFrame::StyledPanel</enum>
+                                <enum>QFrame::Shape::StyledPanel</enum>
                                </property>
                                <property name="frameShadow">
-                                <enum>QFrame::Raised</enum>
+                                <enum>QFrame::Shadow::Raised</enum>
                                </property>
                                <layout class="QHBoxLayout" name="horizontalLayout_6">
                                 <item>
@@ -2885,7 +2950,7 @@ QPushButton::pressed{
                                    <bool>true</bool>
                                   </property>
                                   <property name="buttonSymbols">
-                                   <enum>QAbstractSpinBox::NoButtons</enum>
+                                   <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
                                   </property>
                                  </widget>
                                 </item>
@@ -2937,19 +3002,19 @@ QPushButton::pressed{
                           <item>
                            <widget class="QFrame" name="toFrame">
                             <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
+                             <enum>QFrame::Shape::StyledPanel</enum>
                             </property>
                             <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
+                             <enum>QFrame::Shadow::Raised</enum>
                             </property>
                             <layout class="QVBoxLayout" name="verticalLayout_7">
                              <item>
                               <widget class="QFrame" name="toDateFrame">
                                <property name="frameShape">
-                                <enum>QFrame::StyledPanel</enum>
+                                <enum>QFrame::Shape::StyledPanel</enum>
                                </property>
                                <property name="frameShadow">
-                                <enum>QFrame::Raised</enum>
+                                <enum>QFrame::Shadow::Raised</enum>
                                </property>
                                <layout class="QHBoxLayout" name="horizontalLayout_7">
                                 <item>
@@ -2977,7 +3042,7 @@ QPushButton::pressed{
                                    <bool>true</bool>
                                   </property>
                                   <property name="buttonSymbols">
-                                   <enum>QAbstractSpinBox::NoButtons</enum>
+                                   <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
                                   </property>
                                  </widget>
                                 </item>
@@ -3029,19 +3094,19 @@ QPushButton::pressed{
                           <item>
                            <widget class="QFrame" name="optionsFrame">
                             <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
+                             <enum>QFrame::Shape::StyledPanel</enum>
                             </property>
                             <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
+                             <enum>QFrame::Shadow::Raised</enum>
                             </property>
                             <layout class="QVBoxLayout" name="verticalLayout_8">
                              <item>
                               <widget class="QFrame" name="optionsLabelFrame">
                                <property name="frameShape">
-                                <enum>QFrame::StyledPanel</enum>
+                                <enum>QFrame::Shape::StyledPanel</enum>
                                </property>
                                <property name="frameShadow">
-                                <enum>QFrame::Raised</enum>
+                                <enum>QFrame::Shadow::Raised</enum>
                                </property>
                                <layout class="QHBoxLayout" name="horizontalLayout_8">
                                 <property name="leftMargin">
@@ -3118,10 +3183,10 @@ QPushButton::pressed{
                        <item>
                         <widget class="QFrame" name="calendarFrame">
                          <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
+                          <enum>QFrame::Shape::StyledPanel</enum>
                          </property>
                          <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
+                          <enum>QFrame::Shadow::Raised</enum>
                          </property>
                          <layout class="QHBoxLayout" name="horizontalLayout_10">
                           <item>
@@ -3140,7 +3205,7 @@ QPushButton::pressed{
                           <item>
                            <spacer name="horizontalSpacer_4">
                             <property name="orientation">
-                             <enum>Qt::Horizontal</enum>
+                             <enum>Qt::Orientation::Horizontal</enum>
                             </property>
                             <property name="sizeHint" stdset="0">
                              <size>
@@ -3166,7 +3231,7 @@ QPushButton::pressed{
                           <item>
                            <spacer name="horizontalSpacer_6">
                             <property name="orientation">
-                             <enum>Qt::Horizontal</enum>
+                             <enum>Qt::Orientation::Horizontal</enum>
                             </property>
                             <property name="sizeHint" stdset="0">
                              <size>
@@ -3185,7 +3250,7 @@ QPushButton::pressed{
                     <item>
                      <spacer name="verticalSpacer_2">
                       <property name="orientation">
-                       <enum>Qt::Vertical</enum>
+                       <enum>Qt::Orientation::Vertical</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
@@ -3198,16 +3263,16 @@ QPushButton::pressed{
                     <item>
                      <widget class="QFrame" name="exportBtnFrame">
                       <property name="frameShape">
-                       <enum>QFrame::StyledPanel</enum>
+                       <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
                       <property name="frameShadow">
-                       <enum>QFrame::Raised</enum>
+                       <enum>QFrame::Shadow::Raised</enum>
                       </property>
                       <layout class="QHBoxLayout" name="horizontalLayout_5">
                        <item>
                         <spacer name="horizontalSpacer_3">
                          <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
+                          <enum>Qt::Orientation::Horizontal</enum>
                          </property>
                          <property name="sizeHint" stdset="0">
                           <size>
@@ -3260,7 +3325,7 @@ QPushButton::pressed{
                        <item>
                         <spacer name="horizontalSpacer_5">
                          <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
+                          <enum>Qt::Orientation::Horizontal</enum>
                          </property>
                          <property name="sizeHint" stdset="0">
                           <size>
@@ -3328,10 +3393,10 @@ QPushButton::pressed{
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
+                 <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
+                 <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_3">
                  <item>
@@ -3343,10 +3408,10 @@ QPushButton::pressed{
                     </size>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_4">
                     <item row="0" column="0">
@@ -3368,20 +3433,23 @@ QPushButton::pressed{
                  <item>
                   <widget class="QFrame" name="contentFrame">
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
                    <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_2">
                     <item>
                      <widget class="QTextBrowser" name="textBrowser">
                       <property name="html">
                        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                       </property>
                      </widget>
                     </item>
@@ -3407,10 +3475,10 @@ p, li { white-space: pre-wrap; }
           </size>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::Shape::StyledPanel</enum>
          </property>
          <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::Shadow::Raised</enum>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_11">
           <property name="leftMargin">
@@ -3447,10 +3515,10 @@ p, li { white-space: pre-wrap; }
 }</string>
       </property>
       <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+       <enum>QFrame::Shape::StyledPanel</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+       <enum>QFrame::Shadow::Raised</enum>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <property name="leftMargin">
@@ -3474,10 +3542,10 @@ p, li { white-space: pre-wrap; }
 }</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::Shape::StyledPanel</enum>
          </property>
          <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::Shadow::Raised</enum>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="topMargin">
@@ -3575,7 +3643,7 @@ QPushButton::pressed{
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -3593,10 +3661,10 @@ QPushButton::pressed{
 }</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::Shape::StyledPanel</enum>
          </property>
          <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::Shadow::Raised</enum>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
@@ -3614,7 +3682,7 @@ QPushButton::pressed{
              <number>11</number>
             </property>
             <property name="segmentStyle">
-             <enum>QLCDNumber::Filled</enum>
+             <enum>QLCDNumber::SegmentStyle::Filled</enum>
             </property>
             <property name="value" stdset="0">
              <double>2024.000000000000000</double>
@@ -3650,7 +3718,7 @@ QPushButton::pressed{
        <item>
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -3668,10 +3736,10 @@ QPushButton::pressed{
 }</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::Shape::StyledPanel</enum>
          </property>
          <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::Shadow::Raised</enum>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <property name="topMargin">
@@ -3771,10 +3839,10 @@ QPushButton::pressed{
 }</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+             <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+             <enum>QFrame::Shadow::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout">
              <item row="0" column="0">
@@ -3832,10 +3900,10 @@ QPushButton::pressed{
 }</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+             <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+             <enum>QFrame::Shadow::Raised</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout">
              <property name="leftMargin">
@@ -4034,10 +4102,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="employeeBtnFrame">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_12">
                    <property name="spacing">
@@ -4101,10 +4169,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="projectsBtnFrame">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_13">
                    <property name="spacing">
@@ -4168,10 +4236,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="topicsBtnFrame">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_14">
                    <property name="spacing">
@@ -4235,10 +4303,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="bookingtextsBtnFrame">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_15">
                    <property name="spacing">
@@ -4302,10 +4370,10 @@ QPushButton::pressed{
                 <item>
                  <widget class="QFrame" name="exportBttnFrame">
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::Shape::StyledPanel</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                   <enum>QFrame::Shadow::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_16">
                    <property name="spacing">
@@ -4421,16 +4489,16 @@ QPushButton::pressed{
 }</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+             <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+             <enum>QFrame::Shadow::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_3">
              <item row="0" column="0">
               <spacer name="verticalSpacer">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
