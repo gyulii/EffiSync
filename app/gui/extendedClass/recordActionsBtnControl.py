@@ -1,17 +1,10 @@
-import venv
-from datetime import datetime
+from PySide6.QtWidgets import QWidget
 
-import requests
-from PySide6.QtWidgets import QWidget, QTableWidgetItem
-from PySide6.QtGui import QColor
-from PySide6.QtCore import Qt
-
-from app.db.database_handler import DatabaseHandler
-from app.gui.extendedClass.recordModifyDialogControl import recordModifyDialogControl
+from app.booking import BookingItem
 from app.gui.baseClass.recordActions import Ui_recordActionButtons
 from app.gui.extendedClass.confirmationDialogControl import confirmationDialogControl
-from app.booking import BookingItem
-import os
+from app.gui.extendedClass.recordModifyDialogControl import recordModifyDialogControl
+
 
 class recordActionBtnControl(QWidget):
 
@@ -43,14 +36,14 @@ class recordActionBtnControl(QWidget):
     def setLog(self, log):
         self.log = log
 
-    def setDelNth(self, delNth):
+    def setDBActions(self, delNth, editNth, archiveNth):
         self.delNth = delNth
-
-    def setEditNth(self, editNth):
         self.editNth = editNth
+        self.archiveNth = archiveNth
 
-    def setDriver(self, driver):
+    def setServices(self, driver, relay):
         self.driver = driver
+        self.relay = relay
 
     def editRecord(self):
         project = self.table.item(self.rowNr, 2).text()
@@ -80,12 +73,12 @@ class recordActionBtnControl(QWidget):
         else:
             self.log(f"The record: {self.rowNr} is unfreezed", "INFO")
 
-    def sendRecord(self):
+    def sendRecord(self, solo: bool = False):
         if self.recAcBtns.freezeBtn.isChecked():
             #SAPI
             record = BookingItem(self.table.item(self.rowNr, 2).text(), float(self.table.item(self.rowNr, 5).text()), self.table.item(self.rowNr, 3).text())
             #is this fine without the date?
-            #self.driver.add_booking_item_to_queue(record)
+            #self.driver.add_booking_item_to_queue(record) #should be uncommented when not on outside network
 
             #Manager - relay server
             data = {
@@ -94,10 +87,15 @@ class recordActionBtnControl(QWidget):
                 "day": self.table.item(self.rowNr, 4).text(),
                 "hours": float(self.table.item(self.rowNr, 5).text())
             }
-            url = "https://152.66.182.112:5002/send"
-            response = requests.post(url, json=data, verify=False)
-            self.log(f"{response.text} sent to manager", "INFO")
+            self.relay.add_to_queue(data)
 
+            if solo:
+                # self.driver.execute_booking() #should be uncommented when not on outside network
+                self.relay.send_queue() #error handling?
+
+            self.archiveNth(self.rowNr)
+
+            self.log(f"The {self.rowNr} record is sent to manager", "INFO")
             self.log(f"The {self.rowNr} record is sent to server. The {self.rowNr} record is freezed, the action buttons are disabled", "INFO")
             self.recAcBtns.sendBtn.setDisabled(True)
             self.recAcBtns.freezeBtn.setDisabled(True)
