@@ -1,30 +1,35 @@
-import sys
+import datetime
 import getpass
 from threading import Timer
-from PySide6.QtCore import Qt, QDateTime, QTime, QPoint
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QTableWidgetItem, QMessageBox, QDialog, QHeaderView
+
+from PySide6.QtCore import Qt, QDateTime, QTime, QSize
 from PySide6.QtGui import QColor
+from PySide6.QtWidgets import QMainWindow, QTableWidgetItem, QHeaderView
 
-import datetime
-
-
+from app.db.database_handler import DatabaseHandler
 from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl
-from app.db.database_handler import DatabaseHandler, mock_data
+from app.network.network_client import RelayClient
+from app.network.network_manager import RelayManager
 from app.sapi.sap_handler import EssDriver
+
 
 class myApp(QMainWindow, Ui_MainWindow):
 
     timerThread = None
     blink = False
     userID = None
+    changes = None
+    timeTables = None
 
     def __init__(self, type=None):
         super().__init__()
+
         self.setupUi(self)
         self.db=DatabaseHandler()
         self.effiLog("Open the UI.")
 
         self.driver = EssDriver()
+        self.relay = RelayClient() if type != "Manager" else RelayManager()
 
         self.userID = getpass.getuser()
 
@@ -82,6 +87,15 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.employeesTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
             self.projectsTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
             self.bookingtextsTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+            self.bookingtextsBtnFrame.hide()
+            self.employeeBtnFrame.hide()
+            self.bookintextsBtnFrameMini.hide()
+            self.employeeBtnFrameMini.hide()
+            self.managerWidgetMini.setMinimumSize(QSize(0, 100))
+            self.managerWidget.setMinimumSize(QSize(0, 100))
+            self.loadTopicsTable()
+            self.loadProjectsTable()
+            self.changes = []
 
     def switchToHomePage(self):
         self.bodyWidget.setCurrentIndex(0)
@@ -202,6 +216,12 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.topicDropDownList.clear()
         self.topicDropDownList.addItems(locations)
 
+    def loadTopicsTable(self):
+        pass #TODO
+
+    def loadProjectsTable(self):
+        pass #TODO
+
     def loadTimeTable(self):
         # WIP
         self.timeTables = self.db.read_active_time_table_items()
@@ -226,9 +246,8 @@ class myApp(QMainWindow, Ui_MainWindow):
             actionBtns.setRowNr(i)
             actionBtns.setTable(self.recordedTimesTable)
             actionBtns.setlogField(self.userLog)
-            actionBtns.setDelNth(self.delNthRow)
-            actionBtns.setEditNth(self.editNthRow)
-            actionBtns.setDriver(self.driver)
+            actionBtns.setDBActions(self.delNthRow, self.editNthRow, self.archiveNthRow)
+            actionBtns.setServices(self.driver, self.relay)
 
             actionBtns.recAcBtns.editBtn.setEnabled(True)
             actionBtns.recAcBtns.freezeBtn.setEnabled(True)
@@ -245,6 +264,10 @@ class myApp(QMainWindow, Ui_MainWindow):
 
     def editNthRow(self, row, project, wbs, date, hours):
         self.db.update_time_table_item(self.timeTables[row], self.db.TimeTable(hours=hours, booking_item=self.db.BookingItem(name=project), location=self.db.Location(wbs=wbs), date=date))
+        self.loadTimeTable()
+
+    def archiveNthRow(self, row):
+        self.db.archive_time_table_item(self.timeTables[row])
         self.loadTimeTable()
 
     def startBtnActionDemo(self):
@@ -342,9 +365,10 @@ class myApp(QMainWindow, Ui_MainWindow):
         if isAllFreezed:
             for i in range(0, rowNr):
                 recBtn = self.recordedTimesTable.cellWidget(i, 6)
-                recBtn.recAcBtns.sendBtn.click()
+                recBtn.sendRecord()
                 self.miniLog("All records are sent...", "INFO")
-            #self.driver.execute_booking()
+            #self.driver.execute_booking() #should be uncommented when not on outside machine
+            self.relay.send_queue()
 
     def closeEvent(self, event):
         dialog = confirmationDialogControl("Are you sure to want to exit from the app?")

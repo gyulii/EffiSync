@@ -31,7 +31,7 @@ class EssDriver:
         if self.headless == True:
             options.add_argument("--headless=new")
 
-        self.driver = webdriver.Edge(options=options)
+        self.driver = webdriver.Edge(options=options) #ez nyitja meg a browsert
 
     def add_booking_item_to_queue(self, booking_item: BookingItem):
         self.booking_queue.append(booking_item)

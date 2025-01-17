@@ -4,9 +4,10 @@ class RelayClient:
     val = None
     datas = []
 
-    def __init__(self, url: str="https://152.66.182.112:5002", verify: bool=False):
+    def __init__(self, log, url: str="https://152.66.182.112:5002", verify: bool=False):
         self.url = url
         self.verify = verify
+        self.log = log
 
     def add_to_queue(self, data: dict):
         self.datas.append(data)
@@ -16,7 +17,8 @@ class RelayClient:
             return False, "No val set"
         for data in self.datas:
             if not self.send_data(data)[0]:
-                return False, "Error sending data"
+                #return False, "Error sending data"
+                self.log(f"Error sending data to relay: {data}", "ERROR")
             else:
                 self.datas.remove(data)
         return True, "All data sent"
