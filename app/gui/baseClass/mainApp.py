@@ -21,7 +21,8 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractSpinBox, QApplication
     QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
     QStackedWidget, QTableWidget, QTableWidgetItem, QTextBrowser,
     QTextEdit, QVBoxLayout, QWidget)
-import iconsDark_rc
+#import iconsDark_rc
+import app.gui.iconsDark_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -1112,8 +1113,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
         self.verticalLayout_21.setContentsMargins(12, -1, 13, -1)
         self.projectsTable = QTableWidget(self.projectsContentFrame)
-        if (self.projectsTable.columnCount() < 2):
-            self.projectsTable.setColumnCount(2)
+        if (self.projectsTable.columnCount() < 3):
+            self.projectsTable.setColumnCount(3)
         self.projectsTable.setObjectName(u"projectsTable")
         self.projectsTable.setEnabled(True)
         sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Expanding)
@@ -1121,7 +1122,7 @@ class Ui_MainWindow(object):
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.projectsTable.sizePolicy().hasHeightForWidth())
         self.projectsTable.setSizePolicy(sizePolicy3)
-        self.projectsTable.setMinimumSize(QSize(342, 430))
+        self.projectsTable.setMinimumSize(QSize(512, 430))
         self.projectsTable.setStyleSheet(u"QTableWidget{\n"
 "	alternate-background-color: rgb(1, 65, 63);\n"
 "	color: rgb(186, 186, 186);\n"
@@ -1136,7 +1137,7 @@ class Ui_MainWindow(object):
         self.projectsTable.setWordWrap(True)
         self.projectsTable.setCornerButtonEnabled(False)
         self.projectsTable.setRowCount(0)
-        self.projectsTable.setColumnCount(2)
+        self.projectsTable.setColumnCount(3)
         self.projectsTable.horizontalHeader().setMinimumSectionSize(40)
         self.projectsTable.horizontalHeader().setDefaultSectionSize(170)
         self.projectsTable.verticalHeader().setVisible(False)
@@ -1241,12 +1242,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_23.setObjectName(u"verticalLayout_23")
         self.verticalLayout_23.setContentsMargins(12, -1, 13, -1)
         self.topicsTable = QTableWidget(self.topicsContentFrame)
-        if (self.topicsTable.columnCount() < 3):
-            self.topicsTable.setColumnCount(3)
+        if (self.topicsTable.columnCount() < 4):
+            self.topicsTable.setColumnCount(4)
         self.topicsTable.setObjectName(u"topicsTable")
         sizePolicy3.setHeightForWidth(self.topicsTable.sizePolicy().hasHeightForWidth())
         self.topicsTable.setSizePolicy(sizePolicy3)
-        self.topicsTable.setMinimumSize(QSize(512, 431))
+        self.topicsTable.setMinimumSize(QSize(682, 431))
         self.topicsTable.setStyleSheet(u"QTableWidget{\n"
 "	alternate-background-color: rgb(1, 65, 63);\n"
 "	color: rgb(186, 186, 186);\n"
@@ -1261,7 +1262,7 @@ class Ui_MainWindow(object):
         self.topicsTable.setWordWrap(True)
         self.topicsTable.setCornerButtonEnabled(False)
         self.topicsTable.setRowCount(0)
-        self.topicsTable.setColumnCount(3)
+        self.topicsTable.setColumnCount(4)
         self.topicsTable.horizontalHeader().setDefaultSectionSize(170)
         self.topicsTable.verticalHeader().setVisible(False)
 
@@ -2332,7 +2333,7 @@ class Ui_MainWindow(object):
         self.bookingtextsBtnMini.clicked.connect(self.bookingtextsBtn.click)
         self.exportBtnMini.clicked.connect(self.exportBtn.click)
 
-        self.bodyWidget.setCurrentIndex(5)
+        self.bodyWidget.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

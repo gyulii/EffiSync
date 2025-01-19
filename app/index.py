@@ -217,13 +217,27 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.topicDropDownList.addItems(locations)
 
     def loadTopicsTable(self):
+
         pass #TODO
 
     def loadProjectsTable(self):
+        self.projects = self.db.read_all_projects()
+        #clear the table
+        self.projectsTable.setRowCount(0)
+        #set columns
+        header = ["Project","Active","Actions"]
+        self.projectsTable.setColumnCount(3)
+        self.projectsTable.setHorizontalHeaderLabels(header)
+        self.projectsTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        for i in range(len(self.projects)):
+            self.projectsTable.insertRow(i)
+            self.projectsTable.setItem(i, 0, QTableWidgetItem(str(self.projects[i].name)))
+            self.projectsTable.setItem(i, 1, QTableWidgetItem(str(self.projects[i].active)))
+
+
         pass #TODO
 
     def loadTimeTable(self):
-        # WIP
         self.timeTables = self.db.read_active_time_table_items()
         #clear the table
         self.recordedTimesTable.setRowCount(0)
