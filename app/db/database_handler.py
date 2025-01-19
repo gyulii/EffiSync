@@ -85,7 +85,7 @@ class DatabaseHandler:
 
         self.Base.metadata.create_all(engine)
 
-    #Location CRUD, +readall, +clean
+    #Location CRUD, +readall, +clean, +activate, +archive
 
     @handle_exceptions
     def create_location(self, new_location: Location):
@@ -164,7 +164,12 @@ class DatabaseHandler:
         names = self.session.scalars(select(self.Location.country).where(self.Location.active==True)).all()
         return names
 
-    #BookingItem CRUD, +readall, +clean
+    @handle_exceptions
+    def read_all_locations(self):
+        names = self.session.scalars(select(self.Location)).all()
+        return names
+
+    #BookingItem CRUD, +readall, +clean, +activate, +archive
 
     @handle_exceptions
     def create_booking_item(self, new_booking_item: BookingItem):
@@ -186,6 +191,11 @@ class DatabaseHandler:
     @handle_exceptions
     def read_active_booking_names(self):
         names = self.session.scalars(select(self.BookingItem.name).where(self.BookingItem.active==True)).all()
+        return names
+
+    @handle_exceptions
+    def read_all_projects(self):
+        names = self.session.scalars(select(self.BookingItem)).all()
         return names
 
     @handle_exceptions
@@ -243,7 +253,7 @@ class DatabaseHandler:
         self.session.commit()
         logger.info("All booking data deleted")
 
-    #TimeTable CRUD, +readall, +clean
+    #TimeTable CRUD, +readall, +clean, +archive
 
     @handle_exceptions
     def create_time_table_item(self, new_timetable_item: TimeTable):
