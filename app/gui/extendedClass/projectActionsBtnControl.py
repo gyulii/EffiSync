@@ -1,8 +1,10 @@
 from PySide6.QtWidgets import QWidget
 
 from app.gui.baseClass.projectActions import Ui_projectActionBtns
+from app.gui.extendedClass.projectModifyDialogControl import projectModifyDialogControl
 
-class projectActionBtnControl:
+
+class projectActionBtnControl(QWidget):
 
     rowNr = None
 
@@ -25,7 +27,12 @@ class projectActionBtnControl:
     def setLog(self, log):
         self.log = log
 
-    def editBtnClicked(self):
-        project = self.table.item(self.rowNr, 1).text()
+    def setDBActions(self, editNth):
+        self.editNth = editNth
 
-        pass
+    def editBtnClicked(self):
+        project = self.table.item(self.rowNr, 0).text()
+        diag = projectModifyDialogControl(project)
+        diag.setEditNth(self.editNth)
+        diag.setRow(self.rowNr)
+        diag.exec()

@@ -2,12 +2,14 @@ import datetime
 import getpass
 from threading import Timer
 
+from PySide6.QtWidgets import QCheckBox, QHBoxLayout
 from PySide6.QtCore import Qt, QDateTime, QTime, QSize
 from PySide6.QtGui import QColor
-from PySide6.QtWidgets import QMainWindow, QTableWidgetItem, QHeaderView
+from PySide6.QtWidgets import QMainWindow, QTableWidgetItem, QHeaderView, QWidget, QFrame
 
 from app.db.database_handler import DatabaseHandler
-from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl
+from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl, projectActionBtnControl
+from app.gui.extendedClass.projectModifyDialogControl import projectModifyDialogControl
 from app.network.network_client import RelayClient
 from app.network.network_manager import RelayManager
 from app.sapi.sap_handler import EssDriver
@@ -229,13 +231,51 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.projectsTable.setColumnCount(3)
         self.projectsTable.setHorizontalHeaderLabels(header)
         self.projectsTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        self.addNewProjectBtn.clicked.connect(self.addNewProject)
+
         for i in range(len(self.projects)):
             self.projectsTable.insertRow(i)
             self.projectsTable.setItem(i, 0, QTableWidgetItem(str(self.projects[i].name)))
-            self.projectsTable.setItem(i, 1, QTableWidgetItem(str(self.projects[i].active)))
+            checkboxWidget = QFrame()
+            checkboxLayout = QHBoxLayout(checkboxWidget)
+            checkbox = QCheckBox(checkboxWidget)
+            checkbox.setChecked(self.projects[i].active)
+            checkbox.stateChanged.connect(lambda state, j=i: self.changeProjectState(j, state))
+            checkboxLayout.addWidget(checkbox)
+            self.projectsTable.setCellWidget(i, 1, checkboxWidget)
+            actionBtn = projectActionBtnControl()
+            actionBtn.setRowNr(i)
+            actionBtn.setTable(self.projectsTable)
+            actionBtn.setLog(self.miniLog)
+            actionBtn.setLogField(self.userLog)
+            actionBtn.setDBActions(self.editNthProject)
 
+            actionBtn.projectActionsBtn.editBtn.setEnabled(True)
+
+            self.projectsTable.setCellWidget(i, 2, actionBtn)
 
         pass #TODO
+
+    def addNewProject(self):
+        diag = projectModifyDialogControl()
+        diag.setEditNth(self.createProject)
+        diag.exec()
+
+    def createProject(self, row, project):
+        self.db.create_booking_item(self.db.BookingItem(name=project))
+        self.loadProjectsTable()
+
+    def changeProjectState(self, row, state):
+        proj = self.projects[row]
+        if state:
+            self.db.activate_booking_item(proj)
+        else:
+            self.db.archive_booking_item(proj)
+
+    def editNthProject(self, row, project):
+        self.db.update_booking_item(self.projects[row],self.db.BookingItem(name=project, active=self.projects[row].active))
+        self.loadProjectsTable()
 
     def loadTimeTable(self):
         self.timeTables = self.db.read_active_time_table_items()

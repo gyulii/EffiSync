@@ -17,7 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QPushButton,
     QSizePolicy, QWidget)
-import iconsDark_rc
+#import iconsDark_rc
+import app.gui.iconsDark_rc
 
 class Ui_projectActionBtns(object):
     def setupUi(self, projectActionBtns):

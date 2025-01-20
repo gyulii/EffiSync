@@ -2,4 +2,7 @@ from .baseClass.mainApp import Ui_MainWindow
 from .extendedClass.loginPopupControl import loginPopupControl
 from .extendedClass.recordActionsBtnControl import recordActionBtnControl
 from .extendedClass.confirmationDialogControl import confirmationDialogControl
+from .extendedClass.recordModifyDialogControl import recordModifyDialogControl
+from .extendedClass.projectActionsBtnControl import projectActionBtnControl
+
 
