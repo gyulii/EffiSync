@@ -1,11 +1,13 @@
 import datetime
 import getpass
+import pickle
 from threading import Timer
 
 from PySide6.QtWidgets import QCheckBox, QHBoxLayout
 from PySide6.QtCore import Qt, QDateTime, QTime, QSize
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QMainWindow, QTableWidgetItem, QHeaderView, QWidget, QFrame
+from pandas.io.common import file_exists
 
 from app.db.database_handler import DatabaseHandler
 from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl, projectActionBtnControl
@@ -20,9 +22,10 @@ from app.sapi.sap_handler import EssDriver
 class myApp(QMainWindow, Ui_MainWindow):
 
     timerThread = None
+    pollingThread = None
     blink = False
     userID = None
-    changes = None
+    lastChange = None
     timeTables = None
 
     def __init__(self, type=None):
@@ -36,7 +39,11 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.relay = RelayClient() if type != "Manager" else RelayManager()
 
         self.userID = getpass.getuser()
-
+        if file_exists("lastChange.p"):
+            f = open("lastChange.p", "rb")
+        else: f = None
+        if f is not None and f.readable():
+            self.lastChange = pickle.load(f)
         self.loadInitUI(type)
 
         self.homeBtn.clicked.connect(self.switchToHomePage)
@@ -50,6 +57,8 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.topicsBtn.clicked.connect(self.switchToTopicsPage)
             self.bookingtextsBtn.clicked.connect(self.switchToBookintextsPage)
             self.exportBtn.clicked.connect(self.switchToExportPage)
+        else:
+            self.retrieveProjectsTopics()
 
         self.updateDateTime()
 
@@ -99,7 +108,10 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.managerWidget.setMinimumSize(QSize(0, 100))
             self.loadTopicsTable()
             self.loadProjectsTable()
-            self.changes = []
+            self.addNewProjectBtn.clicked.connect(self.addNewProject)
+            self.addNewTopicBtn.clicked.connect(self.addNewTopic)
+            self.syncTopicsBtn.clicked.connect(self.sendProjectsTopics)
+            self.syncProjectsBtn.clicked.connect(self.sendProjectsTopics)
 
     def switchToHomePage(self):
         self.bodyWidget.setCurrentIndex(0)
@@ -156,6 +168,28 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.blink = True
 
         self.dateLCD.display(date.toString("yyyy.MM.dd."))
+
+
+    def retrieveProjectsTopics(self):
+        current = self.relay.sync_projects_topics(self.lastChange)
+        if current[0]:
+            self.lastChange = current[1].get("time")
+            projects = current[1].get("projects")
+            topics = current[1].get("topics")
+            self.db.sync_tables(projects, topics)
+            self.loadProjectsTable()
+            self.updateProjectList()
+            self.loadTopicsTable()
+            self.updateLocationList()
+            self.loadTimeTable()
+
+        self.pollingThread = Timer(600, self.retrieveProjectsTopics)
+        self.pollingThread.start()
+
+    def sendProjectsTopics(self):
+        projs = self.db.read_all_projects()
+        topics = self.db.read_all_locations()
+        self.relay.sync_manager([proj.to_dict() for proj in projs], [topic.to_dict() for topic in topics])
 
     def showHideFromCalendar(self, checked):
         if checked:
@@ -230,8 +264,6 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.topicsTable.setHorizontalHeaderLabels(header)
         self.topicsTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        self.addNewTopicBtn.clicked.connect(self.addNewTopic)
-
         for i in range(len(self.topics)):
             self.topicsTable.insertRow(i)
             self.topicsTable.setItem(i, 0, QTableWidgetItem(str(self.topics[i].country)))
@@ -252,8 +284,6 @@ class myApp(QMainWindow, Ui_MainWindow):
             actionBtn.topicActionsBtn.editBtn.setEnabled(True)
             self.topicsTable.setCellWidget(i, 3, actionBtn)
 
-        pass #TODO
-
 
     def addNewTopic(self):
         diag = topicModifyDialogControl()
@@ -263,6 +293,7 @@ class myApp(QMainWindow, Ui_MainWindow):
     def createTopic(self, row, country, wbs):
         self.db.create_location(self.db.Location(country=country, wbs=wbs))
         self.loadTopicsTable()
+        self.updateLocationList()
 
     def changeTopicState(self, row, state):
         topic = self.topics[row]
@@ -271,10 +302,12 @@ class myApp(QMainWindow, Ui_MainWindow):
         else:
             self.db.archive_location(topic)
         self.loadTopicsTable()
+        self.updateLocationList()
 
     def editNthTopic(self, row, country, wbs):
         self.db.update_location(self.topics[row], self.db.Location(country=country, wbs=wbs))
         self.loadTopicsTable()
+        self.updateLocationList()
 
     def loadProjectsTable(self):
         self.projects = self.db.read_all_projects()
@@ -285,8 +318,6 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.projectsTable.setColumnCount(3)
         self.projectsTable.setHorizontalHeaderLabels(header)
         self.projectsTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-
-        self.addNewProjectBtn.clicked.connect(self.addNewProject)
 
         for i in range(len(self.projects)):
             self.projectsTable.insertRow(i)
@@ -318,6 +349,7 @@ class myApp(QMainWindow, Ui_MainWindow):
     def createProject(self, row, project):
         self.db.create_booking_item(self.db.BookingItem(name=project))
         self.loadProjectsTable()
+        self.updateProjectList()
 
     def changeProjectState(self, row, state):
         proj = self.projects[row]
@@ -326,10 +358,12 @@ class myApp(QMainWindow, Ui_MainWindow):
         else:
             self.db.archive_booking_item(proj)
         self.loadProjectsTable()
+        self.updateProjectList()
 
     def editNthProject(self, row, project):
         self.db.update_booking_item(self.projects[row],self.db.BookingItem(name=project, active=self.projects[row].active))
         self.loadProjectsTable()
+        self.updateProjectList()
 
     def loadTimeTable(self):
         self.timeTables = self.db.read_active_time_table_items()
@@ -484,6 +518,8 @@ class myApp(QMainWindow, Ui_MainWindow):
 
         if dialog.action:
             self.timerThread.cancel()
+            self.pollingThread.cancel() if self.pollingThread is not None else None
+            pickle.dump(self.lastChange, open("lastChange.p", "wb"))
             event.accept()
         else:
             event.ignore()
