@@ -10,6 +10,8 @@ from PySide6.QtWidgets import QMainWindow, QTableWidgetItem, QHeaderView, QWidge
 from app.db.database_handler import DatabaseHandler
 from app.gui import Ui_MainWindow, loginPopupControl, recordActionBtnControl, confirmationDialogControl, projectActionBtnControl
 from app.gui.extendedClass.projectModifyDialogControl import projectModifyDialogControl
+from app.gui.extendedClass.topicActionsBtnControl import topicActionBtnControl
+from app.gui.extendedClass.topicModifyDialogControl import topicModifyDialogControl
 from app.network.network_client import RelayClient
 from app.network.network_manager import RelayManager
 from app.sapi.sap_handler import EssDriver
@@ -219,8 +221,60 @@ class myApp(QMainWindow, Ui_MainWindow):
         self.topicDropDownList.addItems(locations)
 
     def loadTopicsTable(self):
+        self.topics = self.db.read_all_locations()
+        #clear the table
+        self.topicsTable.setRowCount(0)
+        #set columns
+        header = ["Country","WBS","Active","Actions"]
+        self.topicsTable.setColumnCount(4)
+        self.topicsTable.setHorizontalHeaderLabels(header)
+        self.topicsTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        self.addNewTopicBtn.clicked.connect(self.addNewTopic)
+
+        for i in range(len(self.topics)):
+            self.topicsTable.insertRow(i)
+            self.topicsTable.setItem(i, 0, QTableWidgetItem(str(self.topics[i].country)))
+            self.topicsTable.setItem(i, 1, QTableWidgetItem(str(self.topics[i].wbs)))
+            checkboxWidget = QFrame()
+            checkboxLayout = QHBoxLayout(checkboxWidget)
+            checkbox = QCheckBox(checkboxWidget)
+            checkbox.setChecked(self.topics[i].active)
+            checkbox.stateChanged.connect(lambda state, j=i: self.changeTopicState(j, state))
+            checkboxLayout.addWidget(checkbox)
+            self.topicsTable.setCellWidget(i, 2, checkboxWidget)
+            actionBtn = topicActionBtnControl()
+            actionBtn.setRowNr(i)
+            actionBtn.setTable(self.topicsTable)
+            actionBtn.setLog(self.miniLog)
+            actionBtn.setLogField(self.userLog)
+            actionBtn.setDBActions(self.editNthTopic)
+            actionBtn.topicActionsBtn.editBtn.setEnabled(True)
+            self.topicsTable.setCellWidget(i, 3, actionBtn)
 
         pass #TODO
+
+
+    def addNewTopic(self):
+        diag = topicModifyDialogControl()
+        diag.setEditNth(self.createTopic)
+        diag.exec()
+
+    def createTopic(self, row, country, wbs):
+        self.db.create_location(self.db.Location(country=country, wbs=wbs))
+        self.loadTopicsTable()
+
+    def changeTopicState(self, row, state):
+        topic = self.topics[row]
+        if state:
+            self.db.activate_location(topic)
+        else:
+            self.db.archive_location(topic)
+        self.loadTopicsTable()
+
+    def editNthTopic(self, row, country, wbs):
+        self.db.update_location(self.topics[row], self.db.Location(country=country, wbs=wbs))
+        self.loadTopicsTable()
 
     def loadProjectsTable(self):
         self.projects = self.db.read_all_projects()
@@ -255,7 +309,6 @@ class myApp(QMainWindow, Ui_MainWindow):
 
             self.projectsTable.setCellWidget(i, 2, actionBtn)
 
-        pass #TODO
 
     def addNewProject(self):
         diag = projectModifyDialogControl()
@@ -272,6 +325,7 @@ class myApp(QMainWindow, Ui_MainWindow):
             self.db.activate_booking_item(proj)
         else:
             self.db.archive_booking_item(proj)
+        self.loadProjectsTable()
 
     def editNthProject(self, row, project):
         self.db.update_booking_item(self.projects[row],self.db.BookingItem(name=project, active=self.projects[row].active))
