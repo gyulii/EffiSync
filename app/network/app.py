@@ -39,8 +39,10 @@ class TimetableRecord:
 
 @dataclass
 class Topic:
+    id: int
     country: str
     wbs: str
+    active: bool
 
     def __str__(self):
         return f"{self.country} - {self.wbs}"
@@ -54,7 +56,9 @@ class Topic:
 
 @dataclass
 class Project:
+    id: int
     name: str
+    active: bool
 
     def __str__(self):
         return f"{self.name}"
@@ -101,7 +105,9 @@ def sync_user():
     latest = records_topics.get(key, None)
     if latest is None:
         return "No data", 204
-    if date >= latest['time']:
+    if date is None:
+        return jsonify(latest), 200
+    if latest['time'] is None or date >= latest['time']:
         return "Latest", 204
     return jsonify(latest), 200
 

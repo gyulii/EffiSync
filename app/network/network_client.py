@@ -1,7 +1,9 @@
+from datetime import datetime
+
 import requests
 
 class RelayClient:
-    val = None
+    val = "aaaaaaaa"
     datas = []
 
     def __init__(self, url: str="https://152.66.182.112:5002", verify: bool=False):
@@ -32,12 +34,12 @@ class RelayClient:
         else:
             return False, response.text
 
-    def sync_projects_topics(self, date: str):
+    def sync_projects_topics(self, date: datetime):
         if self.val is None:
             return False, "No val set"
         response = requests.get(f"{self.url}/sync/user", json={'date': date}, headers={'val': self.val}, verify=self.verify)
         if response.status_code == 200:
-            return response.json()
+            return True, response.json()
         else:
             return False, response.text
 

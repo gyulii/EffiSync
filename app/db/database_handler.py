@@ -50,6 +50,14 @@ class DatabaseHandler:
         def __repr__(self):
             return f"<id={self.id}, country={self.country}, wbs={self.wbs}, active={self.active}>"
 
+        def to_dict(self):
+            return {
+                "id": self.id,
+                "country": self.country,
+                "wbs": self.wbs,
+                "active": self.active
+            }
+
     class BookingItem(Base):
         __tablename__ = "bookingitem"
 
@@ -59,6 +67,13 @@ class DatabaseHandler:
 
         def __repr__(self):
             return f"<id={self.id}, name={self.name}, active={self.active}>"
+
+        def to_dict(self):
+            return {
+                "id": self.id,
+                "name": self.name,
+                "active": self.active
+            }
 
     class TimeTable(Base):
         __tablename__ = "timetable"
@@ -75,6 +90,16 @@ class DatabaseHandler:
 
         def __repr__(self):
             return f"<id={self.id}, project_id={self.booking_item_id}, location_id={self.location_id}, date={self.date}, hours={self.hours}>"
+
+        def to_dict(self):
+            return {
+                "id": self.id,
+                "booking_item_id": self.booking_item_id,
+                "location_id": self.location_id,
+                "date": self.date.strftime("%Y-%m-%d"),
+                "hours": self.hours,
+                "sent": self.sent
+            }
 
 
     def __init__(self):
@@ -362,6 +387,50 @@ class DatabaseHandler:
         self.session.execute(stmt)
         self.session.commit()
         logger.info("All time table data deleted")
+
+
+    @handle_exceptions
+    def sync_tables(self, projects, topics):
+
+        for project in projects:
+            exist = self.session.scalars(select(self.BookingItem).where(self.BookingItem.id == project['id'])).first()
+            if exist is None:
+                self.session.add(self.BookingItem(name = project['name'], active = project['active'], id = project['id']))
+                self.session.commit()
+                logger.info(f"Created project: {project}")
+            else:
+                if exist.name != project['name'] or exist.active != project['active']:
+                    stmt = (
+                        update(self.BookingItem)
+                        .where(self.BookingItem.id == project['id'])
+                        .values(name = project['name'], active = project['active']))
+                    self.session.execute(stmt)
+                    self.session.commit()
+                    logger.info(f"Project modified from : {exist} to {project}")
+
+        for topic in topics:
+            exist = self.session.scalars(select(self.Location).where(self.Location.id == topic['id'])).first()
+            if exist is None:
+                self.session.add(self.Location(country = topic['country'], wbs = topic['wbs'], active = topic['active'], id = topic['id']))
+                self.session.commit()
+                logger.info(f"Created topic: {topic}")
+            else:
+                if exist.country != topic['country'] or exist.wbs != topic['wbs'] or exist.active != topic['active']:
+                    stmt = (
+                        update(self.Location)
+                        .where(self.Location.id == topic['id'])
+                        .values(country = topic['country'], wbs = topic['wbs'], active = topic['active']))
+                    self.session.execute(stmt)
+                    self.session.commit()
+                    logger.info(f"Topic modified from : {exist} to {topic}")
+
+        for proj in self.read_all_projects():
+            if proj.to_dict() not in projects:
+                self.archive_booking_item(proj)
+
+        for topic in self.read_all_locations():
+            if topic.to_dict() not in topics:
+                self.archive_location(topic)
 
 
 def mock_data():

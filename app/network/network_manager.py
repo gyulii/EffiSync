@@ -17,7 +17,7 @@ class TimetableRecord:
 
 
 class RelayManager:
-    key = None
+    key = "a"
     datas = []
 
     def __init__(self, url: str = "https://152.66.182.112:5002", verify: bool = False):
@@ -35,7 +35,7 @@ class RelayManager:
 
     def sync_manager(self, projects: list, topics: list):
         """Sync the projects with the manager."""
-        response = requests.post(f"{self.url}/sync/manager", data={'projects':projects, 'topics':topics}, headers={'key': self.key}, verify=self.verify)
+        response = requests.post(f"{self.url}/sync/manager", json={'projects':projects, 'topics':topics}, headers={'key': self.key}, verify=self.verify)
         if response.status_code == 200:
             return True, response.text
         else:
